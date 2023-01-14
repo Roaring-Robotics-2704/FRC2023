@@ -6,6 +6,7 @@ package frc.robot.commands;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyroscope;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class DriveRobot extends CommandBase {
@@ -83,13 +84,28 @@ public class DriveRobot extends CommandBase {
       }
 
       if ( autoBalancePitchMode ) {
+        
+    
         double pitchAngleRadians = pitchAngleDegrees * (Math.PI / 180.0);
-        xAxisRate = Math.sin(pitchAngleRadians) * -4;
+        xAxisRate = Math.sin(pitchAngleRadians) * -1.5;
+        //look to set minnimum and max for speeds
+        SmartDashboard.putNumber("beforeXAxisRate", xAxisRate);
+        if(xAxisRate > 0.3){
+          xAxisRate = 0.3;
+        }
+        else if(xAxisRate < 0.18){
+          xAxisRate = 0.18;
+        }
+        SmartDashboard.putNumber("XAxisRate", xAxisRate);
+
       }
       if ( autoBalanceRollMode ) {
+        SmartDashboard.putNumber("YAxisRate", RobotContainer.m_driverJoystick.getY());
         double rollAngleRadians = rollAngleDegrees * (Math.PI / 180.0);
-        yAxisRate = Math.sin(rollAngleRadians) * -4;
+        yAxisRate = Math.sin(rollAngleRadians) * -1.5;
       }
+      //should add pid so slowly go up 
+
       RobotContainer.m_driveTrain.driveCartesian(xAxisRate, yAxisRate,0);
     /*double xAxisRate = -RobotContainer.m_driverJoystick.getX();
     double yAxisRate = -RobotContainer.m_driverJoystick.getY();

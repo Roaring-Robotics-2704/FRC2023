@@ -52,6 +52,8 @@ public class Robot extends TimedRobot {
     //System.out.println("robot");
     SmartDashboard.putNumber("GyroScope Complementary Angle X", RobotContainer.m_gyroscope.gyro.getXComplementaryAngle());
     SmartDashboard.putNumber("GyroScope Complementary Angle Y", RobotContainer.m_gyroscope.gyro.getYComplementaryAngle());
+
+    
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
