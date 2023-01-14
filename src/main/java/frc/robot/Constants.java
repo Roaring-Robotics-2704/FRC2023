@@ -14,6 +14,24 @@ package frc.robot;
  */
 public final class Constants {
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+    public static final int c_joystick = 0;
+  }
+
+  public static class DriveTrain{
+    //ports
+    //drive motors
+    public static int c_frontRightMotor = 2;
+    public static int c_frontLeftMotor = 1;
+    public static int c_backRightMotor = 4;
+    public static int c_backLeftMotor = 3;
+
+    //joystick
+    public static int c_joystickMain = 0;
+    public static int c_joystickButton = 1;
+  }
+  public static class GyroConstants{
+    public static final double c_MaximumAllowedAngle = 2.5; //is the maximum allowed in order to be consider engaged and docked(level)
+    public static final double c_TargetAngle  = 2; //this number might need to be changed, it is when we stop adjusting
+
   }
 }
