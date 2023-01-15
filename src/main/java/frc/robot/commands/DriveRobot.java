@@ -90,12 +90,16 @@ public class DriveRobot extends CommandBase {
         xAxisRate = Math.sin(pitchAngleRadians) * -1.5;
         //look to set minnimum and max for speeds
         SmartDashboard.putNumber("beforeXAxisRate", xAxisRate);
-        if(xAxisRate > 0.3){
-          xAxisRate = 0.3;
-        }
-        else if(xAxisRate < 0.18){
-          xAxisRate = 0.18;
-        }
+
+        double xAxisSign = Math.signum(xAxisRate);
+
+        double MIN_OUTPUT = 0.18;
+        double MAX_OUTPUT = 0.3;
+    
+        double ScaleFactor = MAX_OUTPUT - MIN_OUTPUT;
+    
+        xAxisRate = xAxisRate*ScaleFactor+xAxisSign*MIN_OUTPUT;
+
         SmartDashboard.putNumber("XAxisRate", xAxisRate);
 
       }
