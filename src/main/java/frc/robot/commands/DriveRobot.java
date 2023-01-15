@@ -97,8 +97,10 @@ public class DriveRobot extends CommandBase {
         double MAX_OUTPUT = 0.3;
     
         double ScaleFactor = MAX_OUTPUT - MIN_OUTPUT;
-    
-        xAxisRate = xAxisRate*ScaleFactor+xAxisSign*MIN_OUTPUT;
+        
+        xAxisRate = Math.pow(xAxisRate,2); //quadratic scale
+
+        xAxisRate = xAxisSign*(xAxisRate*ScaleFactor+MIN_OUTPUT);
 
         SmartDashboard.putNumber("XAxisRate", xAxisRate);
 
