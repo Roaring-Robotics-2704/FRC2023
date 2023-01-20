@@ -4,17 +4,81 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.RobotContainer;
+
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+
 
 public class Gyroscope extends SubsystemBase {
   /** Creates a new Gyroscope. */
+  //Declare  gyro
   public static ADIS16470_IMU gyro = new ADIS16470_IMU();
+
+  //Decalre final constants
+  public static final double MaximumAllowedAngle = 2.5; 
+  public static final double PreferedMaximumAngle = 2;
+
+  //Declare variables and constants
+  public static boolean balancePitchOnOff = false;
+  public static boolean balanceRollOnOff = false;
+  public static double XAxisInputValue;
+  public static double YAxisInputValue;
   
-
   public Gyroscope() {}
+  //check to see if needs to balance the pitch, x axis
+  public static boolean autoBalancePitchModeOnOff(){
+    if(gyro.getXComplementaryAngle() >= MaximumAllowedAngle){
+      balancePitchOnOff = true;
+    }
+    else if(gyro.getXComplementaryAngle() <= PreferedMaximumAngle){
+      balancePitchOnOff = false;
+    }
+    return true;
+  }
 
+  //checks to see if needs to balance the roll, y axis
+  public static boolean autoBalanceRollModeOnOff(){
+    if(gyro.getYComplementaryAngle() >= MaximumAllowedAngle){
+      balanceRollOnOff = true;
+    }
+    else if(gyro.getYComplementaryAngle() <= PreferedMaximumAngle){
+      balanceRollOnOff = false;
+    }
+    return true;
+  }
+  //returns the x rate value to be put into drive cartisian
+  public static double getXRateValue(){
+    autoBalancePitchModeOnOff();
+    if(balancePitchOnOff == true){
+      //want the speeds to be 0.18 to 0.3
+      //code that used previously, does not adjust right, need something that is quadratic, exponetial rather than linear
+      /*double pitchAngleRadians = gyro.getXComplementaryAngle() * (Math.PI / 180.0);
+      XAxisInputValue = Math.sin(pitchAngleRadians) * -1;*/
+    }
+    else if(balancePitchOnOff == false){
+      XAxisInputValue = RobotContainer.m_driverJoystick.getX();
+    }
+    return XAxisInputValue;
+  }
+
+  //returns the y rate value to be put into drive cartisian
+  public static double getYRateValue(){
+    autoBalanceRollModeOnOff();
+    if(balanceRollOnOff == true){
+      //want the speeds to be 0.18 to 0.3
+      //code that used previously, does not adjust right, need something that is quadratic, exponetial rather than linear
+      /*double rollAngleRadians = gyro.getYComplementaryAngle() * (Math.PI / 180.0);
+      YAxisInputValue = Math.sin(rollAngleRadians) * -1;*/
+    }
+    else if(balanceRollOnOff == false){
+      YAxisInputValue = RobotContainer.m_driverJoystick.getY();
+    }
+    return YAxisInputValue;
+  }
+
+    //Gyro code that does not work, tried to use the subsystems
+    /*  
     static boolean autoBalancePitchMode = false; //same as X
     static boolean autoBalanceRollMode = false; //same as Y
 
@@ -71,6 +135,7 @@ public class Gyroscope extends SubsystemBase {
     public static boolean getIfRollModeOn(){
       return autoBalanceRollMode;
     }
+    */
 
   @Override
   public void periodic() {

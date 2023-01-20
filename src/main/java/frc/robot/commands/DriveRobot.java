@@ -3,10 +3,11 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
+
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyroscope;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class DriveRobot extends CommandBase {
@@ -30,6 +31,14 @@ public class DriveRobot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double joystickXInput = Gyroscope.getXRateValue();
+    double joystickYInput = -Gyroscope.getYRateValue();
+
+    RobotContainer.m_driveTrain.driveCartesian(joystickYInput, joystickXInput, 0);
+
+
+
+    //Plain Drivetrain
     /* 
     //all of the postiive and negatives are from testing the mecanum drive
     //make sure the lights are correct by electrially inverting the motors when needed
@@ -58,6 +67,9 @@ public class DriveRobot extends CommandBase {
     //call driveCartesion from Drive Train
     RobotContainer.m_driveTrain.driveCartesian(joystickYInput, joystickXInput, joystickZInput);
     */
+
+    //Gyro code that works but the speed of adjustment is not right
+    /*
     boolean autoBalancePitchMode = false; //same as X
     boolean autoBalanceRollMode = false; //same as Y
 
@@ -84,8 +96,6 @@ public class DriveRobot extends CommandBase {
       }
 
       if ( autoBalancePitchMode ) {
-        
-    
         double pitchAngleRadians = pitchAngleDegrees * (Math.PI / 180.0);
         xAxisRate = Math.sin(pitchAngleRadians) * -1.5;
         //look to set minnimum and max for speeds
@@ -97,7 +107,6 @@ public class DriveRobot extends CommandBase {
           xAxisRate = 0.18;
         }
         SmartDashboard.putNumber("XAxisRate", xAxisRate);
-
       }
       if ( autoBalanceRollMode ) {
         SmartDashboard.putNumber("YAxisRate", RobotContainer.m_driverJoystick.getY());
@@ -107,6 +116,9 @@ public class DriveRobot extends CommandBase {
       //should add pid so slowly go up 
 
       RobotContainer.m_driveTrain.driveCartesian(xAxisRate, yAxisRate,0);
+      */
+
+    //Gyro code that does not work, tried to use the subsystems
     /*double xAxisRate = -RobotContainer.m_driverJoystick.getX();
     double yAxisRate = -RobotContainer.m_driverJoystick.getY();
 
