@@ -10,21 +10,30 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 public class Drivetrain extends SubsystemBase {
   /** Creates a new Drivetrain. */
   //Drive Train Motors
     //Declare Motor Controllers 
+    //VictorSPX
+    private WPI_VictorSPX m_frontLeft = new WPI_VictorSPX(Constants.DriveTrain.c_frontLeftMotor);
+    private WPI_VictorSPX m_backLeft = new WPI_VictorSPX(Constants.DriveTrain.c_backLeftMotor);
+
     //TalonSRXs
-    private WPI_TalonSRX m_frontLeft = new WPI_TalonSRX(Constants.DriveTrain.c_frontLeftMotor);
-    private WPI_TalonSRX m_backLeft = new WPI_TalonSRX(Constants.DriveTrain.c_backLeftMotor);
+    //private WPI_TalonSRX m_frontLeft = new WPI_TalonSRX(Constants.DriveTrain.c_frontLeftMotor);
+    //private WPI_TalonSRX m_backLeft = new WPI_TalonSRX(Constants.DriveTrain.c_backLeftMotor);
+
     private WPI_TalonSRX m_frontRight = new WPI_TalonSRX(Constants.DriveTrain.c_frontRightMotor);
     private WPI_TalonSRX m_backRight = new WPI_TalonSRX(Constants.DriveTrain.c_backRightMotor);
+
 
     //Mecanum Drive Consturctor 
     private MecanumDrive drive = new MecanumDrive(m_frontLeft, m_backLeft, m_frontRight, m_backRight);
  
-  public Drivetrain() {}
+  public Drivetrain() {
+    //m_frontLeft.setInverted(true);
+  }
 
   public void driveCartesian(double yAxisSpeed, double xAxisSpeed, double zAxisSpeed){
     drive.driveCartesian(yAxisSpeed, -xAxisSpeed, zAxisSpeed);

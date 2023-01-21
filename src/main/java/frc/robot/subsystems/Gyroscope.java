@@ -26,6 +26,9 @@ public class Gyroscope extends SubsystemBase {
   public static double YAxisInputValue;
   
   public Gyroscope() {}
+
+  //Test code that is not complete that would use more of the subsystem, does not have scaling code
+  /* 
   //check to see if needs to balance the pitch, x axis
   public static boolean autoBalancePitchModeOnOff(){
     if(gyro.getXComplementaryAngle() >= MaximumAllowedAngle){
@@ -53,8 +56,8 @@ public class Gyroscope extends SubsystemBase {
     if(balancePitchOnOff == true){
       //want the speeds to be 0.18 to 0.3
       //code that used previously, does not adjust right, need something that is quadratic, exponetial rather than linear
-      /*double pitchAngleRadians = gyro.getXComplementaryAngle() * (Math.PI / 180.0);
-      XAxisInputValue = Math.sin(pitchAngleRadians) * -1;*/
+      //double pitchAngleRadians = gyro.getXComplementaryAngle() * (Math.PI / 180.0);
+      //XAxisInputValue = Math.sin(pitchAngleRadians) * -1;
     }
     else if(balancePitchOnOff == false){
       XAxisInputValue = RobotContainer.m_driverJoystick.getX();
@@ -68,14 +71,14 @@ public class Gyroscope extends SubsystemBase {
     if(balanceRollOnOff == true){
       //want the speeds to be 0.18 to 0.3
       //code that used previously, does not adjust right, need something that is quadratic, exponetial rather than linear
-      /*double rollAngleRadians = gyro.getYComplementaryAngle() * (Math.PI / 180.0);
-      YAxisInputValue = Math.sin(rollAngleRadians) * -1;*/
+      //double rollAngleRadians = gyro.getYComplementaryAngle() * (Math.PI / 180.0);
+      //YAxisInputValue = Math.sin(rollAngleRadians) * -1;
     }
     else if(balanceRollOnOff == false){
       YAxisInputValue = RobotContainer.m_driverJoystick.getY();
     }
     return YAxisInputValue;
-  }
+  }*/
 
     //Gyro code that does not work, tried to use the subsystems
     /*  

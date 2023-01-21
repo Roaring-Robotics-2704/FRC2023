@@ -7,7 +7,7 @@ package frc.robot.commands;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyroscope;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class DriveRobot extends CommandBase {
@@ -31,12 +31,13 @@ public class DriveRobot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //code that uses subsystem more, does not have scaling code
+    /* 
     double joystickXInput = Gyroscope.getXRateValue();
     double joystickYInput = -Gyroscope.getYRateValue();
 
     RobotContainer.m_driveTrain.driveCartesian(joystickYInput, joystickXInput, 0);
-
-
+    */
 
     //Plain Drivetrain
     /* 
@@ -69,7 +70,7 @@ public class DriveRobot extends CommandBase {
     */
 
     //Gyro code that works but the speed of adjustment is not right
-    /*
+     
     boolean autoBalancePitchMode = false; //same as X
     boolean autoBalanceRollMode = false; //same as Y
 
@@ -96,6 +97,41 @@ public class DriveRobot extends CommandBase {
       }
 
       if ( autoBalancePitchMode ) {
+        //if x is movable
+        /* 
+        double minMotorPower = 0.2;
+        double maxMotorPower = 0.5;
+        double powerRange = maxMotorPower - minMotorPower;
+
+        double maxAngle = 15;
+        double minAngle = 2;
+        double angleRange = maxAngle - minAngle;
+
+        double multiplier = maxAngle / 100;
+        double angleToMotorSpeed = angleRange * multiplier;
+        double scaleMotorSpeed = angleToMotorSpeed * powerRange + minMotorPower;
+
+        if(pitchAngleDegrees > 0){
+          if(Math.abs(pitchAngleDegrees) > maxAngle){
+            xAxisRate = - maxMotorPower;
+          }
+          else{
+            xAxisRate = - scaleMotorSpeed;
+          }
+          //must be negative
+        }
+        else if(pitchAngleDegrees < 0){
+          if(Math.abs(pitchAngleDegrees) > maxAngle){
+            xAxisRate = maxMotorPower;
+          }
+          else{
+            xAxisRate = scaleMotorSpeed;
+          }
+          //must be positive
+          */
+        }
+
+        /* 
         double pitchAngleRadians = pitchAngleDegrees * (Math.PI / 180.0);
         xAxisRate = Math.sin(pitchAngleRadians) * -1.5;
         //look to set minnimum and max for speeds
@@ -107,16 +143,46 @@ public class DriveRobot extends CommandBase {
           xAxisRate = 0.18;
         }
         SmartDashboard.putNumber("XAxisRate", xAxisRate);
-      }
+        */
+       
       if ( autoBalanceRollMode ) {
-        SmartDashboard.putNumber("YAxisRate", RobotContainer.m_driverJoystick.getY());
+        double minMotorPower = 0.2;
+        double maxMotorPower = 0.3;
+        double powerRange = maxMotorPower - minMotorPower;
+
+        double maxAngle = +-15;
+        double minAngle = +-2;
+        double angleRange = maxAngle - minAngle;
+
+        double multiplier = maxAngle / 100;
+        double angleToMotorSpeed = angleRange * multiplier;
+        double scaleMotorSpeed = angleToMotorSpeed * powerRange + minMotorPower;
+
+        if(rollAngleDegrees > 0){
+          if(rollAngleDegrees > maxAngle){
+            yAxisRate = maxMotorPower;
+          }
+          else{
+            yAxisRate = scaleMotorSpeed;
+          }
+        }
+        else if(rollAngleDegrees < 0){
+          if(rollAngleDegrees > maxAngle){
+            yAxisRate = -maxMotorPower;
+          }
+          else{
+            yAxisRate = -scaleMotorSpeed;
+          }
+        }
+        /*SmartDashboard.putNumber("YAxisRate", RobotContainer.m_driverJoystick.getY());
         double rollAngleRadians = rollAngleDegrees * (Math.PI / 180.0);
-        yAxisRate = Math.sin(rollAngleRadians) * -1.5;
+        yAxisRate = Math.sin(rollAngleRadians) * -1.5;*/
       }
       //should add pid so slowly go up 
 
-      RobotContainer.m_driveTrain.driveCartesian(xAxisRate, yAxisRate,0);
-      */
+      RobotContainer.m_driveTrain.driveCartesian(yAxisRate, 0,0);
+      //RobotContainer.m_driveTrain.driveCartesian(xAxisRate, yAxisRate,0);
+      
 
     //Gyro code that does not work, tried to use the subsystems
     /*double xAxisRate = -RobotContainer.m_driverJoystick.getX();
