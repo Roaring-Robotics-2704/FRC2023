@@ -16,6 +16,7 @@ public class DriveRobot extends CommandBase {
   private Gyroscope gyroscope;
   
   public DriveRobot(Drivetrain driveTrain, Gyroscope gyroscope) {
+    
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain =  driveTrain;
     this.gyroscope = gyroscope;
@@ -97,7 +98,7 @@ public class DriveRobot extends CommandBase {
       }
 
       if ( autoBalancePitchMode ) {
-        //if x is movable
+        //if x is movable, worked with canibalized frc2023
         /* 
         double minMotorPower = 0.2;
         double maxMotorPower = 0.5;
@@ -131,6 +132,7 @@ public class DriveRobot extends CommandBase {
           */
         }
 
+        //old radian code that will not use since swiched to scaling
         /* 
         double pitchAngleRadians = pitchAngleDegrees * (Math.PI / 180.0);
         xAxisRate = Math.sin(pitchAngleRadians) * -1.5;
@@ -146,17 +148,65 @@ public class DriveRobot extends CommandBase {
         */
        
       if ( autoBalanceRollMode ) {
-        double minMotorPower = 0.2;
+        double minPower = 0.2;
+        double maxPower = 0.5;
+        double powerRange = maxPower - minPower;
+
+        double minAngle = 2.5;
+        double maxAngle = 10;
+        double angleRange = maxAngle - minAngle;
+
+        double multiplier = angleRange/100;
+        double absAngle = Math.abs(rollAngleDegrees);
+        double scaledPower = (absAngle - minPower)*(multiplier)*(powerRange);
+        double finalPower = minPower + scaledPower;
+
+        if(rollAngleDegrees > 0){
+          if(rollAngleDegrees > maxAngle){
+            xAxisRate = maxPower;
+          }
+          else if(rollAngleDegrees < minAngle){
+            xAxisRate = minPower;
+          }
+          else{
+            xAxisRate = finalPower;
+            SmartDashboard.putNumber("+xAxisRate", finalPower);
+          }
+        }
+        else if(rollAngleDegrees < 0){
+          if(rollAngleDegrees < -maxAngle){
+            xAxisRate = -maxPower;
+          }
+          else if(rollAngleDegrees > -minAngle){
+            xAxisRate = -minPower;
+          }
+          else{
+            xAxisRate = -finalPower;
+            SmartDashboard.putNumber("-xAxisRate", finalPower);
+          }
+        }
+        else{
+          xAxisRate = 0;
+        }
+
+
+        //Balance code that does not work
+        /* 
+        double minMotorPower = 0.1;
         double maxMotorPower = 0.3;
         double powerRange = maxMotorPower - minMotorPower;
 
-        double maxAngle = +-15;
-        double minAngle = +-2;
+        double maxAngle = 15;
+        double minAngle = 2;
         double angleRange = maxAngle - minAngle;
+        System.out.println(angleRange);
 
         double multiplier = maxAngle / 100;
+        System.out.println(multiplier);
         double angleToMotorSpeed = angleRange * multiplier;
+        System.out.println(angleToMotorSpeed);
         double scaleMotorSpeed = angleToMotorSpeed * powerRange + minMotorPower;
+        System.out.println(scaleMotorSpeed);
 
         if(rollAngleDegrees > 0){
           if(rollAngleDegrees > maxAngle){
@@ -164,6 +214,7 @@ public class DriveRobot extends CommandBase {
           }
           else{
             yAxisRate = scaleMotorSpeed;
+            SmartDashboard.putNumber("+xmotorSpeed", scaleMotorSpeed);
           }
         }
         else if(rollAngleDegrees < 0){
@@ -172,15 +223,16 @@ public class DriveRobot extends CommandBase {
           }
           else{
             yAxisRate = -scaleMotorSpeed;
-          }
-        }
+            SmartDashboard.putNumber("x-motorSpeed", scaleMotorSpeed);
+          }*/
+        
         /*SmartDashboard.putNumber("YAxisRate", RobotContainer.m_driverJoystick.getY());
         double rollAngleRadians = rollAngleDegrees * (Math.PI / 180.0);
         yAxisRate = Math.sin(rollAngleRadians) * -1.5;*/
       }
       //should add pid so slowly go up 
 
-      RobotContainer.m_driveTrain.driveCartesian(yAxisRate, 0,0);
+      RobotContainer.m_driveTrain.driveCartesian(xAxisRate, 0,0);
       //RobotContainer.m_driveTrain.driveCartesian(xAxisRate, yAxisRate,0);
       
 
