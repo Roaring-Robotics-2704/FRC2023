@@ -12,20 +12,44 @@ import org.photonvision.PhotonUtils;
 import org.photonvision.targeting.PhotonPipelineResult;
 import edu.wpi.first.math.util.Units;
 
+import edu.wpi.first.wpilibj.smartdashboard.*;
+
 public class Vision extends SubsystemBase {
-  PhotonCamera camera = new PhotonCamera("OV5647");
-
-  PhotonPipelineResult result = camera.getLatestResult();
-
   /** Creates a new Vision. */
   public Vision() {}
+  
+  public PhotonCamera camera = new PhotonCamera("OV5647");
+
+  public PhotonPipelineResult result = camera.getLatestResult();
+
+  public static double range;
+  public int anne = 1;
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+
+    SmartDashboard.putBoolean("got targets??", result.hasTargets());
+    
+    // if (result.hasTargets()) {
+    //   range =
+    //   PhotonUtils.calculateDistanceToTargetMeters(
+    //           Constants.cameraHeightMeters,
+    //           Constants.targetHeightMeters,
+    //           Constants.cameraPitchRadians,
+    //           Units.degreesToRadians(result.getBestTarget().getPitch()));
+    //   SmartDashboard.putNumber("range", range);
+    //   // SmartDashboard.updateValues();
+    // }
+    // else {
+    //   SmartDashboard.putNumber("range", 0);
+    // }
+    // anne ++;
+    // SmartDashboard.putNumber("var", anne);
+     
   }
 
-  public double getTargetDistance() {
+  /*public double getTargetDistance() {
       
     double range =
                          PhotonUtils.calculateDistanceToTargetMeters(
@@ -34,7 +58,11 @@ public class Vision extends SubsystemBase {
                                  Constants.cameraPitchRadians,
                                  Units.degreesToRadians(result.getBestTarget().getPitch()));
      return range; 
-  }
+  }*/
+
+  // public double getTargetDistance() {
+  //   return range;
+  // }
 
   public double getTargetAngle() {
       double targetYaw = result.getBestTarget().getYaw();

@@ -12,15 +12,15 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 
 public class Drivetrain extends SubsystemBase {
+  /** Creates a new Drivetrain. */
+  public Drivetrain() { }
+  
   WPI_VictorSPX leftDriveMotor = new WPI_VictorSPX(Constants.kleftDriveCanID);
   WPI_VictorSPX rightDriveMotor = new WPI_VictorSPX(Constants.krightDriveCanID);
   PIDController distancePID = new PIDController(1.45, 0, 0);
   PIDController rotationPID = new PIDController(0.05, 0, 0);
 
   DifferentialDrive m_drive = new DifferentialDrive(leftDriveMotor, rightDriveMotor);
-
-   /** Creates a new Drivetrain. */
-  public Drivetrain() { }
 
   @Override
   public void periodic() {
