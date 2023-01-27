@@ -4,11 +4,13 @@
 
 package frc.robot.commands;
 
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyroscope;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class DriveRobot extends CommandBase {
   /** Creates a new DriveRobot. */
@@ -27,11 +29,14 @@ public class DriveRobot extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    //Gyroscope.reset();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    
     //code that uses subsystem more, does not have scaling code
     /* 
     double joystickXInput = Gyroscope.getXRateValue();
@@ -71,7 +76,11 @@ public class DriveRobot extends CommandBase {
     */
 
     //Gyro code that works but the speed of adjustment is not right
-     
+    //works with the scaling code not the previous code, might need to add auto zeroing at start
+
+   //gyroscope.gyro.reset();
+    //gyroscope.gyro.calibrate();
+    
     boolean autoBalancePitchMode = false; //same as X
     boolean autoBalanceRollMode = false; //same as Y
 
@@ -81,8 +90,8 @@ public class DriveRobot extends CommandBase {
     double pitchAngleDegrees = RobotContainer.m_gyroscope.gyro.getXComplementaryAngle();
     double rollAngleDegrees = RobotContainer.m_gyroscope.gyro.getYComplementaryAngle();
  
-    double xAxisRate = RobotContainer.m_driverJoystick.getX();
-    double yAxisRate = RobotContainer.m_driverJoystick.getY();
+    double xAxisRate = RobotContainer.m_driverJoystick.getX(); //not nessary for just autoleveling
+    double yAxisRate = RobotContainer.m_driverJoystick.getY(); //not nessary for just autoleveling
    
       if ( !autoBalancePitchMode && (Math.abs(pitchAngleDegrees) >= Math.abs(MaximumAllowedAngle))) {
         autoBalancePitchMode = true;
@@ -98,7 +107,7 @@ public class DriveRobot extends CommandBase {
       }
 
       if ( autoBalancePitchMode ) {
-        //if x is movable, worked with canibalized frc2023
+        //if pitch is forward and back, worked with canibalized frc2023
         /* 
         double minMotorPower = 0.2;
         double maxMotorPower = 0.5;
@@ -132,7 +141,7 @@ public class DriveRobot extends CommandBase {
           */
         }
 
-        //old radian code that will not use since swiched to scaling
+        //old radian code that will not use since swiched to scaling, was for the pitch angle
         /* 
         double pitchAngleRadians = pitchAngleDegrees * (Math.PI / 180.0);
         xAxisRate = Math.sin(pitchAngleRadians) * -1.5;
@@ -148,8 +157,10 @@ public class DriveRobot extends CommandBase {
         */
        
       if ( autoBalanceRollMode ) {
-        double minPower = 0.2;
-        double maxPower = 0.5;
+        //if roll if forward and back, working scaling code just needs to be tested on the ground, worked while on blocks
+        //not had a chance to test on the ground since issue with gyro readings
+        double minPower = 0.18;
+        double maxPower = 0.25;
         double powerRange = maxPower - minPower;
 
         double minAngle = 2.5;
@@ -163,30 +174,30 @@ public class DriveRobot extends CommandBase {
 
         if(rollAngleDegrees > 0){
           if(rollAngleDegrees > maxAngle){
-            xAxisRate = maxPower;
+            yAxisRate = maxPower;
           }
           else if(rollAngleDegrees < minAngle){
-            xAxisRate = minPower;
+            yAxisRate = minPower;
           }
           else{
-            xAxisRate = finalPower;
+            yAxisRate = finalPower;
             SmartDashboard.putNumber("+xAxisRate", finalPower);
           }
         }
         else if(rollAngleDegrees < 0){
           if(rollAngleDegrees < -maxAngle){
-            xAxisRate = -maxPower;
+            yAxisRate = -maxPower;
           }
           else if(rollAngleDegrees > -minAngle){
-            xAxisRate = -minPower;
+            yAxisRate = -minPower;
           }
           else{
-            xAxisRate = -finalPower;
+            yAxisRate = -finalPower;
             SmartDashboard.putNumber("-xAxisRate", finalPower);
           }
         }
         else{
-          xAxisRate = 0;
+          yAxisRate = 0;
         }
 
 
@@ -230,9 +241,9 @@ public class DriveRobot extends CommandBase {
         double rollAngleRadians = rollAngleDegrees * (Math.PI / 180.0);
         yAxisRate = Math.sin(rollAngleRadians) * -1.5;*/
       }
-      //should add pid so slowly go up 
+      //should add pid so slowly go up, done is in the scaling code 
 
-      RobotContainer.m_driveTrain.driveCartesian(xAxisRate, 0,0);
+      RobotContainer.m_driveTrain.driveCartesian(yAxisRate, 0,0);
       //RobotContainer.m_driveTrain.driveCartesian(xAxisRate, yAxisRate,0);
       
 

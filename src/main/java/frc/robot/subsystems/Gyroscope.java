@@ -8,12 +8,17 @@ import frc.robot.RobotContainer;
 
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 
 public class Gyroscope extends SubsystemBase {
   /** Creates a new Gyroscope. */
   //Declare  gyro
   public static ADIS16470_IMU gyro = new ADIS16470_IMU();
+
+  // should be placed at center of robots axis of rotation
+  // location does not really matter since measrure rotation not linear position but better to put at center
+  // just need it to start out at a semi level position
 
   //Decalre final constants
   public static final double MaximumAllowedAngle = 2.5; 
