@@ -62,7 +62,7 @@ public class Drivetrain extends SubsystemBase {
   public boolean isOnAngle(double yaw, double setpoint) {
     //this currently doesn't work if the setpoint is 0 degrees to be fixed later
 
-    if (yaw < 2*setpoint && yaw > 0.5*setpoint) {
+    if (yaw < 1.50*setpoint && yaw > .5*setpoint) {
       return true;
     }
     else {
