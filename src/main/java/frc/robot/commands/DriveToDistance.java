@@ -17,14 +17,14 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class DefaultDrive extends CommandBase {
-  /** Creates a new DefaultDrive. */
+public class DriveToDistance extends CommandBase {
+  /** Creates a new DriveToDistance. */
   private final Drivetrain m_drivetrain;
   private final Vision m_vision;
   private final XboxController m_xbox;
   double range;
 
-  public DefaultDrive(Drivetrain drivetrain, Vision vision, XboxController xbox) {
+  public DriveToDistance(Drivetrain drivetrain, Vision vision, XboxController xbox) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_drivetrain = drivetrain;
     m_vision = vision;
@@ -35,17 +35,12 @@ public class DefaultDrive extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-     
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
     PhotonPipelineResult result = m_vision.camera.getLatestResult();
-
-    SmartDashboard.putBoolean("aaaaaa", result.hasTargets());
 
     if (result.hasTargets()) {
       range =
@@ -55,36 +50,12 @@ public class DefaultDrive extends CommandBase {
               Constants.cameraPitchRadians,
               Units.degreesToRadians(result.getBestTarget().getPitch()));
       SmartDashboard.putNumber("range", range);
-      // SmartDashboard.updateValues();
     }
-
-   if (m_xbox.getRawButton(4)) {
     if (result.hasTargets()) {
-      m_drivetrain.distanceDrivingPID(range, 1.00);
-      m_drivetrain.feedWatchdog();
+      m_drivetrain.distanceDrivingPID(range, Constants.distanceSetpoint);
       SmartDashboard.putString("what is it doing", "vision ing");
     }
-    else {
-      m_drivetrain.driveRobot(m_xbox.getLeftY(), m_xbox.getRightX());
-      SmartDashboard.putString("what is it doing", "driving");
-      //m_drivetrain.feedWatchdog();
-    }
-   }
-   else if (m_xbox.getRawButton(1)) {
-    if (result.hasTargets()) {
-      m_drivetrain.rotationDrivingPID(result.getBestTarget().getYaw(), 0);
-      m_drivetrain.feedWatchdog();
-    }
-    else {
-      m_drivetrain.driveRobot(m_xbox.getLeftY(), m_xbox.getRightX());
-      m_drivetrain.feedWatchdog();
-    }
-   }
-   else {
-    m_drivetrain.driveRobot(m_xbox.getLeftY(), m_xbox.getRightX());
-    SmartDashboard.putString("what is it doing", "driving");
-   }
-   
+    m_drivetrain.feedWatchdog();
   }
 
   // Called once the command ends or is interrupted.

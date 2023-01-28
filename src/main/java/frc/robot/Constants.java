@@ -20,8 +20,11 @@ public final class Constants {
     public static int krightDriveCanID = 1;
 
     public static double cameraHeightMeters = Units.inchesToMeters(14.25);
-    public static double targetHeightMeters = Units.inchesToMeters(21);
+    public static double targetHeightMeters = Units.inchesToMeters(27.75);
     public static double cameraPitchRadians = Units.degreesToRadians(20);
+
+    // in meters
+    public static double distanceSetpoint = 1;
 
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;

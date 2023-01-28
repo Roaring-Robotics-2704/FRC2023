@@ -47,4 +47,13 @@ public class Drivetrain extends SubsystemBase {
   public void feedWatchdog() {
     m_drive.feed();
   }
+
+  public boolean isOnTarget(double range, double setpoint) {
+    if (range < 1.05*setpoint && range > .95*setpoint) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }

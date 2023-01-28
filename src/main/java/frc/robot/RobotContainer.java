@@ -9,7 +9,7 @@ import frc.robot.subsystems.Vision;
 
 //import frc.robot.commands.DriveToTargetDistance;
 //import frc.robot.commands.RotateToTargetYaw;
-import frc.robot.commands.DefaultDrive;
+import frc.robot.commands.*;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -31,7 +31,6 @@ public class RobotContainer {
   public static Drivetrain m_drivetrain = new Drivetrain();
   public static Vision m_vision = new Vision();
   
-  
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public static XboxController m_xbox =
@@ -42,7 +41,8 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    m_drivetrain.setDefaultCommand(new DefaultDrive(m_drivetrain, m_vision, m_xbox));
+    //m_drivetrain.setDefaultCommand(new DefaultDrive(m_drivetrain, m_vision, m_xbox));
+    m_drivetrain.setDefaultCommand(new OnlyDriving(m_drivetrain, m_xbox));
     configureBindings();
   }
 
@@ -56,16 +56,12 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    //new Trigger(m_exampleSubsystem::exampleCondition)
-        //.onTrue(new ExampleCommand(m_exampleSubsystem));
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-    //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-    
-   // distanceButton.whileTrue(new DriveToTargetDistance(m_drivetrain, m_vision)).whileFalse(new DefaultDrive(m_drivetrain));
-  //  rotateButton.whileTrue(new RotateToTargetYaw());
+  //withtimeout() required for ending a command that uses PID so far - tells it to end after a certain time, requires tuning
+  //whiletrue() is a press-and-hold, ontrue() is a press-to-start
+
+    distanceButton.onTrue(new DriveToDistance(m_drivetrain, m_vision, m_xbox).withTimeout(4).andThen(new TurnToAngle(m_drivetrain, m_vision, m_xbox).withTimeout(2)));
+    rotateButton.whileTrue(new TurnToAngle(m_drivetrain, m_vision, m_xbox));
 
   }
 
