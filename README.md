@@ -5,7 +5,6 @@ working (all with tank drive):
 
 to be fixed:
 - commands still running after losing the target
-- turn command not ending (deadzone)
 - tune both PIDs
 
 other to do:

@@ -60,7 +60,7 @@ public class TurnToAngle extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_drivetrain.isOnTarget(yaw, Constants.rotationSetpoint)) {
+    if (m_drivetrain.isOnAngle(yaw, Constants.rotationSetpoint)) {
       return true;
     }
     else {

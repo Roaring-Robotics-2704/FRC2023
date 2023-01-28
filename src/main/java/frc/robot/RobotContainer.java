@@ -58,7 +58,7 @@ public class RobotContainer {
   private void configureBindings() {
 
     //distanceButton.onTrue(new DriveToDistance(m_drivetrain, m_vision, m_xbox).withTimeout(4).andThen(new TurnToAngle(m_drivetrain, m_vision, m_xbox).withTimeout(2)));
-    distanceButton.onTrue(new DriveToDistance(m_drivetrain, m_vision, m_xbox));
+    distanceButton.onTrue(new DriveToDistance(m_drivetrain, m_vision, m_xbox).andThen(new TurnToAngle(m_drivetrain, m_vision, m_xbox)));
     rotateButton.onTrue(new TurnToAngle(m_drivetrain, m_vision, m_xbox));
 
   }

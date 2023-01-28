@@ -18,9 +18,9 @@ public class Drivetrain extends SubsystemBase {
   WPI_VictorSPX leftDriveMotor = new WPI_VictorSPX(Constants.kleftDriveCanID);
   WPI_VictorSPX rightDriveMotor = new WPI_VictorSPX(Constants.krightDriveCanID);
   //1.45 does work mostly
-  PIDController distancePID = new PIDController(1.55, 0, 0);
+  PIDController distancePID = new PIDController(Constants.distance_kP, Constants.distance_kI, Constants.distance_kD);
   //.05 does work but is being tuned to be better
-  PIDController rotationPID = new PIDController(0.1, 0, 0);
+  PIDController rotationPID = new PIDController(Constants.rotation_kP, Constants.rotation_kI, Constants.rotation_kD);
 
   DifferentialDrive m_drive = new DifferentialDrive(leftDriveMotor, rightDriveMotor);
 
@@ -60,9 +60,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public boolean isOnAngle(double yaw, double setpoint) {
-    //this currently doesn't work if the setpoint is 0 degrees to be fixed later
-
-    if (yaw < 1.50*setpoint && yaw > .5*setpoint) {
+    if (yaw < 2+setpoint && yaw > setpoint-2) {
       return true;
     }
     else {
