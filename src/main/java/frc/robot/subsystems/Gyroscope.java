@@ -9,6 +9,7 @@ import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Gyroscope extends SubsystemBase {
@@ -31,6 +32,35 @@ public class Gyroscope extends SubsystemBase {
   public static double YAxisInputValue;
   
   public Gyroscope() {}
+
+  public static double zeroGyroX(double startAngle){
+    double newAngle = 0;
+      if(startAngle > 0){
+        newAngle = gyro.getXComplementaryAngle() - startAngle;
+      }
+      else if(startAngle < 0){
+        newAngle = gyro.getXComplementaryAngle() - startAngle;
+      }
+      else{
+        newAngle = 0;
+      }
+    return newAngle;
+  }
+
+  public static double zeroGyroY(double startAngle){
+    double newAngle = 0;
+      if(startAngle > 0){
+        newAngle = gyro.getYComplementaryAngle() - startAngle;
+      }
+      else if(startAngle < 0){
+        newAngle = gyro.getYComplementaryAngle() - startAngle;
+      }
+      else{
+        newAngle = 0;
+      }
+    return newAngle;
+  }
+
 
   //Test code that is not complete that would use more of the subsystem, does not have scaling code
   /* 

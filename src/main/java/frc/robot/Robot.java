@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.DriveRobot;
+import frc.robot.subsystems.Gyroscope;
 
 
 /**
@@ -19,6 +20,7 @@ import frc.robot.commands.DriveRobot;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+  public static double gyroStartAngle;
 
   private RobotContainer m_robotContainer;
 
@@ -31,9 +33,12 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    
+    //Use the correct one for the position of the gyro on robot
+    //gyroStartAngle = Gyroscope.gyro.getXComplementaryAngle();
+    gyroStartAngle = Gyroscope.gyro.getYComplementaryAngle();
+    SmartDashboard.putNumber("gyroStartAngle Y", gyroStartAngle);
 
-    //Gyroscope.gyro.reset();
-    //System.out.println("resset");
   }
 
   /**

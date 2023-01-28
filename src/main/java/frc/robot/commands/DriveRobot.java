@@ -87,18 +87,21 @@ public class DriveRobot extends CommandBase {
     final double MaximumAllowedAngle = 2.5; //is the maximum allowed in order to be consider engaged and docked(level)
     final double TargetAngle  = 2; //this number might need to be changed, it is when we stop adjusting
 
-    double pitchAngleDegrees = RobotContainer.m_gyroscope.gyro.getXComplementaryAngle();
-    double rollAngleDegrees = RobotContainer.m_gyroscope.gyro.getYComplementaryAngle();
+    //double pitchAngleDegrees = Gyroscope.zeroGyroX(Robot.gyroStartAngle);
+    //SmartDashboard.putNumber("newStartAngle inital X", pitchAngleDegrees);
+    double rollAngleDegrees = Gyroscope.zeroGyroY(Robot.gyroStartAngle);
+    SmartDashboard.putNumber("newStartAngle inital Y", rollAngleDegrees);
  
-    double xAxisRate = RobotContainer.m_driverJoystick.getX(); //not nessary for just autoleveling
+    //double xAxisRate = RobotContainer.m_driverJoystick.getX(); //not nessary for just autoleveling
     double yAxisRate = RobotContainer.m_driverJoystick.getY(); //not nessary for just autoleveling
-   
-      if ( !autoBalancePitchMode && (Math.abs(pitchAngleDegrees) >= Math.abs(MaximumAllowedAngle))) {
+    
+      /*if ( !autoBalancePitchMode && (Math.abs(pitchAngleDegrees) >= Math.abs(MaximumAllowedAngle))) {
         autoBalancePitchMode = true;
       }
       else if ( autoBalancePitchMode && (Math.abs(pitchAngleDegrees) <= Math.abs(TargetAngle))) {
         autoBalancePitchMode = false;
-      }
+      }*/
+
       if ( !autoBalanceRollMode && (Math.abs(rollAngleDegrees) >= Math.abs(MaximumAllowedAngle))) {
         autoBalanceRollMode = true;
       }
@@ -107,6 +110,51 @@ public class DriveRobot extends CommandBase {
       }
 
       if ( autoBalancePitchMode ) {
+        //code if using the x axis
+        /*double minPower = 0.18;
+        double maxPower = 0.25;
+        double powerRange = maxPower - minPower;
+
+        double minAngle = 2.5;
+        double maxAngle = 10;
+        double angleRange = maxAngle - minAngle;
+
+        double multiplier = angleRange/100;
+        double absAngle = Math.abs(pitchAngleDegrees);
+        SmartDashboard.putNumber("absAngle", absAngle);
+        double scaledPower = (absAngle - minPower)*(multiplier)*(powerRange);
+        SmartDashboard.putNumber("scaledPower", scaledPower);
+        double finalPower = minPower + scaledPower;
+        SmartDashboard.putNumber("finalPower", finalPower);
+
+        if(pitchAngleDegrees > 0){
+          if(pitchAngleDegrees > maxAngle){
+            xAxisRate = maxPower;
+          }
+          else if(pitchAngleDegrees < minAngle){
+            xAxisRate = minPower;
+          }
+          else{
+            xAxisRate = finalPower;
+            SmartDashboard.putNumber("+xAxisRate", finalPower);
+          }
+        }
+        else if(pitchAngleDegrees < 0){
+          if(pitchAngleDegrees < -maxAngle){
+            xAxisRate = -maxPower;
+          }
+          else if(pitchAngleDegrees > -minAngle){
+            xAxisRate = -minPower;
+          }
+          else{
+            xAxisRate = -finalPower;
+            SmartDashboard.putNumber("-xAxisRate", finalPower);
+          }
+        }
+        else{
+          yAxisRate = 0;
+        }*/
+
         //if pitch is forward and back, worked with canibalized frc2023
         /* 
         double minMotorPower = 0.2;
@@ -160,17 +208,20 @@ public class DriveRobot extends CommandBase {
         //if roll if forward and back, working scaling code just needs to be tested on the ground, worked while on blocks
         //not had a chance to test on the ground since issue with gyro readings
         double minPower = 0.18;
-        double maxPower = 0.25;
+        double maxPower = 0.29;
         double powerRange = maxPower - minPower;
 
         double minAngle = 2.5;
-        double maxAngle = 10;
+        double maxAngle = 7;
         double angleRange = maxAngle - minAngle;
 
         double multiplier = angleRange/100;
         double absAngle = Math.abs(rollAngleDegrees);
+        SmartDashboard.putNumber("absAngle", absAngle);
         double scaledPower = (absAngle - minPower)*(multiplier)*(powerRange);
+        SmartDashboard.putNumber("scaledPower", scaledPower);
         double finalPower = minPower + scaledPower;
+        SmartDashboard.putNumber("finalPower", finalPower);
 
         if(rollAngleDegrees > 0){
           if(rollAngleDegrees > maxAngle){
@@ -242,7 +293,7 @@ public class DriveRobot extends CommandBase {
         yAxisRate = Math.sin(rollAngleRadians) * -1.5;*/
       }
       //should add pid so slowly go up, done is in the scaling code 
-
+      //in the first spot is always where the new speed goes
       RobotContainer.m_driveTrain.driveCartesian(yAxisRate, 0,0);
       //RobotContainer.m_driveTrain.driveCartesian(xAxisRate, yAxisRate,0);
       
