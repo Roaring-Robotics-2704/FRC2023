@@ -22,7 +22,7 @@ public class TurnToAngle extends CommandBase {
   private final Drivetrain m_drivetrain;
   private final Vision m_vision;
   private final XboxController m_xbox;
-  double range;
+  double yaw;
 
   public TurnToAngle(Drivetrain drivetrain, Vision vision, XboxController xbox) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -41,22 +41,14 @@ public class TurnToAngle extends CommandBase {
   @Override
   public void execute() {
     PhotonPipelineResult result = m_vision.camera.getLatestResult();
-
+  
     SmartDashboard.putBoolean("aaaaaa", result.hasTargets());
 
     if (result.hasTargets()) {
-      range =
-      PhotonUtils.calculateDistanceToTargetMeters(
-              Constants.cameraHeightMeters,
-              Constants.targetHeightMeters,
-              Constants.cameraPitchRadians,
-              Units.degreesToRadians(result.getBestTarget().getPitch()));
-      SmartDashboard.putNumber("range", range);
-    }
-
-    if (result.hasTargets()) {
-      m_drivetrain.rotationDrivingPID(result.getBestTarget().getYaw(), 0);
+      yaw = result.getBestTarget().getYaw();
+      m_drivetrain.rotationDrivingPID(yaw, Constants.rotationSetpoint);
       SmartDashboard.putString("what is it doing", "turning");
+      SmartDashboard.putNumber("yawwwwww", yaw);
     }
     m_drivetrain.feedWatchdog();
   }
@@ -68,6 +60,11 @@ public class TurnToAngle extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (m_drivetrain.isOnTarget(yaw, Constants.rotationSetpoint)) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }

@@ -57,11 +57,9 @@ public class RobotContainer {
    */
   private void configureBindings() {
 
-  //withtimeout() required for ending a command that uses PID so far - tells it to end after a certain time, requires tuning
-  //whiletrue() is a press-and-hold, ontrue() is a press-to-start
-
-    distanceButton.onTrue(new DriveToDistance(m_drivetrain, m_vision, m_xbox).withTimeout(4).andThen(new TurnToAngle(m_drivetrain, m_vision, m_xbox).withTimeout(2)));
-    rotateButton.whileTrue(new TurnToAngle(m_drivetrain, m_vision, m_xbox));
+    //distanceButton.onTrue(new DriveToDistance(m_drivetrain, m_vision, m_xbox).withTimeout(4).andThen(new TurnToAngle(m_drivetrain, m_vision, m_xbox).withTimeout(2)));
+    distanceButton.onTrue(new DriveToDistance(m_drivetrain, m_vision, m_xbox));
+    rotateButton.onTrue(new TurnToAngle(m_drivetrain, m_vision, m_xbox));
 
   }
 

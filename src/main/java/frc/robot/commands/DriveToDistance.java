@@ -65,6 +65,11 @@ public class DriveToDistance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (m_drivetrain.isOnTarget(range, Constants.distanceSetpoint)) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }

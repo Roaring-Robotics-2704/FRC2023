@@ -25,6 +25,8 @@ public final class Constants {
 
     // in meters
     public static double distanceSetpoint = 1;
+    //in UNITS
+    public static double rotationSetpoint = 0.1;
 
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
