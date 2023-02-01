@@ -4,16 +4,15 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.Constants;
-
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-public class Drivetrain extends SubsystemBase {
-  /** Creates a new Drivetrain. */
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+
+public class NormalDrivetrain extends SubsystemBase {
+  /** Creates a new NormalDrivetrain. */
   //Drive Train Motors
     //Declare Motor Controllers 
     //VictorSPX
@@ -28,12 +27,13 @@ public class Drivetrain extends SubsystemBase {
     private WPI_TalonSRX m_backRight = new WPI_TalonSRX(Constants.DriveTrain.c_backRightMotor);
 
 
-    //Mecanum Drive Consturctor 
-    private MecanumDrive drive = new MecanumDrive(m_frontLeft, m_backLeft, m_frontRight, m_backRight);
+   //Mecanum Drive Consturctor 
+   private MecanumDrive drive = new MecanumDrive(m_frontLeft, m_backLeft, m_frontRight, m_backRight);
  
-  public Drivetrain() {
-    //m_frontLeft.setInverted(true);
+  public NormalDrivetrain() {
+
   }
+
 
   public void driveCartesian(double yAxisSpeed, double xAxisSpeed, double zAxisSpeed){
     drive.driveCartesian(yAxisSpeed, -xAxisSpeed, zAxisSpeed);

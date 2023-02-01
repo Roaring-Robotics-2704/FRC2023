@@ -6,18 +6,18 @@ package frc.robot.commands;
 
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyroscope;
+import frc.robot.subsystems.NormalDrivetrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
-public class DriveRobot extends CommandBase {
+public class AutoBalanceWithGyro extends CommandBase {
   /** Creates a new DriveRobot. */
-  private Drivetrain driveTrain;
+  private NormalDrivetrain driveTrain;
   private Gyroscope gyroscope;
   
-  public DriveRobot(Drivetrain driveTrain, Gyroscope gyroscope) {
+  public AutoBalanceWithGyro(NormalDrivetrain driveTrain, Gyroscope gyroscope) {
     
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain =  driveTrain;
@@ -93,7 +93,9 @@ public class DriveRobot extends CommandBase {
     SmartDashboard.putNumber("newStartAngle inital Y", rollAngleDegrees);
  
     //double xAxisRate = RobotContainer.m_driverJoystick.getX(); //not nessary for just autoleveling
-    double yAxisRate = RobotContainer.m_driverJoystick.getY(); //not nessary for just autoleveling
+    //double yAxisRate = RobotContainer.m_driverJoystick.getY(); //not nessary for just autoleveling
+    //double xAxisRate = 0;
+    double yAxisRate = 0;
     
       /*if ( !autoBalancePitchMode && (Math.abs(pitchAngleDegrees) >= Math.abs(MaximumAllowedAngle))) {
         autoBalancePitchMode = true;

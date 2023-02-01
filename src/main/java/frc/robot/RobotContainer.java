@@ -5,11 +5,13 @@
 package frc.robot;
 
 import frc.robot.commands.Autos;
-import frc.robot.commands.DriveRobot;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.commands.DriveWithGyro;
+import frc.robot.commands.AutoBalanceWithGyro;
+import frc.robot.subsystems.OdometryKinematicDriveTrain;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Gyroscope;
+import frc.robot.subsystems.NormalDrivetrain;
 import frc.robot.Constants.OperatorConstants;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -26,9 +28,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private  ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static Gyroscope m_gyroscope = new Gyroscope();
-  public static Drivetrain m_driveTrain = new Drivetrain();
+  public static NormalDrivetrain m_driveTrain = new NormalDrivetrain();
+  public static OdometryKinematicDriveTrain m_odometryKinematicDriveTrain = new OdometryKinematicDriveTrain();
  
   public static Joystick m_driverJoystick = new Joystick(OperatorConstants.c_joystick);
 
@@ -37,7 +40,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    m_driveTrain.setDefaultCommand(new DriveRobot(m_driveTrain, m_gyroscope));
+    //m_driveTrain.setDefaultCommand(new AutoBalanceWithGyro(m_driveTrain, m_gyroscope));
+    m_driveTrain.setDefaultCommand(new DriveWithGyro(m_driveTrain));
   }
 
   /**
