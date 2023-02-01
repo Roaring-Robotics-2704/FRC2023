@@ -35,5 +35,7 @@ public class MecanumDrivetrain extends SubsystemBase {
     drive.driveCartesian(-y,x,-z);
   }
 
-  
+  public void mecanumDistanceDrivingPID(double range, double setpoint) {
+    
+  }
 }
