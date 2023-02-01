@@ -39,6 +39,12 @@ public final class Constants {
     //in degrees
     public static double rotationSetpoint = 0;
 
+    //mecanum bot constants
+    public static int c_frontleftDriveMotor = 4;
+    public static int c_frontrightDriveMotor = 2;
+    public static int c_backleftDriveMotor = 3;
+    public static int c_backrightDriveMotor = 1;
+
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
 
