@@ -17,12 +17,12 @@ public class Drivetrain extends SubsystemBase {
   //Drive Train Motors
     //Declare Motor Controllers 
     //VictorSPX
-    private WPI_VictorSPX m_frontLeft = new WPI_VictorSPX(Constants.DriveTrain.c_frontLeftMotor);
-    private WPI_VictorSPX m_backLeft = new WPI_VictorSPX(Constants.DriveTrain.c_backLeftMotor);
+    //private WPI_VictorSPX m_frontLeft = new WPI_VictorSPX(Constants.DriveTrain.c_frontLeftMotor);
+    //private WPI_VictorSPX m_backLeft = new WPI_VictorSPX(Constants.DriveTrain.c_backLeftMotor);
 
     //TalonSRXs
-    //private WPI_TalonSRX m_frontLeft = new WPI_TalonSRX(Constants.DriveTrain.c_frontLeftMotor);
-    //private WPI_TalonSRX m_backLeft = new WPI_TalonSRX(Constants.DriveTrain.c_backLeftMotor);
+    private WPI_TalonSRX m_frontLeft = new WPI_TalonSRX(Constants.DriveTrain.c_frontLeftMotor);
+    private WPI_TalonSRX m_backLeft = new WPI_TalonSRX(Constants.DriveTrain.c_backLeftMotor);
 
     private WPI_TalonSRX m_frontRight = new WPI_TalonSRX(Constants.DriveTrain.c_frontRightMotor);
     private WPI_TalonSRX m_backRight = new WPI_TalonSRX(Constants.DriveTrain.c_backRightMotor);

@@ -28,11 +28,17 @@ public final class Constants {
     public static int c_backLeftMotor = 3;
     */
     //demoobot
+    /* 
     public static int c_frontRightMotor = 2;
     public static int c_frontLeftMotor = 4;
     public static int c_backRightMotor = 1;
     public static int c_backLeftMotor = 3;
-
+    */
+    //frc2023
+    public static int c_frontRightMotor = 2;
+    public static int c_frontLeftMotor = 1;
+    public static int c_backRightMotor = 4;
+    public static int c_backLeftMotor = 3;
   }
   public static class GyroConstants{
     public static final double c_MaximumAllowedAngle = 2.5; //is the maximum allowed in order to be consider engaged and docked(level)
