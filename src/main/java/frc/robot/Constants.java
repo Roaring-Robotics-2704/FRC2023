@@ -26,7 +26,12 @@ public final class Constants {
   public static int c_leftJoystickAxisx = 1;
   public static int c_rightJoystickAxisx = 5;
   public static int c_rightJoystickAxisy = 5;
+  public static int c_lightLength = 100;
   
-  
-  public static double c_speedcap = 0.5;//0.75 speed is good. y of xbox times this number.
+  public static int c_ledPort = 0;
+  public static int[] yellowRGB = {255/2, 150/2, 0/2};
+  public static int[] blueRGB = {0,100/2,255/2};
+  public static int[] MiddleSchoolOrangeRGB = {255,25,0}; //Matthew's favorite color
+
+  public static double c_speedcap = 0;//0.75 speed is good. y of xbox times this number.
 }
