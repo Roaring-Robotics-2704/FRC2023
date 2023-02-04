@@ -208,11 +208,11 @@ public class DriveRobot extends CommandBase {
         //if roll if forward and back, working scaling code just needs to be tested on the ground, worked while on blocks
         //not had a chance to test on the ground since issue with gyro readings
         double minPower = 0.18;
-        double maxPower = 0.29;
+        double maxPower = 0.30;
         double powerRange = maxPower - minPower;
 
         double minAngle = 2.5;
-        double maxAngle = 7;
+        double maxAngle = 11;
         double angleRange = maxAngle - minAngle;
 
         double multiplier = angleRange/100;
@@ -225,25 +225,25 @@ public class DriveRobot extends CommandBase {
 
         if(rollAngleDegrees > 0){
           if(rollAngleDegrees > maxAngle){
-            yAxisRate = maxPower;
+            yAxisRate = -maxPower;
           }
           else if(rollAngleDegrees < minAngle){
-            yAxisRate = minPower;
+            yAxisRate = -minPower;
           }
           else{
-            yAxisRate = finalPower;
+            yAxisRate = -finalPower;
             SmartDashboard.putNumber("+xAxisRate", finalPower);
           }
         }
         else if(rollAngleDegrees < 0){
           if(rollAngleDegrees < -maxAngle){
-            yAxisRate = -maxPower;
+            yAxisRate = maxPower;
           }
           else if(rollAngleDegrees > -minAngle){
-            yAxisRate = -minPower;
+            yAxisRate = minPower;
           }
           else{
-            yAxisRate = -finalPower;
+            yAxisRate = finalPower;
             SmartDashboard.putNumber("-xAxisRate", finalPower);
           }
         }
