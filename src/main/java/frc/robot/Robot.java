@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.DriveRobot;
-import frc.robot.subsystems.Gyroscope;
 
 
 /**
@@ -36,8 +34,6 @@ public class Robot extends TimedRobot {
     
     //Use the correct one for the position of the gyro on robot
     //gyroStartAngle = Gyroscope.gyro.getXComplementaryAngle();
-    gyroStartAngle = Gyroscope.gyro.getYComplementaryAngle();
-    SmartDashboard.putNumber("gyroStartAngle Y", gyroStartAngle);
 
   }
 
@@ -56,11 +52,6 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    SmartDashboard.putNumber("GyroScope Angle", RobotContainer.m_gyroscope.gyro.getAngle());
-    SmartDashboard.putNumber("GyroScope Rate", RobotContainer.m_gyroscope.gyro.getRate());
-    //System.out.println("robot");
-    SmartDashboard.putNumber("GyroScope Complementary Angle X", RobotContainer.m_gyroscope.gyro.getXComplementaryAngle());
-    SmartDashboard.putNumber("GyroScope Complementary Angle Y", RobotContainer.m_gyroscope.gyro.getYComplementaryAngle());
     
   }
 
