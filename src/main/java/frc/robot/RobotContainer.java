@@ -5,7 +5,11 @@
 package frc.robot;
 
 import frc.robot.commands.Autos;
+import frc.robot.commands.ControlIntake;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.MoveArm;
+import frc.robot.subsystems.EverybotArm;
+import frc.robot.subsystems.EverybotIntake;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.Constants.OperatorConstants;
 
@@ -23,7 +27,9 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private  ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private EverybotArm s_everybotArmSubsystem = new EverybotArm();
+  private EverybotIntake s_everybotIntakeSubsystem = new EverybotIntake();
  
   public static Joystick m_driverJoystick = new Joystick(OperatorConstants.c_joystick);
 
@@ -32,6 +38,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    s_everybotArmSubsystem.setDefaultCommand(new MoveArm(s_everybotArmSubsystem));
+    s_everybotIntakeSubsystem.setDefaultCommand(new ControlIntake(s_everybotIntakeSubsystem));
   }
 
   /**

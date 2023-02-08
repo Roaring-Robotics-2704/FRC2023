@@ -17,32 +17,18 @@ public final class Constants {
     public static final int c_joystick = 0;
   }
 
-  public static class DriveTrain{
-    //ports
-    //drive motors
-    //frc2022
-    /* 
-    public static int c_frontRightMotor = 2;
-    public static int c_frontLeftMotor = 1;
-    public static int c_backRightMotor = 4;
-    public static int c_backLeftMotor = 3;
-    */
-    //demoobot
-    /* 
-    public static int c_frontRightMotor = 2;
-    public static int c_frontLeftMotor = 4;
-    public static int c_backRightMotor = 1;
-    public static int c_backLeftMotor = 3;
-    */
-    //frc2023
-    public static int c_frontRightMotor = 2;
-    public static int c_frontLeftMotor = 1;
-    public static int c_backRightMotor = 4;
-    public static int c_backLeftMotor = 3;
+  public static class ArmConstants{
+    public static final int c_armMotor = 1;//Motor port
+    public static final int c_armCurrentLimit = 20;//Amps motor can use
+    public static final double c_armOutputPower = 0.4;//Precent output when go up and down
   }
-  public static class GyroConstants{
-    public static final double c_MaximumAllowedAngle = 2.5; //is the maximum allowed in order to be consider engaged and docked(level)
-    public static final double c_TargetAngle  = 2; //this number might need to be changed, it is when we stop adjusting
 
+  public static class IntakeConstants{
+    public static final int c_intakeMotor = 2;//Motor port
+    public static final int c_intakeCurrentLimit = 25;//Amps can use when picking up
+    public static final int c_intakeHoldCurrentLimit = 5;//Amps can use when holding
+    public static final double c_intakeOutputPower = 1.0;//Precent output for intaking
+    public static final double c_intakeHoldPower = 0.07;//Precent output for holding
   }
+
 }
