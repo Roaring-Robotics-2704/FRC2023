@@ -51,7 +51,7 @@ public class DriveRobot extends CommandBase {
     turbo = RobotContainer.xbox.getRightTriggerAxis();
     precision = RobotContainer.xbox.getLeftTriggerAxis()/2;
   
-      turboamount = Constants.c_speedcap;//turbo-precision+0.5;
+      turboamount = turbo-precision+0.5;
 
     
     SmartDashboard.putNumber("turbo amount", turboamount);
@@ -83,7 +83,7 @@ public class DriveRobot extends CommandBase {
       RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz,-gyro.getAngle());   
     }
     else if (mode == 2) {
-      RobotContainer.m_Drivetrain.driveCartesian(outputy, 0,outputz, 0);
+      RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,outputz, 0);
     }
     else {
       RobotContainer.m_Drivetrain.tank(outputy, outputz);
