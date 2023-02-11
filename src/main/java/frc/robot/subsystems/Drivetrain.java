@@ -3,8 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.can.*;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -22,17 +21,15 @@ public class Drivetrain extends SubsystemBase {
   private WPI_TalonSRX m_backleftMotor = new WPI_TalonSRX(Constants.c_backleftDriveMotor);
   MotorControllerGroup m_right = new MotorControllerGroup(m_frontrightMotor, m_backrightMotor);
   MotorControllerGroup m_left = new MotorControllerGroup(m_frontleftMotor, m_backleftMotor);
-  private MecanumDrive mecanumdrive = new MecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor);
   private DifferentialDrive tankdrive = new DifferentialDrive(m_left, m_right);
+  private MecanumDrive mecanumdrive = new MecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor);
   public void driveCartesian(double y, double x, double z,double rotation){
     Rotation2d heading = Rotation2d.fromDegrees(rotation);
     mecanumdrive.driveCartesian(-y,-x,-z,heading);
   }
-  public void tank(double x,double y){
-    double left = (-y-x)*2;
-    double right = (-y+x)*2;
-    tankdrive.tankDrive(left,right);
-  }
+public void tank(double y,double z) {
+  tankdrive.arcadeDrive(y, z);
+}
 
   @Override
   public void periodic() {
