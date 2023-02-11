@@ -13,20 +13,22 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
-  }
 
+    public static int c_joystick = 0;
 
-  public static int c_frontleftDriveMotor = 1;
-  public static int c_frontrightDriveMotor = 2;
-  public static int c_backleftDriveMotor = 3;
-  public static int c_backrightDriveMotor = 4;
+    public static int c_frontleftDriveMotor = 1;
+    public static int c_frontrightDriveMotor = 2;
+    public static int c_backleftDriveMotor = 3;
+    public static int c_backrightDriveMotor = 4;
 
-  public static int c_leftJoystickAxisx = 1;
-  public static int c_rightJoystickAxisx = 5;
-  public static int c_rightJoystickAxisy = 5;
-  
-  
-  public static double c_speedcap = 0.5;//0.75 speed is good. y of xbox times this number.
+    public static int c_leftJoystickAxisx = 1;
+    public static int c_rightJoystickAxisx = 5;
+    public static int c_rightJoystickAxisy = 5;
+    public final static class zpid {
+        public static double p = 0.005;
+        public static double i = 0;
+        public static double d = 0;
+    }
+    public static int setup = 10;
+    public static double c_speedcap = 0.5;//0.75 speed is good. y of xbox times this number.
 }
