@@ -40,6 +40,8 @@ public class RobotContainer {
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
   public static SendableChooser<Boolean> DriveMode = new SendableChooser<>();
 
+  public static SendableChooser<Integer> lightChooser = new SendableChooser<>();
+
   //OI
   public static XboxController xbox = new XboxController(Constants.OperatorConstants.kDriverControllerPort);
   //getPOV can be used to find the ange value of the d-Pad on the xbox controller
@@ -58,6 +60,17 @@ public class RobotContainer {
     autoChooser.addOption("probably chaos",3);
     autoChooser.addOption("chaos square",4);
     SmartDashboard.putData("Autonomous Mode", autoChooser);
+
+    lightChooser.addOption("off", 0);
+    lightChooser.addOption("back and forth", 1);
+    lightChooser.addOption("red", 2);
+    lightChooser.addOption("blue", 3);
+    lightChooser.addOption("rainbow", 4);
+    lightChooser.addOption("rainbowsweep",5);
+    lightChooser.setDefaultOption("blink_at_Teleop", 6);
+    lightChooser.addOption("Dynamic Alliance",7);
+    SmartDashboard.putData("LightStrand Option", lightChooser);
+
 
     DriveMode.setDefaultOption("Field Oriented", true);
     DriveMode.addOption("Robot Oriented", false);

@@ -29,9 +29,9 @@ public final class Constants {
   public static int c_lightLength = 100;
   
   public static int c_ledPort = 0;
-  public static int[] yellowRGB = {255/2, 150/2, 0/2};
-  public static int[] blueRGB = {0,100/2,255/2};
-  public static int[] MiddleSchoolOrangeRGB = {255,25,0}; //Matthew's favorite color
+  public static int[] yellowRGB = {255, 150, 0};
+  public static int[] blueRGB = {0,100,255};
+  public static int[] MiddleSchoolOrangeRGB = {255,25,0}; //Matthew's favorite color, named by him
 
   public static double c_speedcap = 0;//0.75 speed is good. y of xbox times this number.
 }
