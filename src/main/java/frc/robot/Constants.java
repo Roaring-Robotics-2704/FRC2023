@@ -16,10 +16,10 @@ public final class Constants {
 
     public static int c_joystick = 0;
 
-    public static int c_frontleftDriveMotor = 1;
-    public static int c_frontrightDriveMotor = 2;
-    public static int c_backleftDriveMotor = 3;
-    public static int c_backrightDriveMotor = 4;
+    public static int c_frontleftDriveMotor = 4;
+    public static int c_frontrightDriveMotor = 3;
+    public static int c_backleftDriveMotor = 2;
+    public static int c_backrightDriveMotor = 1;
 
     public static int c_leftJoystickAxisx = 1;
     public static int c_rightJoystickAxisx = 5;
