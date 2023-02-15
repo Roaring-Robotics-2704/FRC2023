@@ -7,14 +7,14 @@ package frc.robot;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Auto;
 import frc.robot.commands.DriveRobot;
 import frc.robot.subsystems.Drivetrain;
-
-
+import frc.robot.subsystems.Gyroscope;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -26,7 +26,9 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   //Subsystems
   public static Drivetrain m_Drivetrain = new Drivetrain();
-  public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
+  public static Gyroscope m_gyroscope = new Gyroscope();
+ 
+
 
 
   //Commands
@@ -51,6 +53,7 @@ public class RobotContainer {
     autoChooser.addOption("Back up", 2);
     autoChooser.addOption("probably chaos",3);
     autoChooser.addOption("chaos square",4);
+    autoChooser.addOption("Test auto", 5);
     SmartDashboard.putData("Autonomous Mode", autoChooser);
 
     DriveMode.setDefaultOption("Field Oriented", true);
