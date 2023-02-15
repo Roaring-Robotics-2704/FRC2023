@@ -26,7 +26,7 @@ public class Drivetrain extends SubsystemBase {
   private DifferentialDrive tankdrive = new DifferentialDrive(m_left, m_right);
   public void driveCartesian(double y, double x, double z,double rotation){
     Rotation2d heading = Rotation2d.fromDegrees(rotation);
-    mecanumdrive.driveCartesian(-y,-x,-z,heading);
+    mecanumdrive.driveCartesian(y,x,z,heading);
   }
 
 
