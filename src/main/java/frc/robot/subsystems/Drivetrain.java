@@ -28,11 +28,7 @@ public class Drivetrain extends SubsystemBase {
     Rotation2d heading = Rotation2d.fromDegrees(rotation);
     mecanumdrive.driveCartesian(-y,-x,-z,heading);
   }
-  public void tank(double x,double y){
-    double left = (-y-x)*2;
-    double right = (-y+x)*2;
-    tankdrive.tankDrive(left,right);
-  }
+
 
   @Override
   public void periodic() {
