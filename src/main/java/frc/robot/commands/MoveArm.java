@@ -25,10 +25,10 @@ public class MoveArm extends CommandBase {
   @Override
   public void execute() {
     double armPower;
-    if (RobotContainer.m_driverJoystick.getRawButton(7)) {
+    if (RobotContainer.xbox.getXButton()) {
       // lower the arm
       armPower = -EverybotArm.ArmOutputPower;
-    } else if (RobotContainer.m_driverJoystick.getRawButton(5)) {
+    } else if (RobotContainer.xbox.getYButton()) {
       // raise the arm
       armPower = EverybotArm.ArmOutputPower;
     } else {

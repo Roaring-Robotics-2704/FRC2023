@@ -35,14 +35,11 @@ import frc.robot.subsystems.Drivetrain;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private EverybotArm s_everybotArmSubsystem = new EverybotArm();
-  private EverybotIntake s_everybotIntakeSubsystem = new EverybotIntake();
- 
-  public static Joystick m_driverJoystick = new Joystick(OperatorConstants.c_joystick);
   //Subsystems
   public static Drivetrain m_Drivetrain = new Drivetrain();
   public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
-
+  private EverybotArm s_everybotArmSubsystem = new EverybotArm();
+  private EverybotIntake s_everybotIntakeSubsystem = new EverybotIntake();
 
   //Commands
   public static DriveRobot m_DriveRobot = new DriveRobot();
