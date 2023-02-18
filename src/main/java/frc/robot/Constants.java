@@ -17,9 +17,6 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
-  }
 
   public static int c_frontleftDriveMotor = 1;
   public static int c_frontrightDriveMotor = 2;
@@ -37,4 +34,11 @@ public final class Constants {
   public static int[] MiddleSchoolOrangeRGB = { 255, 25, 0 }; // Matthew's favorite color, named by him
 
   public static double c_speedcap = 0;// 0.75 speed is good. y of xbox times this number.
+
+  public final static class zpid {
+    public static double p = 0.005;
+    public static double i = 0;
+    public static double d = 0;
+}
+public static int setup = 10;
 }
