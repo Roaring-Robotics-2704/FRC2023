@@ -31,4 +31,22 @@ public final class Constants {
     public static final double c_intakeHoldPower = 0.07;//Precent output for holding
   }
 
+
+    public static int c_joystick = 0;
+
+    public static int c_frontleftDriveMotor = 4;
+    public static int c_frontrightDriveMotor = 3;
+    public static int c_backleftDriveMotor = 2;
+    public static int c_backrightDriveMotor = 1;
+
+    public static int c_leftJoystickAxisx = 1;
+    public static int c_rightJoystickAxisx = 5;
+    public static int c_rightJoystickAxisy = 5;
+    public final static class zpid {
+        public static double p = 0.005;
+        public static double i = 0;
+        public static double d = 0;
+    }
+    public static int setup = 10;
+    public static double c_speedcap = 0.5;//0.75 speed is good. y of xbox times this number.
 }
