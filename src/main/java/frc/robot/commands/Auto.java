@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
@@ -22,11 +21,10 @@ public int mode;
 
 @Override
 public void initialize(){
-    RobotContainer.m_LightCommand.Dynamic_Alliance();
-    RobotContainer.m_LightStrand.update();
     autoTime.reset();
     gyro.calibrate();
     gyro.reset();
+    
 }
 double outputz;
 PIDController align = new PIDController(Constants.zpid.p,Constants.zpid.i,Constants.zpid.d);
