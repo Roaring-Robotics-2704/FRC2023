@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -22,6 +23,7 @@ public class Drivetrain extends SubsystemBase {
   static Translation2d m_backRightLocation = new Translation2d(-0.2286, -0.2286);
   public static final MecanumDriveKinematics kDriveKinematics = new MecanumDriveKinematics( m_frontLeftLocation,  m_frontRightLocation,  m_backLeftLocation,  m_backRightLocation);
   ChassisSpeeds speeds = new ChassisSpeeds(1.0, 3.0, 1.5);
+
   MecanumDriveWheelSpeeds wheelSpeeds = kDriveKinematics.toWheelSpeeds(speeds);
   double frontLeft = wheelSpeeds.frontLeftMetersPerSecond;
   double frontRight = wheelSpeeds.frontRightMetersPerSecond;
@@ -32,12 +34,18 @@ public class Drivetrain extends SubsystemBase {
   private WPI_TalonSRX m_frontrightMotor = new WPI_TalonSRX(Constants.c_frontrightDriveMotor);
   private WPI_TalonSRX m_frontleftMotor = new WPI_TalonSRX(Constants.c_frontleftDriveMotor);
   private WPI_TalonSRX m_backleftMotor = new WPI_TalonSRX(Constants.c_backleftDriveMotor);
+
   private MecanumDrive mecanumdrive = new MecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor);
   public void driveCartesian(double y, double x, double z,double rotation){
     Rotation2d heading = Rotation2d.fromDegrees(rotation);
     mecanumdrive.driveCartesian(y,x,z,heading);
   }
-
+  public void getencodervalue(int motorport) {
+    WPI_TalonSRX _testMotor = new WPI_TalonSRX(motorport);
+    _testMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    _testMotor.getSelectedSensorPosition();
+    _testMotor.close();
+  }
 
   @Override
   public void periodic() {
