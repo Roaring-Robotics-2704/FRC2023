@@ -4,7 +4,14 @@
 
 package frc.robot;
 
+import java.io.IOException;
+import java.nio.file.Path;
+
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -27,7 +34,8 @@ public class RobotContainer {
   //Subsystems
   public static Drivetrain m_Drivetrain = new Drivetrain();
   public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
-
+  String trajectoryJSON = "paths/YourPath.wpilib.json";
+  Trajectory trajectory = new Trajectory();
 
   //Commands
   public static DriveRobot m_DriveRobot = new DriveRobot();
@@ -36,8 +44,6 @@ public class RobotContainer {
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
   public static SendableChooser<Boolean> DriveMode = new SendableChooser<>();
   public static SendableChooser<Boolean> Drivescheme = new SendableChooser<>();
-
-
   //OI
   public static XboxController xbox = new XboxController(Constants.c_joystick);
   //getPOV can be used to find the ange value of the d-Pad on the xbox controller
@@ -61,7 +67,12 @@ public class RobotContainer {
     DriveMode.setDefaultOption("Field Oriented", true);
     DriveMode.addOption("Robot Oriented", false);
     SmartDashboard.putData("Drive Mode", DriveMode);
-
+    try {
+      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+   } catch (IOException ex) {
+      DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+   }
 
   }
 

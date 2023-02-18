@@ -31,4 +31,11 @@ public final class Constants {
     }
     public static int setup = 10;
     public static double c_speedcap = 0.5;//0.75 speed is good. y of xbox times this number.
+
+    public static final double ksVolts = 1.1476;
+    public static final double kvVoltSecondsPerMeter = 0.08879;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.016708;
+    public static final double kPDriveVel = 2.0861;
+    public static final double kTrackwidthMeters = 0.69;
+
 }
