@@ -39,11 +39,13 @@ public class RobotContainer {
   //Smart Dashboard
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
   public static SendableChooser<Boolean> DriveMode = new SendableChooser<>();
+  public static SendableChooser<Boolean> Drivescheme = new SendableChooser<>();
+
 
   public static SendableChooser<Integer> lightChooser = new SendableChooser<>();
 
   //OI
-  public static XboxController xbox = new XboxController(Constants.OperatorConstants.kDriverControllerPort);
+  public static XboxController xbox = new XboxController(Constants.c_joystick);
   //getPOV can be used to find the ange value of the d-Pad on the xbox controller
 
 
@@ -59,6 +61,9 @@ public class RobotContainer {
     autoChooser.addOption("Back up", 2);
     autoChooser.addOption("probably chaos",3);
     autoChooser.addOption("chaos square",4);
+    autoChooser.addOption("self align",5);
+    Drivescheme.setDefaultOption("Katelyn", true);
+    Drivescheme.addOption("Matthew", false);
     SmartDashboard.putData("Autonomous Mode", autoChooser);
 
     lightChooser.addOption("off", 0);
@@ -72,6 +77,7 @@ public class RobotContainer {
     SmartDashboard.putData("LightStrand Option", lightChooser);
 
 
+    SmartDashboard.putData("driver", Drivescheme);
     DriveMode.setDefaultOption("Field Oriented", true);
     DriveMode.addOption("Robot Oriented", false);
     SmartDashboard.putData("Drive Mode", DriveMode);
