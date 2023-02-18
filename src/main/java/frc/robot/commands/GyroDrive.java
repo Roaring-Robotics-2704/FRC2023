@@ -13,12 +13,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
-public class DriveRobot extends CommandBase {
+public class GyroDrive extends CommandBase {
   /** Creates a new DriveRobot. */
   private Drivetrain driveTrain;
   private Gyroscope gyroscope;
   
-  public DriveRobot(Drivetrain driveTrain, Gyroscope gyroscope) {
+  public GyroDrive(Drivetrain driveTrain, Gyroscope gyroscope) {
     
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain =  driveTrain;

@@ -4,11 +4,8 @@
 
 package frc.robot;
 
-import frc.robot.commands.Autos;
-import frc.robot.commands.DriveRobot;
+import frc.robot.commands.GyroDrive;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Gyroscope;
 import frc.robot.Constants.OperatorConstants;
 
@@ -26,7 +23,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private  ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static Gyroscope m_gyroscope = new Gyroscope();
   public static Drivetrain m_driveTrain = new Drivetrain();
  
@@ -37,7 +33,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    m_driveTrain.setDefaultCommand(new DriveRobot(m_driveTrain, m_gyroscope));
+    m_driveTrain.setDefaultCommand(new GyroDrive(m_driveTrain, m_gyroscope));
   }
 
   /**
@@ -51,20 +47,13 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition).onTrue(new ExampleCommand(m_exampleSubsystem));
+    //new Trigger(m_exampleSubsystem::exampleCondition).onTrue(new ExampleCommand(m_exampleSubsystem));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
-  }
+ 
+  
 }
