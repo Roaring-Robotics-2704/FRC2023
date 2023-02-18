@@ -92,6 +92,8 @@ public class DriveRobot extends CommandBase {
     else {
       RobotContainer.xbox.setRumble(RumbleType.kBothRumble, 0);
     }
+    SmartDashboard.putNumber("output", outputy);
+    
   }
   // Called once the command ends or is interrupted.
   @Override

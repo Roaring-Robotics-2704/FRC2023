@@ -3,9 +3,12 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import com.ctre.phoenix.ErrorCode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -21,8 +24,27 @@ public class Drivetrain extends SubsystemBase {
   public void driveCartesian(double y, double x, double z,double rotation){
     Rotation2d heading = Rotation2d.fromDegrees(rotation);
     mecanumdrive.driveCartesian(y,x,z,heading);
-  }
+  } 
+  ErrorCode backleftreset = m_backleftMotor.configFactoryDefault();
+  ErrorCode backrightreset = m_backrightMotor.configFactoryDefault();
+  ErrorCode frontleftreset = m_frontleftMotor.configFactoryDefault();
+  ErrorCode frontrightreset = m_frontrightMotor.configFactoryDefault();
 
+  ErrorCode frontrightencoder = m_frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+  ErrorCode frontleftencoder = m_frontleftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+  ErrorCode backrightencoder = m_backrightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+  ErrorCode backleftencoder = m_backleftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+
+public double getAbsoluteAngle() {
+  
+  double frontright = m_frontrightMotor.getSelectedSensorPosition();
+  double frontleft = m_frontleftMotor.getSelectedSensorPosition();
+  double backright = m_backrightMotor.getSelectedSensorPosition();
+  double backleft = m_backleftMotor.getSelectedSensorPosition();
+  double sum = frontleft+frontright+backleft+backright;
+  double meanAngle = sum/4;
+  return -meanAngle;
+}
 
   @Override
   public void periodic() {

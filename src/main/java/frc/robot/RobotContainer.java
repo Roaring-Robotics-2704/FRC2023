@@ -54,6 +54,7 @@ public class RobotContainer {
     autoChooser.addOption("probably chaos",3);
     autoChooser.addOption("chaos square",4);
     autoChooser.addOption("self align",5);
+    autoChooser.addOption("backwards with encoder",6);
     Drivescheme.setDefaultOption("Katelyn", true);
     Drivescheme.addOption("Matthew", false);
     SmartDashboard.putData("Autonomous Mode", autoChooser);
