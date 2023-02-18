@@ -1,12 +1,12 @@
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import com.ctre.phoenix.ErrorCode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Constants;
 
 
@@ -26,16 +26,30 @@ public class Drivetrain extends SubsystemBase {
   private MecanumDrive drive = new MecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor);
   MotorControllerGroup m_right = new MotorControllerGroup(m_frontrightMotor, m_backrightMotor);
   MotorControllerGroup m_left = new MotorControllerGroup(m_frontleftMotor, m_backleftMotor);
-  /*private DifferentialDrive tankdrive = new DifferentialDrive(m_left, m_right);*/
+// encoders
+// yes,this is as painful as it seems 
+   ErrorCode frontRightEncoder = m_frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    double frontRightEncoderDistance = m_frontrightMotor.getSelectedSensorPosition();//basically a verison of the get.distance()from the wpilib encoder class.
+    double frontRightEncoderRate = m_frontrightMotor.getSelectedSensorVelocity();//basically a verison of the get.Rate()from the wpilib encoder class.
+   ErrorCode frontLeftEncoder = m_frontleftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+     double frontLeftEncoderDistance = m_frontleftMotor.getSelectedSensorPosition();
+     double frontLeftEncoderRate = m_frontleftMotor.getSelectedSensorVelocity();
+   ErrorCode backRightEncoder = m_backrightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+     double backRightEncoderDistance = m_backrightMotor.getSelectedSensorPosition();
+     double backRightEncoderRate = m_backleftMotor.getSelectedSensorVelocity();
+   ErrorCode backLeftEncoder = m_backleftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+     double backLeftEncoderDistance = m_backleftMotor.getSelectedSensorPosition();
+     double backLeftEncoderRate = m_backleftMotor.getSelectedSensorVelocity();
 
-
+    
+/*  the first line with ErrorCode is setting the encoder to a motor. 
+    the first double line sets it to a verion of the get.distance in the wpilb encoder class 
+    the second double line in each sets it to a version  of get.Rate() from the wpilib encoder class */ 
   public void driveCartesian(double y, double x, double z,double rotation){
     Rotation2d heading = Rotation2d.fromDegrees(rotation);
     drive.driveCartesian(-y,x,-z,heading);
   }
-  /*public void tank(double y,double z) {
-  tankdrive.arcadeDrive(y, z);
-}*/
+
 
   @Override
   public void periodic() {
