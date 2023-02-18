@@ -28,7 +28,7 @@ public class ControlIntake extends CommandBase {
      int lastGamePiece = 0;
      final int CONE = 1;
      final int CUBE = 2;
-     final int NOTHING = 3;
+     //final int NOTHING = 3;
      
 
 
@@ -36,20 +36,20 @@ public class ControlIntake extends CommandBase {
     int intakeAmps;
     if (RobotContainer.m_driverJoystick.getRawButton(8)) {
       // cube in or cone out
-      intakePower = everybotIntake.IntakeOutputPower;
-      intakeAmps = everybotIntake.IntakeCurrentLimit;
+      intakePower = EverybotIntake.IntakeOutputPower;
+      intakeAmps = EverybotIntake.IntakeCurrentLimit;
       lastGamePiece = CUBE;
     } else if (RobotContainer.m_driverJoystick.getRawButton(6)) {
       // cone in or cube out
-      intakePower = -everybotIntake.IntakeOutputPower;
-      intakeAmps = everybotIntake.IntakeCurrentLimit;
+      intakePower = -EverybotIntake.IntakeOutputPower;
+      intakeAmps = EverybotIntake.IntakeCurrentLimit;
       lastGamePiece = CONE;
     } else if (lastGamePiece == CUBE) {
-      intakePower = everybotIntake.IntakeHoldPower;
-      intakeAmps = everybotIntake.IntakeHoldCurrentLimit;
+      intakePower = EverybotIntake.IntakeHoldPower;
+      intakeAmps = EverybotIntake.IntakeHoldCurrentLimit;
     } else if (lastGamePiece == CONE) {
-      intakePower = -everybotIntake.IntakeHoldPower;
-      intakeAmps = everybotIntake.IntakeHoldCurrentLimit;
+      intakePower = -EverybotIntake.IntakeHoldPower;
+      intakeAmps = EverybotIntake.IntakeHoldCurrentLimit;
     } else {
       intakePower = 0.0;
       intakeAmps = 0;
