@@ -18,6 +18,8 @@ package frc.robot;
  */
 public final class Constants {
 
+  public static int c_joystick = 0;
+
   public static int c_frontleftDriveMotor = 1;
   public static int c_frontrightDriveMotor = 2;
   public static int c_backleftDriveMotor = 3;
