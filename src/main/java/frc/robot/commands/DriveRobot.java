@@ -10,6 +10,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyroscope;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class DriveRobot extends CommandBase {
@@ -37,7 +38,9 @@ public class DriveRobot extends CommandBase {
   @Override
   public void execute() {
     
-    boolean autoBalancePitchMode = false; //same as X
+    //balancing variables
+    //If gyro moved on robot
+    //boolean autoBalancePitchMode = false; //same as X
     boolean autoBalanceRollMode = false; //same as Y
 
     final double MaximumAllowedAngle = 2.5; //is the maximum allowed in order to be consider engaged and docked(level)
@@ -50,9 +53,19 @@ public class DriveRobot extends CommandBase {
     SmartDashboard.putNumber("newStartAngle inital Y", rollAngleDegrees);
  
     //If gyro moved on robot
-    //double xAxisRate = RobotContainer.m_driverJoystick.getX(); //not nessary for just autoleveling
-    double yAxisRate = RobotContainer.m_driverJoystick.getY(); //not nessary for just autoleveling
+    //double xAxisRate = 0;
+    double yAxisRate = 0;
+    double zAxisRate = 0;
+
+    //stablizing variables
+    final double allowedTurnAngle = 2;
+    double stabilizingSpeed = 0.1;
+
+    PIDController stablizePID = new PIDController(0.005, 0, 0);
+    double correction = stablizePID.calculate(Gyroscope.gyro.getAngle());
+    SmartDashboard.putNumber("PID correction", correction);
     
+      //autobalance code
       //If gyro moved on robot 
       /*if ( !autoBalancePitchMode && (Math.abs(pitchAngleDegrees) >= Math.abs(MaximumAllowedAngle))) {
         autoBalancePitchMode = true;
@@ -68,9 +81,9 @@ public class DriveRobot extends CommandBase {
         autoBalanceRollMode = false;
       }
 
-      if ( autoBalancePitchMode ) {
+      /*if ( autoBalancePitchMode ) {
         //If gyro moved on robot
-        /*double minPower = 0.18;
+        double minPower = 0.18;
         double maxPower = 0.25;
         double powerRange = maxPower - minPower;
 
@@ -112,8 +125,8 @@ public class DriveRobot extends CommandBase {
         }
         else{
           yAxisRate = 0;
-        }*/
-      }
+        }
+      }*/
        
       if ( autoBalanceRollMode ) {
         double minPower = 0.18;
@@ -160,7 +173,43 @@ public class DriveRobot extends CommandBase {
           yAxisRate = 0;
         }
       }
-      RobotContainer.m_driveTrain.driveCartesian(yAxisRate, 0,0);
+
+      //stablizing code
+      /* 
+        if(Gyroscope.gyro.getAngle() > allowedTurnAngle){
+          zAxisRate = stabilizingSpeed;
+          SmartDashboard.putNumber("stabilizingSpeed", zAxisRate);
+        }
+        else{
+          zAxisRate = 0;
+        }
+        if(Gyroscope.gyro.getAngle() < -allowedTurnAngle){
+          zAxisRate = -stabilizingSpeed;
+          SmartDashboard.putNumber("-stabilizingSpeed", zAxisRate);
+        }
+        else{
+          zAxisRate = 0;
+        }
+      */
+
+      //PID stablizing
+        if(Gyroscope.gyro.getAngle() > allowedTurnAngle){
+          zAxisRate = -correction;
+          SmartDashboard.putNumber("stabilizingSpeed", zAxisRate);
+        }
+        else{
+          zAxisRate = 0;
+        }
+      
+        if(Gyroscope.gyro.getAngle() < -allowedTurnAngle){
+          zAxisRate = correction;
+          SmartDashboard.putNumber("-stabilizingSpeed", zAxisRate);
+        }
+        else{
+          zAxisRate = 0;
+        }
+
+      RobotContainer.m_driveTrain.driveCartesian(yAxisRate, 0,zAxisRate);
   }
 
   // Called once the command ends or is interrupted.
