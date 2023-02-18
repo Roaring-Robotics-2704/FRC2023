@@ -13,18 +13,27 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int c_joystick = 0;
-  }
 
-  public static class DriveTrain{
-    public static int c_frontRightMotor = 2;
-    public static int c_frontLeftMotor = 1;
-    public static int c_backRightMotor = 4;
-    public static int c_backLeftMotor = 3;
-  }
   public static class GyroConstants{
     public static final double c_MaximumAllowedAngle = 2.5; //is the maximum allowed in order to be consider engaged and docked(level)
     public static final double c_TargetAngle  = 2; //this number might need to be changed, it is when we stop adjusting
   }
+
+    public static int c_joystick = 0;
+
+    public static int c_frontleftDriveMotor = 4;
+    public static int c_frontrightDriveMotor = 3;
+    public static int c_backleftDriveMotor = 2;
+    public static int c_backrightDriveMotor = 1;
+
+    public static int c_leftJoystickAxisx = 1;
+    public static int c_rightJoystickAxisx = 5;
+    public static int c_rightJoystickAxisy = 5;
+    public final static class zpid {
+        public static double p = 0.005;
+        public static double i = 0;
+        public static double d = 0;
+    }
+    public static int setup = 10;
+    public static double c_speedcap = 0.5;//0.75 speed is good. y of xbox times this number.
 }

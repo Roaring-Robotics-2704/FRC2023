@@ -7,53 +7,90 @@ package frc.robot;
 import frc.robot.commands.GyroDrive;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyroscope;
-import frc.robot.Constants.OperatorConstants;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.Auto;
+import frc.robot.commands.DriveRobot;
+import frc.robot.subsystems.Drivetrain;
+
+
 
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and trigger mappings) should be declared here.
+ * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static Gyroscope m_gyroscope = new Gyroscope();
-  public static Drivetrain m_driveTrain = new Drivetrain();
- 
-  public static Joystick m_driverJoystick = new Joystick(OperatorConstants.c_joystick);
+  //Subsystems
+  public static Drivetrain m_Drivetrain = new Drivetrain();
+  public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
+
+
+  //Commands
+  public static DriveRobot m_DriveRobot = new DriveRobot();
+  public static Auto m_autonomous = new Auto();
+
+  SendableChooser<Integer> autoChooser = new SendableChooser<>();
+  public static SendableChooser<Boolean> DriveMode = new SendableChooser<>();
+  public static SendableChooser<Boolean> Drivescheme = new SendableChooser<>();
+
+
+  //OI
+  public static XboxController xbox = new XboxController(Constants.c_joystick);
+  //getPOV can be used to find the ange value of the d-Pad on the xbox controller
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the trigger bindings
-    configureBindings();
-    m_driveTrain.setDefaultCommand(new GyroDrive(m_driveTrain, m_gyroscope));
+    // Configure the button bindings
+    configureButtonBindings();
+    m_Drivetrain.setDefaultCommand(new GyroDrive(m_Drivetrain, m_gyroscope));
+    //Is nessary, might have been the reason for the error "DifferntialDrive...Output not updated often enough"
+    m_Drivetrain.setDefaultCommand(m_DriveRobot);
+    autoChooser.setDefaultOption("square", 1);
+    autoChooser.addOption("Back up", 2);
+    autoChooser.addOption("probably chaos",3);
+    autoChooser.addOption("chaos square",4);
+    autoChooser.addOption("self align",5);
+    Drivescheme.setDefaultOption("Katelyn", true);
+    Drivescheme.addOption("Matthew", false);
+    SmartDashboard.putData("Autonomous Mode", autoChooser);
+    SmartDashboard.putData("driver", Drivescheme);
+    DriveMode.setDefaultOption("Field Oriented", true);
+    DriveMode.addOption("Robot Oriented", false);
+    SmartDashboard.putData("Drive Mode", DriveMode);
+
+
   }
 
   /**
-   * Use this method to define your trigger->command mappings. Triggers can be created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
-   * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
-   * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-   * joysticks}.
+   * Use this method to define your button->command mappings. Buttons can be created by
+   * instantiating a {@link GenericHID} or one of its subclasses ({@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    //new Trigger(m_exampleSubsystem::exampleCondition).onTrue(new ExampleCommand(m_exampleSubsystem));
+  private void configureButtonBindings() {}
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-    // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+  /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
+  public Command getAutonomousCommand() {
+    m_autonomous.mode = autoChooser.getSelected();
+    return m_autonomous;
   }
-
- 
-  
 }

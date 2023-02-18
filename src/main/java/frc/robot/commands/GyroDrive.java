@@ -209,7 +209,7 @@ public class GyroDrive extends CommandBase {
           zAxisRate = 0;
         }
 
-      RobotContainer.m_driveTrain.driveCartesian(yAxisRate, 0,zAxisRate);
+      RobotContainer.m_Drivetrain.driveCartesian(yAxisRate, 0,zAxisRate);
   }
 
   // Called once the command ends or is interrupted.
