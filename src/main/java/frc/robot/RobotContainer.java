@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Auto;
 import frc.robot.commands.DriveRobot;
+import frc.robot.commands.LightCommand;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.LightStrand;
 
 
 
@@ -27,15 +29,17 @@ public class RobotContainer {
   //Subsystems
   public static Drivetrain m_Drivetrain = new Drivetrain();
   public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
-
+  public static LightStrand m_LightStrand = new LightStrand();
 
   //Commands
   public static DriveRobot m_DriveRobot = new DriveRobot();
   public static Auto m_autonomous = new Auto();
+  public static LightCommand m_LightCommand = new LightCommand();
 
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
   public static SendableChooser<Boolean> DriveMode = new SendableChooser<>();
   public static SendableChooser<Boolean> Drivescheme = new SendableChooser<>();
+  public static SendableChooser<Integer> lightChooser = new SendableChooser<>();
 
 
   //OI
@@ -47,6 +51,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    m_LightStrand.setDefaultCommand(m_LightCommand);
     //Is nessary, might have been the reason for the error "DifferntialDrive...Output not updated often enough"
     m_Drivetrain.setDefaultCommand(m_DriveRobot);
     autoChooser.setDefaultOption("square", 1);
@@ -62,7 +67,15 @@ public class RobotContainer {
     DriveMode.addOption("Robot Oriented", false);
     SmartDashboard.putData("Drive Mode", DriveMode);
 
-
+    lightChooser.addOption("off", 0);
+    lightChooser.addOption("back and forth", 1);
+    lightChooser.addOption("red", 2);
+    lightChooser.addOption("blue", 3);
+    lightChooser.addOption("rainbow", 4);
+    lightChooser.addOption("rainbowsweep",5);
+    lightChooser.setDefaultOption("blink_at_Teleop", 6);
+    lightChooser.addOption("Dynamic Alliance",7);
+    SmartDashboard.putData("LightStrand Option", lightChooser);
   }
 
   /**

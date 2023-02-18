@@ -21,6 +21,8 @@ public int mode;
 
 @Override
 public void initialize(){
+    RobotContainer.m_LightCommand.Dynamic_Alliance();
+    RobotContainer.m_LightStrand.update();
     autoTime.reset();
     gyro.calibrate();
     gyro.reset();
