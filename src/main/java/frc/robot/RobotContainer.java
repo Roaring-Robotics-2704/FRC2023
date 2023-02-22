@@ -86,6 +86,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    //starts command when condition changes to true and cancels when the condition changes to false
+    //toggles gyrodrive on and off
     gryoButton.whileTrue(new GyroDrive(m_Drivetrain, m_gyroscope));
   }
 
