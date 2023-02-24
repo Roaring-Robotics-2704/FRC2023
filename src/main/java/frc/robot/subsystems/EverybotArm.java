@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -14,7 +16,7 @@ import frc.robot.Constants;
 public class EverybotArm extends SubsystemBase {
   /** Creates a new EverybotArm. */
   //Create new CANSparkMax
-  CANSparkMax armMotor = new CANSparkMax(Constants.ArmConstants.c_armMotor, MotorType.kBrushless); 
+  public TalonSRX armMotor = new TalonSRX(Constants.ArmConstants.c_armMotor); 
 
   public static final int ArmCurrentLimit = Constants.ArmConstants.c_armCurrentLimit; //Amps motor can use
   public static final double ArmOutputPower = Constants.ArmConstants.c_armOutputPower; //Precent output when go up and down
@@ -22,10 +24,8 @@ public class EverybotArm extends SubsystemBase {
   public EverybotArm() {}
 
   public void setArmMotor(double percent) {
-    armMotor.set(percent);
+    armMotor.set(TalonSRXControlMode.PercentOutput, percent);
     SmartDashboard.putNumber("arm power (%)", percent);
-    SmartDashboard.putNumber("arm motor current (amps)", armMotor.getOutputCurrent());
-    SmartDashboard.putNumber("arm motor temperature (C)", armMotor.getMotorTemperature());
   }
 
   @Override
