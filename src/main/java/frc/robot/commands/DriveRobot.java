@@ -48,10 +48,13 @@ public class DriveRobot extends CommandBase {
   @Override
   public void execute() {
     
-    turbo = RobotContainer.xbox.getRightTriggerAxis();
+    turbo = RobotContainer.xbox.getRightTriggerAxis()/2;
+    //turbo = RobotContainer.xbox.getRightTriggerAxis();
     precision = RobotContainer.xbox.getLeftTriggerAxis()/2;
   
-      turboamount = Constants.c_speedcap;//turbo-precision+0.5;
+      //turboamount = Constants.c_speedcap;
+      turboamount = turbo + Constants.c_speedcap;
+    
 
     
     SmartDashboard.putNumber("turbo amount", turboamount);
