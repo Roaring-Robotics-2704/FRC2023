@@ -52,6 +52,7 @@ public class RobotContainer {
 
   //OI
   public static XboxController xbox = new XboxController(Constants.c_joystick);
+  public static XboxController xboxSecond = new XboxController(Constants.c_joystickSecond);
   //getPOV can be used to find the ange value of the d-Pad on the xbox controller
 
 
