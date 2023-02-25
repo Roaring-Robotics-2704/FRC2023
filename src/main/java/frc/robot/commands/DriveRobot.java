@@ -52,7 +52,7 @@ public class DriveRobot extends CommandBase {
     //turbo = RobotContainer.xbox.getRightTriggerAxis();
     precision = RobotContainer.xbox.getLeftTriggerAxis()/2;
   
-      turboamount = Constants.c_speedcap;//turbo-precision+0.5;
+      speedFactor =turbo-precision+Constants.c_speedcap;
 
     
     SmartDashboard.putNumber("turbo amount", speedFactor);
