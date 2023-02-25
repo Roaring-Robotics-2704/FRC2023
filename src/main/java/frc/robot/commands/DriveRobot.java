@@ -39,7 +39,7 @@ public class DriveRobot extends CommandBase {
   private double angle;
   public double turbo;
   public double precision;
-  public double turboamount;
+  public double speedFactor;
   double joystickxz; // getRawAxis(Constants.c_leftJoystickAxisx);
   double joystickyz;
   double joystickx; // getRawAxis(Constants.c_rightJoystickAxisx);
@@ -53,11 +53,11 @@ public class DriveRobot extends CommandBase {
     precision = RobotContainer.xbox.getLeftTriggerAxis()/2;
   
       //turboamount = Constants.c_speedcap;
-      turboamount = turbo + Constants.c_speedcap;
+      speedFactor = turbo - precision + Constants.c_speedcap;
     
 
     
-    SmartDashboard.putNumber("turbo amount", turboamount);
+    SmartDashboard.putNumber("turbo amount", speedFactor);
     SmartDashboard.putNumber("turbo", turbo);
     if (RobotContainer.Drivescheme.getSelected()) {
        joystickxz = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_leftJoystickAxisx);
@@ -71,9 +71,9 @@ public class DriveRobot extends CommandBase {
      joystickx = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_rightJoystickAxisx);
      joysticky = -RobotContainer.xbox.getLeftY(); // getRawAxis(Constants.c_rightJoystickAxisy);
     }
-    double outputx = joystickx * turboamount;
-    double outputy = joysticky * turboamount;
-    double outputz = joystickxz * turboamount;
+    double outputx = joystickx * speedFactor;
+    double outputy = joysticky * speedFactor;
+    double outputz = joystickxz * speedFactor;
     mode = RobotContainer.DriveMode.getSelected();
     
     SmartDashboard.putNumber("x", outputx);
