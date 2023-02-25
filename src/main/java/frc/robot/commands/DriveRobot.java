@@ -51,7 +51,7 @@ public class DriveRobot extends CommandBase {
     turbo = RobotContainer.xbox.getRightTriggerAxis()/2;
     precision = RobotContainer.xbox.getLeftTriggerAxis()/2;
   
-      turboamount = turbo++Constants.c_speedcap;//turbo-precision+0.5;
+      turboamount = turbo-precision+Constants.c_speedcap;//turbo-precision+0.5;
 
     
     SmartDashboard.putNumber("turbo amount", turboamount);
@@ -93,7 +93,7 @@ public class DriveRobot extends CommandBase {
       RobotContainer.xbox.setRumble(RumbleType.kBothRumble, 0);
     }
     SmartDashboard.putNumber("output", outputy);
-    
+    SmartDashboard.putNumber("encoderAverage",RobotContainer.m_Drivetrain.getAbsoluteAngle());
   }
   // Called once the command ends or is interrupted.
   @Override
