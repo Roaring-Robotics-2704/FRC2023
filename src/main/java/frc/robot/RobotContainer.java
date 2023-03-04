@@ -4,12 +4,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Auto;
 import frc.robot.commands.DriveRobot;
 import frc.robot.subsystems.Drivetrain;
@@ -27,6 +27,8 @@ public class RobotContainer {
   //Subsystems
   public static Drivetrain m_Drivetrain = new Drivetrain();
   public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
+  
+
 
 
   //Commands
@@ -54,6 +56,9 @@ public class RobotContainer {
     autoChooser.addOption("probably chaos",3);
     autoChooser.addOption("chaos square",4);
     autoChooser.addOption("self align",5);
+    autoChooser.addOption("on and off", 6);
+    autoChooser.addOption("right side balance ", 7);
+    autoChooser.addOption("left side balance ", 8);
     Drivescheme.setDefaultOption("Katelyn", true);
     Drivescheme.addOption("Matthew", false);
     SmartDashboard.putData("Autonomous Mode", autoChooser);
