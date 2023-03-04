@@ -12,6 +12,7 @@ import frc.robot.Constants.OperatorConstants;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
@@ -53,6 +54,7 @@ public class RobotContainer {
   //OI
   public static XboxController xbox = new XboxController(Constants.c_joystick);
   public static XboxController xboxSecond = new XboxController(Constants.c_joystickSecond);
+  public static JoystickButton armButton = new JoystickButton(xbox, 4);
   //getPOV can be used to find the ange value of the d-Pad on the xbox controller
 
 
@@ -86,7 +88,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+   
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

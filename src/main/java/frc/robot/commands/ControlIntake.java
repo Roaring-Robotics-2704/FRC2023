@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.EverybotIntake;
 
@@ -37,22 +38,26 @@ public class ControlIntake extends CommandBase {
     if (RobotContainer.xbox.getAButton()) {
     //if (RobotContainer.xboxSecond.getAButton()) {
       // cube in or cone out
-      intakePower = EverybotIntake.IntakeOutputPower;
-      intakeAmps = EverybotIntake.IntakeCurrentLimit;
+      intakePower = Constants.IntakeConstants.c_intakeOutputPower;
+      intakeAmps = Constants.IntakeConstants.c_intakeCurrentLimit;
       lastGamePiece = CUBE;
-    } else if (RobotContainer.xbox.getBButton()) {
-    //} else if (RobotContainer.xboxSecond.getBButton()) {
+    } 
+    else if (RobotContainer.xbox.getBButton()) {
+    //else if (RobotContainer.xboxSecond.getBButton()) {
       // cone in or cube out
-      intakePower = -EverybotIntake.IntakeOutputPower;
-      intakeAmps = EverybotIntake.IntakeCurrentLimit;
+      intakePower = -Constants.IntakeConstants.c_intakeOutputPower;
+      intakeAmps = Constants.IntakeConstants.c_intakeCurrentLimit;
       lastGamePiece = CONE;
-    } else if (lastGamePiece == CUBE) {
-      intakePower = EverybotIntake.IntakeHoldPower;
-      intakeAmps = EverybotIntake.IntakeHoldCurrentLimit;
-    } else if (lastGamePiece == CONE) {
-      intakePower = -EverybotIntake.IntakeHoldPower;
-      intakeAmps = EverybotIntake.IntakeHoldCurrentLimit;
-    } else {
+    } 
+    else if (lastGamePiece == CUBE) {
+      intakePower = Constants.IntakeConstants.c_intakeHoldPower;
+      intakeAmps = Constants.IntakeConstants.c_intakeHoldCurrentLimit;
+    } 
+    else if (lastGamePiece == CONE) {
+      intakePower = -Constants.IntakeConstants.c_intakeHoldPower;
+      intakeAmps = Constants.IntakeConstants.c_intakeHoldCurrentLimit;
+    } 
+    else {
       intakePower = 0.0;
       intakeAmps = 0;
     }

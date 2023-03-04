@@ -19,8 +19,11 @@ public final class Constants {
 
   public static class ArmConstants{
     public static final int c_armMotor = 1;//Motor port
-    public static final int c_armCurrentLimit = 20;//Amps motor can use
-    public static final double c_armOutputPower = 0.4;//Precent output when go up and down
+    //public static final int c_armCurrentLimit = 20;//Amps motor can use
+    public static final double c_armPower = 0.2;//Precent output when go up and down
+    public static final double c_armEncoderKp = 0;
+    public static final double c_armEncoderKi = 0;
+    public static final double c_armEncoderKd = 0;
   }
 
   public static class IntakeConstants{
