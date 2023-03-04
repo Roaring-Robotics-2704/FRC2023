@@ -14,7 +14,7 @@ public class Auto extends CommandBase{
    } 
    ADIS16470_IMU gyro = RobotContainer.m_imu;
    private void moveAuto(double y,double x,double z) {
-    RobotContainer.m_Drivetrain.driveCartesian(y,x,z,0);   
+    RobotContainer.m_Drivetrain.driveCartesian(y,x,z,-gyro.getAngle());   
     }
 Timer autoTime = new Timer();
 public int mode;
@@ -48,8 +48,8 @@ public void execute() {
         }
     }          
     else if (mode == 2) {//backwards
-        while ( autoTime.get() <= 2.06){
-            moveAuto(0.6,0,0);
+        while ( autoTime.get() <= 1.65){
+            moveAuto(01,0,0);
             System.out.println(RobotContainer.m_Drivetrain.getAbsoluteAngle());
             
         
@@ -68,21 +68,17 @@ public void execute() {
     
     }
     else if (mode == 4) {//spinning square
-        while (autoTime.get()<=1) {//back
+        while (autoTime.get()<=2) {//back
            moveAuto(-0.3,0,0.3);
         }
-        while (autoTime.get()<=2) {//right
+        while (autoTime.get()<=4) {//right
             moveAuto(0,0.3,0.3);
         }
-        while (autoTime.get()<=3) {//up
+        while (autoTime.get()<=6) {//up
             moveAuto(0.3,0,0.3);
         }
-        while (autoTime.get()<=4) {//left
+        while (autoTime.get()<=8) {//left
             moveAuto(0,-0.3,0.3);
-        }
-        while (gyro.getAngle() != 0){
-            moveAuto(0,0,align.calculate(gyro.getAngle(),0)/180);
-            
         }
     }
     else if (mode == 5) {
