@@ -13,7 +13,24 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-
+    public static class OperatorConstants {
+        public static final int c_joystick = 0;
+      }
+    
+      public static class ArmConstants{
+        public static final int c_armMotor = 1;//Motor port
+        public static final int c_armCurrentLimit = 20;//Amps motor can use
+        public static final double c_armOutputPower = 0.4;//Precent output when go up and down
+      }
+    
+      public static class IntakeConstants{
+        public static final int c_intakeMotor = 2;//Motor port
+        public static final int c_intakeCurrentLimit = 25;//Amps can use when picking up
+        public static final int c_intakeHoldCurrentLimit = 5;//Amps can use when holding
+        public static final double c_intakeOutputPower = 1.0;//Precent output for intaking
+        public static final double c_intakeHoldPower = 0.07;//Precent output for holding
+      }
+    
     public static int c_joystick = 0;
 
     public static int c_frontleftDriveMotor = 4;
@@ -30,5 +47,5 @@ public final class Constants {
         public static double d = 0;
     }
     public static int setup = 10;
-    public static double c_speedcap = 0.5;//0.75 speed is good. y of xbox times this number.
+    public static double c_speedcap = 0.8;//0.75 speed is good. y of xbox times this number.
 }
