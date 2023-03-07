@@ -18,12 +18,15 @@ public class EverybotArm extends SubsystemBase {
   /** Creates a new EverybotArm. */
   //Create new TalonSRX
   public TalonSRX armMotor = new TalonSRX(Constants.ArmConstants.c_armMotor); 
-
+/* 
   //Create new Encoder
-  /*ErrorCode frontRightEncoder = armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+  ErrorCode frontRightEncoder = armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
   double frontRightEncoderDistance = armMotor.getSelectedSensorPosition();//like get.distance()
   double frontRightEncoderRate = armMotor.getSelectedSensorVelocity();//get.rate()
-  double firstLevel = 3;
+  //Setpoints for arm
+  double topRow = Constants.ArmConstants.c_topRow;
+  double middleRow = Constants.ArmConstants.c_middleRow;
+  double startingPosition =  Constants.ArmConstants.c_startinPosition;
 
   //Create new PID Controller
   PIDController armPID = new PIDController(Constants.ArmConstants.c_armEncoderKp, Constants.ArmConstants.c_armEncoderKi, Constants.ArmConstants.c_armEncoderKd);
@@ -37,13 +40,23 @@ public class EverybotArm extends SubsystemBase {
     armMotor.set(TalonSRXControlMode.PercentOutput, percent);
     SmartDashboard.putNumber("arm power", percent);
   }
-
-  /*public void setArmMotor(){
-    double speed = armPID.calculate(frontRightEncoderDistance, firstLevel);
+/* 
+  public void setArmStartingPosition(){
+    double speed = armPID.calculate(frontRightEncoderDistance, startingPosition);
     armMotor.set(TalonSRXControlMode.PercentOutput, speed);
-  }*/
-  
+  }
 
+  public void setArmMiddleRow(){
+    double speed = armPID.calculate(frontRightEncoderDistance, middleRow);
+    armMotor.set(TalonSRXControlMode.PercentOutput, speed);
+  }
+
+  public void setArmTopRow(){
+    double speed = armPID.calculate(frontRightEncoderDistance, topRow);
+    armMotor.set(TalonSRXControlMode.PercentOutput, speed);
+  }
+  
+*/
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

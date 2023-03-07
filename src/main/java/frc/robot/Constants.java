@@ -24,6 +24,9 @@ public final class Constants {
     public static final double c_armEncoderKp = 0;
     public static final double c_armEncoderKi = 0;
     public static final double c_armEncoderKd = 0;
+    public static final double c_topRow = 10;
+    public static final double c_middleRow = 5;
+    public static final double c_startinPosition = 0;
   }
 
   public static class IntakeConstants{
