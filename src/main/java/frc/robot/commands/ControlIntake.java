@@ -35,14 +35,14 @@ public class ControlIntake extends CommandBase {
 
     double intakePower;
     int intakeAmps;
-    if (RobotContainer.xbox.getAButton()) {
+    if (RobotContainer.xboxSecond.getAButton()) {
     //if (RobotContainer.xboxSecond.getAButton()) {
       // cube in or cone out
       intakePower = Constants.IntakeConstants.c_intakeOutputPower;
       intakeAmps = Constants.IntakeConstants.c_intakeCurrentLimit;
       lastGamePiece = CUBE;
     } 
-    else if (RobotContainer.xbox.getBButton()) {
+    else if (RobotContainer.xboxSecond.getBButton()) {
     //else if (RobotContainer.xboxSecond.getBButton()) {
       // cone in or cube out
       intakePower = -Constants.IntakeConstants.c_intakeOutputPower;
