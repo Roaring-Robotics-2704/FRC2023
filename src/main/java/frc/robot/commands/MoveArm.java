@@ -26,14 +26,12 @@ public class MoveArm extends CommandBase {
   @Override
   public void execute() {
     double armPower;
-    if (RobotContainer.xbox.getXButton()) {
-    //if (RobotContainer.xboxSecond.getXButton()) {
+    if (RobotContainer.xboxSecond.getRightTriggerAxis() > 0) {
       // makes arm go out
-      armPower = -Constants.ArmConstants.c_armPower;
-    } else if (RobotContainer.xbox.getYButton()) {
-    //} else if (RobotContainer.xboxSecond.getYButton()) {
+      armPower = -Constants.ArmConstants.c_armPowerOut;
+    } else if (RobotContainer.xboxSecond.getRightBumper()) {
       // makes arm go in
-      armPower = Constants.ArmConstants.c_armPower;
+      armPower = Constants.ArmConstants.c_armPowerIn;
     } else {
       // do nothing and let it sit where it is
       armPower = 0.0;

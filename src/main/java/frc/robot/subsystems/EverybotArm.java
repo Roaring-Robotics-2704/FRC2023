@@ -17,12 +17,13 @@ import frc.robot.Constants;
 public class EverybotArm extends SubsystemBase {
   /** Creates a new EverybotArm. */
   //Create new TalonSRX
-  public TalonSRX armMotor = new TalonSRX(Constants.ArmConstants.c_armMotor); 
-/* 
+  public static TalonSRX armMotor = new TalonSRX(Constants.ArmConstants.c_armMotor); 
+
   //Create new Encoder
-  ErrorCode frontRightEncoder = armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-  double frontRightEncoderDistance = armMotor.getSelectedSensorPosition();//like get.distance()
-  double frontRightEncoderRate = armMotor.getSelectedSensorVelocity();//get.rate()
+  public static ErrorCode ArmEncoder = armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+  double ArmEncoderDistance = armMotor.getSelectedSensorPosition();//like get.distance()
+  double ArmEncoderRate = armMotor.getSelectedSensorVelocity();//get.rate()
+  
   //Setpoints for arm
   double topRow = Constants.ArmConstants.c_topRow;
   double middleRow = Constants.ArmConstants.c_middleRow;
@@ -30,7 +31,7 @@ public class EverybotArm extends SubsystemBase {
 
   //Create new PID Controller
   PIDController armPID = new PIDController(Constants.ArmConstants.c_armEncoderKp, Constants.ArmConstants.c_armEncoderKi, Constants.ArmConstants.c_armEncoderKd);
-*/
+
   //public static final int ArmCurrentLimit = Constants.ArmConstants.c_armCurrentLimit; //Amps motor can use
   //public static final double ArmPower = Constants.ArmConstants.c_armPower; //Precent output when go up and down
 
@@ -42,17 +43,17 @@ public class EverybotArm extends SubsystemBase {
   }
 /* 
   public void setArmStartingPosition(){
-    double speed = armPID.calculate(frontRightEncoderDistance, startingPosition);
+    double speed = armPID.calculate(ArmEncoderDistance, startingPosition);
     armMotor.set(TalonSRXControlMode.PercentOutput, speed);
   }
 
   public void setArmMiddleRow(){
-    double speed = armPID.calculate(frontRightEncoderDistance, middleRow);
+    double speed = armPID.calculate(ArmEncoderDistance, middleRow);
     armMotor.set(TalonSRXControlMode.PercentOutput, speed);
   }
 
   public void setArmTopRow(){
-    double speed = armPID.calculate(frontRightEncoderDistance, topRow);
+    double speed = armPID.calculate(ArmEncoderDistance, topRow);
     armMotor.set(TalonSRXControlMode.PercentOutput, speed);
   }
   
