@@ -57,5 +57,5 @@ public final class Constants {
     }
     public static int setup = 10;
     public static double c_speedcap = 0.8;//0.75 speed is good. y of xbox times this number.
-    public static double deadzone = 0.1;
+    public static double deadzone = 0.25;
 }
