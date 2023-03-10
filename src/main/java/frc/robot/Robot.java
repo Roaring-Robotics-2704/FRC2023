@@ -88,7 +88,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putNumber("Arm Encoder Value", EverybotArm.armMotor.getSelectedSensorPosition());
+    //SmartDashboard.putNumber("Arm Encoder Value", EverybotArm.armMotor.getSelectedSensorPosition());
   }
 
   @Override

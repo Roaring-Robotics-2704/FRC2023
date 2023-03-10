@@ -18,12 +18,12 @@ public class EverybotArm extends SubsystemBase {
   /** Creates a new EverybotArm. */
   //Create new TalonSRX
   public static TalonSRX armMotor = new TalonSRX(Constants.ArmConstants.c_armMotor); 
-
+/* 
   //Create new Encoder
   public static ErrorCode ArmEncoder = armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
   double ArmEncoderDistance = armMotor.getSelectedSensorPosition();//like get.distance()
   double ArmEncoderRate = armMotor.getSelectedSensorVelocity();//get.rate()
-  
+  */
   //Setpoints for arm
   double topRow = Constants.ArmConstants.c_topRow;
   double middleRow = Constants.ArmConstants.c_middleRow;
