@@ -27,6 +27,7 @@ public final class Constants {
     public static final double c_topRow = 10;
     public static final double c_middleRow = 5;
     public static final double c_startinPosition = 0;
+    public static final int c_armCurrentLimit = 0;
   }
 
   public static class IntakeConstants{
@@ -56,4 +57,5 @@ public final class Constants {
     }
     public static int setup = 10;
     public static double c_speedcap = 0.8;//0.75 speed is good. y of xbox times this number.
+    public static double deadzone = 0.1;
 }

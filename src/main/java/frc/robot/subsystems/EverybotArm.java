@@ -18,9 +18,9 @@ public class EverybotArm extends SubsystemBase {
   /** Creates a new EverybotArm. */
   //Create new TalonSRX
   public TalonSRX armMotor = new TalonSRX(Constants.ArmConstants.c_armMotor); 
-/* 
+
   //Create new Encoder
-  ErrorCode frontRightEncoder = armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+  ErrorCode frontRightEncoder = armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
   double frontRightEncoderDistance = armMotor.getSelectedSensorPosition();//like get.distance()
   double frontRightEncoderRate = armMotor.getSelectedSensorVelocity();//get.rate()
   //Setpoints for arm
@@ -30,9 +30,8 @@ public class EverybotArm extends SubsystemBase {
 
   //Create new PID Controller
   PIDController armPID = new PIDController(Constants.ArmConstants.c_armEncoderKp, Constants.ArmConstants.c_armEncoderKi, Constants.ArmConstants.c_armEncoderKd);
-*/
-  //public static final int ArmCurrentLimit = Constants.ArmConstants.c_armCurrentLimit; //Amps motor can use
-  //public static final double ArmPower = Constants.ArmConstants.c_armPower; //Precent output when go up and down
+  public static final int ArmCurrentLimit = Constants.ArmConstants.c_armCurrentLimit; //Amps motor can use
+  public static final double ArmPower = Constants.ArmConstants.c_armPower; //Precent output when go up and down
 
   public EverybotArm() {}
 
@@ -40,7 +39,7 @@ public class EverybotArm extends SubsystemBase {
     armMotor.set(TalonSRXControlMode.PercentOutput, percent);
     SmartDashboard.putNumber("arm power", percent);
   }
-/* 
+ 
   public void setArmStartingPosition(){
     double speed = armPID.calculate(frontRightEncoderDistance, startingPosition);
     armMotor.set(TalonSRXControlMode.PercentOutput, speed);
@@ -56,7 +55,7 @@ public class EverybotArm extends SubsystemBase {
     armMotor.set(TalonSRXControlMode.PercentOutput, speed);
   }
   
-*/
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
