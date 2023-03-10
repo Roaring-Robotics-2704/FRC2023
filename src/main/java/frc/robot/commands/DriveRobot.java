@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import java.lang.Math.*;
 public class DriveRobot extends CommandBase {
   /** Creates a new DriveRobot. */
   public DriveRobot() {
@@ -72,7 +73,27 @@ public class DriveRobot extends CommandBase {
     double outputy = joysticky * turboamount;
     double outputz = joystickxz * turboamount;
     mode = RobotContainer.DriveMode.getSelected();
-    
+    double Deadband = Constants.deadzone;
+    if( Math.abs(outputx) < Deadband ){
+      outputx = 0;
+    }
+     else{
+      outputx = (1 / (1 - Deadband)) * (outputx + (-Math.sin(outputx) * Deadband));
+     }
+     
+     if( Math.abs(outputy) < Deadband ){
+      outputy = 0;
+    }
+     else{
+      outputy = (1 / (1 - Deadband)) * (outputy + (-Math.sin(outputy) * Deadband));
+     }
+     
+     if( Math.abs(outputz) < Deadband ){
+      outputz = 0;
+    }
+     else{
+      outputz = (1 / (1 - Deadband)) * (outputz + (-Math.sin(outputy) * Deadband));
+     }
     SmartDashboard.putNumber("x", outputx);
     SmartDashboard.putNumber("y", outputy);
     SmartDashboard.putNumber("z", outputz);
