@@ -8,10 +8,12 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Mechanum.mecanum;
 
 public class Drivetrain extends SubsystemBase {
   /** Creates a new Drivetrain. */
@@ -34,8 +36,17 @@ public void updatevalues() {
 
   private MecanumDrive mecanumdrive = new MecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor);
   public void driveCartesian(double y, double x, double z,double rotation){
-    Rotation2d heading = Rotation2d.fromDegrees(rotation);
-    mecanumdrive.driveCartesian(y,x,z,heading);
+    MecanumDriveWheelSpeeds speeds = mecanum.calculateSpeeds(mecanum.createSpeeds(y,x,z));
+    mecanum.veloDrive(
+    speeds,
+    m_frontleftMotor,
+    m_frontrightMotor,
+    m_backleftMotor,
+    m_backrightMotor,
+    mecanumdrive
+    );
+    /*Rotation2d heading = Rotation2d.fromDegrees(rotation);
+    mecanumdrive.driveCartesian(y,x,z,heading);*/
   }
 
   @Override
