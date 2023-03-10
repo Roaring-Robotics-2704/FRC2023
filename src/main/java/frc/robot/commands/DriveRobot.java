@@ -71,20 +71,14 @@ public class DriveRobot extends CommandBase {
     double outputx = joystickx * turboamount;
     double outputy = joysticky * turboamount;
     double outputz = joystickxz * turboamount;
-    mode = RobotContainer.DriveMode.getSelected();
-
     SmartDashboard.putNumber("x", outputx);
     SmartDashboard.putNumber("y", outputy);
     SmartDashboard.putNumber("z", outputz);
     SmartDashboard.putNumber("vector angle",vector(joystickxz,joystickyz));
     SmartDashboard.putNumber("output heading", angle); 
     SmartDashboard.putNumber("actual heading", -RobotContainer.m_imu.getAngle());;
-    if (mode) {
-      RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz,-gyro.getAngle());   
-    }
-    else {
-      RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,outputz, 0);
-    }
+   
+    RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,outputz);
     if (RobotContainer.xbox.getLeftBumper()) {
       RobotContainer.m_imu.reset();
       RobotContainer.xbox.setRumble(RumbleType.kBothRumble, 0.5);
@@ -92,7 +86,6 @@ public class DriveRobot extends CommandBase {
     else {
       RobotContainer.xbox.setRumble(RumbleType.kBothRumble, 0);
     }
-    RobotContainer.m_Drivetrain.updatevalues();
   }
   // Called once the command ends or is interrupted.
   @Override

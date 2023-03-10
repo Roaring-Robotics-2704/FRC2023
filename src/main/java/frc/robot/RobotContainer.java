@@ -40,7 +40,6 @@ public class RobotContainer {
   public static Auto m_autonomous = new Auto();
 
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
-  public static SendableChooser<Boolean> DriveMode = new SendableChooser<>();
   public static SendableChooser<Boolean> Drivescheme = new SendableChooser<>();
 
 
@@ -67,9 +66,6 @@ public class RobotContainer {
     Drivescheme.addOption("Matthew", false);
     SmartDashboard.putData("Autonomous Mode", autoChooser);
     SmartDashboard.putData("driver", Drivescheme);
-    DriveMode.setDefaultOption("Robot Oriented", false);
-    DriveMode.addOption("Field Oriented", true);
-    SmartDashboard.putData("Drive Mode", DriveMode);
 
 
   }

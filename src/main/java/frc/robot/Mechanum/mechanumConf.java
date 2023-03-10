@@ -18,5 +18,11 @@ public class mechanumConf extends mecanum {
         public static double backRightWheelX = -0.381; //+ is to front of robot
         public static double backRightWheelY = -0.381; //+ is to left of robot
     } 
-
+    public static class motorPorts {
+        //motor ports on can bus
+        public static int frontleft = 1;
+        public static int frontright = 1;
+        public static int backleft = 1;
+        public static int backright = 1;
+    }
 }

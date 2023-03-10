@@ -14,7 +14,7 @@ public class Auto extends CommandBase{
    } 
    ADIS16470_IMU gyro = RobotContainer.m_imu;
    private void moveAuto(double y,double x,double z) {
-    RobotContainer.m_Drivetrain.driveCartesian(y,x,z,-gyro.getAngle());   
+    RobotContainer.m_Drivetrain.driveCartesian(y,x,z);   
     }
 Timer autoTime = new Timer();
 public int mode;
