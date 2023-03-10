@@ -25,4 +25,9 @@ public class mechanumConf extends mecanum {
         public static int backleft = 1;
         public static int backright = 1;
     }
+    public static class anglepid {
+        double p = 0;
+        double i = 0;
+        double d = 0;
+    }
 }

@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.Mechanum.mechanumConf.anglepid;
+
 public class DriveRobot extends CommandBase {
   /** Creates a new DriveRobot. */
   public DriveRobot() {
@@ -18,7 +20,6 @@ public class DriveRobot extends CommandBase {
     addRequirements(RobotContainer.m_Drivetrain);
   }
 
-  PIDController align = new PIDController(Constants.zpid.p,Constants.zpid.i,Constants.zpid.d);
   ADIS16470_IMU gyro = RobotContainer.m_imu;
   public static double vector(double x, double y) {
       double angleRadians = Math.atan2(y, x);
@@ -33,6 +34,7 @@ public class DriveRobot extends CommandBase {
     RobotContainer.m_imu.reset();
     RobotContainer.m_imu.calibrate();
     RobotContainer.m_imu.reset();
+    
   }
 
   public Boolean mode;
@@ -44,6 +46,8 @@ public class DriveRobot extends CommandBase {
   double joystickyz;
   double joystickx; // getRawAxis(Constants.c_rightJoystickAxisx);
   double joysticky;
+  double correctangle = 0;
+  PIDController anglePID = new PIDController(anglepid.p, anglepid.i, anglepid.d);
 
   @Override
   public void execute() {
@@ -58,19 +62,19 @@ public class DriveRobot extends CommandBase {
     SmartDashboard.putNumber("turbo", turbo);
     if (RobotContainer.Drivescheme.getSelected()) {
        joystickxz = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_leftJoystickAxisx);
-       joystickyz = RobotContainer.xbox.getLeftY();
        joystickx = RobotContainer.xbox.getRightX(); // getRawAxis(Constants.c_rightJoystickAxisx);
        joysticky = -RobotContainer.xbox.getRightY();
     }
     else {
      joystickxz = RobotContainer.xbox.getRightX(); // getRawAxis(Constants.c_leftJoystickAxisx);
-     joystickyz = RobotContainer.xbox.getRightY();
      joystickx = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_rightJoystickAxisx);
      joysticky = -RobotContainer.xbox.getLeftY(); // getRawAxis(Constants.c_rightJoystickAxisy);
     }
     double outputx = joystickx * turboamount;
     double outputy = joysticky * turboamount;
     double outputz = joystickxz * turboamount;
+    correctangle = correctangle+outputz;
+
     SmartDashboard.putNumber("x", outputx);
     SmartDashboard.putNumber("y", outputy);
     SmartDashboard.putNumber("z", outputz);
@@ -78,7 +82,7 @@ public class DriveRobot extends CommandBase {
     SmartDashboard.putNumber("output heading", angle); 
     SmartDashboard.putNumber("actual heading", -RobotContainer.m_imu.getAngle());;
    
-    RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,outputz);
+    RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,anglePID.calculate(-RobotContainer.m_imu.getAngle(), correctangle));
     if (RobotContainer.xbox.getLeftBumper()) {
       RobotContainer.m_imu.reset();
       RobotContainer.xbox.setRumble(RumbleType.kBothRumble, 0.5);
