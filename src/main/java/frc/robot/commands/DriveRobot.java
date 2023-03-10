@@ -36,6 +36,30 @@ public class DriveRobot extends CommandBase {
     RobotContainer.m_imu.reset();
     
   }
+  public static double scale_with_sign(double axis_value) {
+    final double SCALE_EXPONENT = 1;
+    final double DEADZONE_SIZE = 0.1;
+
+    // creates scale factor based on deadzone size, so entire output area is still
+    // usable
+    double ScaleFactor = 1 / (1 - DEADZONE_SIZE);
+
+    // x/|x| = 1 or -1 depending on sign of x
+    double axis_sign = axis_value / Math.abs(axis_value);
+
+    double unsigned_return_value = Math.abs(axis_value);
+
+    unsigned_return_value = unsigned_return_value - DEADZONE_SIZE;
+
+    if (unsigned_return_value < 0) { // set value to 0 if it's within the DEADZONE
+      unsigned_return_value = 0;
+    }
+    unsigned_return_value = unsigned_return_value * ScaleFactor;
+
+    unsigned_return_value = Math.pow(unsigned_return_value, SCALE_EXPONENT);
+
+    return axis_sign * unsigned_return_value;
+  }
 
   public Boolean mode;
   private double angle;
@@ -73,6 +97,7 @@ public class DriveRobot extends CommandBase {
     double outputx = joystickx * turboamount;
     double outputy = joysticky * turboamount;
     double outputz = joystickxz * turboamount;
+    outputz = scale_with_sign(outputz);
     correctangle = correctangle+outputz;
 
     SmartDashboard.putNumber("x", outputx);
