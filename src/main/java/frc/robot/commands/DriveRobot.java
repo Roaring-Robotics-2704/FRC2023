@@ -48,10 +48,9 @@ public class DriveRobot extends CommandBase {
   @Override
   public void execute() {
     
-    turbo = RobotContainer.xbox.getRightTriggerAxis();
-    precision = RobotContainer.xbox.getLeftTriggerAxis()/2;
-  
-      turboamount = Constants.c_speedcap;//turbo-precision+0.5;
+    //turbo = RobotContainer.xbox.getRightTriggerAxis();
+    //precision = RobotContainer.xbox.getLeftTriggerAxis()/2;
+    //turboamount = Constants.c_speedcap;//turbo-precision+0.5;
 
     
     SmartDashboard.putNumber("turbo amount", turboamount);
@@ -68,9 +67,9 @@ public class DriveRobot extends CommandBase {
      joystickx = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_rightJoystickAxisx);
      joysticky = -RobotContainer.xbox.getLeftY(); // getRawAxis(Constants.c_rightJoystickAxisy);
     }
-    double outputx = joystickx * turboamount;
-    double outputy = joysticky * turboamount;
-    double outputz = joystickxz * turboamount;
+    double outputx = joystickx;
+    double outputy = joysticky;
+    double outputz = joystickxz;
     mode = RobotContainer.DriveMode.getSelected();
     
     SmartDashboard.putNumber("x", outputx);
@@ -85,7 +84,7 @@ public class DriveRobot extends CommandBase {
     else {
       RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,outputz, 0);
     }
-    if (RobotContainer.xbox.getLeftBumper()) {
+    if (RobotContainer.xbox.getYButton()) {
       RobotContainer.m_imu.reset();
       RobotContainer.xbox.setRumble(RumbleType.kBothRumble, 0.5);
     }
