@@ -10,6 +10,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Mechanum.mechanumConf.motorPorts;
 import frc.robot.Mechanum.mechanumConf.wheelLocations;
 
@@ -53,6 +54,12 @@ public static void veloDrive(double x,double y,double z) {
     frontrightSrx.set(ControlMode.Velocity, speed.frontRightMetersPerSecond);
     backleftSrx.set(ControlMode.Velocity, speed.rearLeftMetersPerSecond);
     backrightSrx.set(ControlMode.Velocity, speed.rearRightMetersPerSecond);
-    drive.feed();
+    drive.feed();    
+    
+    SmartDashboard.putNumber("frontleftV", frontleftSrx.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("frontrightV", frontrightSrx.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("backleftV", backleftSrx.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("backrightV", backrightSrx.getSelectedSensorVelocity());
+
 }
 }
