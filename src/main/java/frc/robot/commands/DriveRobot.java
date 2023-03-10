@@ -38,7 +38,7 @@ public class DriveRobot extends CommandBase {
   }
   public static double scale_with_sign(double axis_value) {
     final double SCALE_EXPONENT = 1;
-    final double DEADZONE_SIZE = 0.1;
+    final double DEADZONE_SIZE = Constants.deadzone;
 
     // creates scale factor based on deadzone size, so entire output area is still
     // usable
