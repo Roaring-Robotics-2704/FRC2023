@@ -9,6 +9,8 @@ import frc.robot.commands.MoveArm;
 import frc.robot.subsystems.EverybotArm;
 import frc.robot.subsystems.EverybotIntake;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.subsystems.LightStrand;
+
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -41,7 +43,7 @@ public class RobotContainer {
   public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
   private EverybotArm s_everybotArmSubsystem = new EverybotArm();
   private EverybotIntake s_everybotIntakeSubsystem = new EverybotIntake();
-
+  public static LightStrand m_LightStrand = new LightStrand();
   //Commands
   public static DriveRobot m_DriveRobot = new DriveRobot();
   public static Auto m_autonomous = new Auto();

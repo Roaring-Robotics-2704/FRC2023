@@ -39,7 +39,14 @@ public final class Constants {
     public static final double c_intakeHoldPower = 0.07;//Precent output for holding
   }
 
+    
+  public static int c_lightLength = 100;
 
+  public static int c_ledPort = 0;
+  public static int[] yellowRGB = {255, 150, 0};
+  public static int[] blueRGB = {0,100,255};
+  public static int[] MiddleSchoolOrangeRGB = {255,25,0}; //Matthew's favorite color, named by him
+  
     public static int c_joystick = 0;
     public static int c_joystickSecond = 1;
 
