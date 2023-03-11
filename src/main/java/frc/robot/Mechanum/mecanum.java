@@ -41,15 +41,15 @@ static MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics(
 );
 
 public static ChassisSpeeds createSpeeds(double x,double y,double z) {
-    ChassisSpeeds speeds = new ChassisSpeeds(y,x,z);
+    ChassisSpeeds speeds = new ChassisSpeeds(y,x,Math.toDegrees(z));
     return speeds;
 }
 public static MecanumDriveWheelSpeeds calculateSpeeds(ChassisSpeeds speeds) {
     MecanumDriveWheelSpeeds wheelSpeeds = m_kinematics.toWheelSpeeds(speeds);
     return wheelSpeeds;
 }
-public static void veloDrive(double x,double y,double z) {
-    MecanumDriveWheelSpeeds speed = calculateSpeeds(createSpeeds(0, 0, 0));
+public static void driveCartesian(double y,double x,double z) {
+    MecanumDriveWheelSpeeds speed = calculateSpeeds(createSpeeds(y, x, z));
     frontleftSrx.set(ControlMode.Velocity,speed.frontLeftMetersPerSecond);
     frontrightSrx.set(ControlMode.Velocity, speed.frontRightMetersPerSecond);
     backleftSrx.set(ControlMode.Velocity, speed.rearLeftMetersPerSecond);

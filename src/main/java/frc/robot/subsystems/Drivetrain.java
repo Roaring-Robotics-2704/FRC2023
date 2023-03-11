@@ -12,7 +12,7 @@ public class Drivetrain extends SubsystemBase {
 
 
   public void driveCartesian(double y, double x, double z){
-    mecanum.veloDrive(y,x,z);
+    mecanum.driveCartesian(y,x,z);
     /*Rotation2d heading = Rotation2d.fromDegrees(rotation);
     mecanumdrive.driveCartesian(y,x,z,heading);*/
   }
