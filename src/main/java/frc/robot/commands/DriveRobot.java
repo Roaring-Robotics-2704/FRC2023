@@ -20,11 +20,11 @@ public class DriveRobot extends CommandBase {
 
   PIDController align = new PIDController(Constants.zpid.p,Constants.zpid.i,Constants.zpid.d);
   ADIS16470_IMU gyro = RobotContainer.m_imu;
-  public static double vector(double x, double y) {
-      double angleRadians = Math.atan2(y, x);
-      double angleDegrees = Math.toDegrees(angleRadians);
-      return angleDegrees;
-  }
+  //public static double vector(double x, double y) {
+      //double angleRadians = Math.atan2(y, x);
+      //double angleDegrees = Math.toDegrees(angleRadians);
+     // return angleDegrees;
+  //}
 
   
   // Called when the command is initially scheduled.
@@ -76,7 +76,6 @@ public class DriveRobot extends CommandBase {
     SmartDashboard.putNumber("x", outputx);
     SmartDashboard.putNumber("y", outputy);
     SmartDashboard.putNumber("z", outputz);
-    SmartDashboard.putNumber("vector angle",vector(joystickxz,joystickyz));
     SmartDashboard.putNumber("output heading", angle);
     SmartDashboard.putNumber("actual heading", -RobotContainer.m_imu.getAngle());;
     if (mode) {
