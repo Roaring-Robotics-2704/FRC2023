@@ -4,6 +4,17 @@
 
 package frc.robot;
 
+import frc.robot.commands.ControlIntake;
+import frc.robot.commands.MoveArm;
+import frc.robot.subsystems.EverybotArm;
+import frc.robot.subsystems.EverybotIntake;
+import frc.robot.Constants.OperatorConstants;
+
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -11,12 +22,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Auto;
-import frc.robot.commands.ControlIntake;
 import frc.robot.commands.DriveRobot;
-import frc.robot.commands.MoveArm;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.EverybotArm;
-import frc.robot.subsystems.EverybotIntake;
 
 
 
@@ -40,12 +47,14 @@ public class RobotContainer {
   public static Auto m_autonomous = new Auto();
 
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
+  public static SendableChooser<Boolean> DriveMode = new SendableChooser<>();
   public static SendableChooser<Boolean> Drivescheme = new SendableChooser<>();
 
 
   //OI
   public static XboxController xbox = new XboxController(Constants.c_joystick);
   public static XboxController xboxSecond = new XboxController(Constants.c_joystickSecond);
+  public static JoystickButton armButton = new JoystickButton(xbox, 4);
   //getPOV can be used to find the ange value of the d-Pad on the xbox controller
 
 
@@ -66,6 +75,9 @@ public class RobotContainer {
     Drivescheme.addOption("Matthew", false);
     SmartDashboard.putData("Autonomous Mode", autoChooser);
     SmartDashboard.putData("driver", Drivescheme);
+    DriveMode.setDefaultOption("Robot Oriented", false);
+    DriveMode.addOption("Field Oriented", true); 
+    SmartDashboard.putData("Drive Mode", DriveMode);
 
 
   }
