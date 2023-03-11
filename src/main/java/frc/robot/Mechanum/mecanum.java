@@ -48,7 +48,7 @@ public static MecanumDriveWheelSpeeds calculateSpeeds(ChassisSpeeds speeds) {
     MecanumDriveWheelSpeeds wheelSpeeds = m_kinematics.toWheelSpeeds(speeds);
     return wheelSpeeds;
 }
-public static void driveCartesian(double y,double x,double z) {
+public static void veloDrive(double y,double x,double z) {
     MecanumDriveWheelSpeeds speed = calculateSpeeds(createSpeeds(y, x, z));
     frontleftSrx.set(ControlMode.Velocity,speed.frontLeftMetersPerSecond);
     frontrightSrx.set(ControlMode.Velocity, speed.frontRightMetersPerSecond);
@@ -61,5 +61,8 @@ public static void driveCartesian(double y,double x,double z) {
     SmartDashboard.putNumber("backleftV", backleftSrx.getSelectedSensorVelocity());
     SmartDashboard.putNumber("backrightV", backrightSrx.getSelectedSensorVelocity());
 
+}
+public static void driveCartesian(double y,double x,double z) {
+    drive.driveCartesian(y, x, z);
 }
 }
