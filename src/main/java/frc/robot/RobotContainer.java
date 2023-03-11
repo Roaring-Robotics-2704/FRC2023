@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Auto;
 import frc.robot.commands.DriveRobot;
+import frc.robot.commands.LightCommand;
 import frc.robot.subsystems.Drivetrain;
 
 
@@ -47,6 +48,7 @@ public class RobotContainer {
   //Commands
   public static DriveRobot m_DriveRobot = new DriveRobot();
   public static Auto m_autonomous = new Auto();
+  public static LightCommand m_LightCommand = new LightCommand();
 
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
   public static SendableChooser<Boolean> DriveMode = new SendableChooser<>();
@@ -64,6 +66,7 @@ public class RobotContainer {
   public RobotContainer() {
     s_everybotArmSubsystem.setDefaultCommand(new MoveArm(s_everybotArmSubsystem));
     s_everybotIntakeSubsystem.setDefaultCommand(new ControlIntake(s_everybotIntakeSubsystem));
+    m_LightStrand.setDefaultCommand(m_LightCommand);
     // Configure the button bindings
     configureButtonBindings();
     //Is nessary, might have been the reason for the error "DifferntialDrive...Output not updated often enough"

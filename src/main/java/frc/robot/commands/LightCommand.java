@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class LightCommand extends CommandBase {
@@ -28,7 +29,13 @@ public class LightCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {//if chain should be kept in sync with lightChooser options
+  public void execute() {
+    if(RobotContainer.xboxSecond.getAButton()){
+      setFullStrand(128, 0, 128);
+    }
+    else{
+      setFullStrand(128, 128, 0);
+    }
   }
 
   private void setFullStrand(int r, int g, int b) {
