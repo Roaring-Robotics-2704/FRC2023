@@ -15,7 +15,7 @@ public class Auto extends CommandBase{
    } 
   
 private void moveAuto(double y,double x,double z) {
-RobotContainer.m_Drivetrain.driveCartesian(y,x,z,-RobotContainer.m_imu.getAngle()); 
+RobotContainer.m_Drivetrain.driveCartesian(y,x,z,0); 
 }
 Timer autoTime = new Timer();
 public int mode;
