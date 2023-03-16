@@ -20,11 +20,11 @@ public class DriveRobot extends CommandBase {
 
   PIDController align = new PIDController(Constants.zpid.p,Constants.zpid.i,Constants.zpid.d);
   ADIS16470_IMU gyro = RobotContainer.m_imu;
-  public static double vector(double x, double y) {
-      double angleRadians = Math.atan2(y, x);
-      double angleDegrees = Math.toDegrees(angleRadians);
-      return angleDegrees;
-  }
+  //public static double vector(double x, double y) {
+      //double angleRadians = Math.atan2(y, x);
+      //double angleDegrees = Math.toDegrees(angleRadians);
+     // return angleDegrees;
+  //}
 
   
   // Called when the command is initially scheduled.
@@ -39,7 +39,7 @@ public class DriveRobot extends CommandBase {
   private double angle;
   public double turbo;
   public double precision;
-  public double turboamount;
+  public double adjustemntAmount;
   double joystickxz; // getRawAxis(Constants.c_leftJoystickAxisx);
   double joystickyz;
   double joystickx; // getRawAxis(Constants.c_rightJoystickAxisx);
@@ -51,10 +51,10 @@ public class DriveRobot extends CommandBase {
     turbo = RobotContainer.xbox.getRightTriggerAxis();
     precision = RobotContainer.xbox.getLeftTriggerAxis()/2;
   
-      turboamount = turbo-precision+Constants.c_speedcap;
+    adjustemntAmount = turbo - precision + 0.5;
 
     
-    SmartDashboard.putNumber("turbo amount", turboamount);
+    SmartDashboard.putNumber("adjustemntAmount", adjustemntAmount);
     SmartDashboard.putNumber("turbo", turbo);
     if (RobotContainer.Drivescheme.getSelected()) {
        joystickxz = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_leftJoystickAxisx);
@@ -68,15 +68,14 @@ public class DriveRobot extends CommandBase {
      joystickx = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_rightJoystickAxisx);
      joysticky = -RobotContainer.xbox.getLeftY(); // getRawAxis(Constants.c_rightJoystickAxisy);
     }
-    double outputx = joystickx * turboamount;
-    double outputy = joysticky * turboamount;
-    double outputz = joystickxz * turboamount;
+    double outputx = joystickx * adjustemntAmount;
+    double outputy = joysticky * adjustemntAmount;
+    double outputz = joystickxz * adjustemntAmount;
     mode = RobotContainer.DriveMode.getSelected();
     
     SmartDashboard.putNumber("x", outputx);
     SmartDashboard.putNumber("y", outputy);
     SmartDashboard.putNumber("z", outputz);
-    SmartDashboard.putNumber("vector angle",vector(joystickxz,joystickyz));
     SmartDashboard.putNumber("output heading", angle);
     SmartDashboard.putNumber("actual heading", -RobotContainer.m_imu.getAngle());;
     if (mode) {

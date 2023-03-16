@@ -1,15 +1,16 @@
-/* 
+
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.EverybotIntake;
 
-public class ControlIntake extends CommandBase {
+public class ControllerIntake extends CommandBase {
   /** Creates a new ControlIntake. */
- /* private EverybotIntake everybotIntake;
+  private EverybotIntake everybotIntake;
 
-  public ControlIntake(EverybotIntake everybotIntake) {
+  public ControllerIntake(EverybotIntake everybotIntake) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.everybotIntake = everybotIntake;
     addRequirements(everybotIntake);
@@ -31,25 +32,27 @@ public class ControlIntake extends CommandBase {
 
     double intakePower;
     int intakeAmps;
-    if (RobotContainer.xbox.getAButton()) {
-    //if (RobotContainer.xboxSecond.getAButton()) {
+    if (RobotContainer.xboxSecond.getLeftTriggerAxis() > 0) {
       // cube in or cone out
-      intakePower = EverybotIntake.IntakeOutputPower;
-      intakeAmps = EverybotIntake.IntakeCurrentLimit;
+      intakePower = Constants.IntakeConstants.c_intakeOutputPowerSlower;
+      intakeAmps = Constants.IntakeConstants.c_intakeCurrentLimit;
       lastGamePiece = CUBE;
-    } else if (RobotContainer.xbox.getBButton()) {
-    //} else if (RobotContainer.xboxSecond.getBButton()) {
+    } 
+    else if (RobotContainer.xboxSecond.getLeftBumper()) {
       // cone in or cube out
-      intakePower = -EverybotIntake.IntakeOutputPower;
-      intakeAmps = EverybotIntake.IntakeCurrentLimit;
+      intakePower = -Constants.IntakeConstants.c_intakeOutputPowerSlower;
+      intakeAmps = Constants.IntakeConstants.c_intakeCurrentLimit;
       lastGamePiece = CONE;
-    } else if (lastGamePiece == CUBE) {
-      intakePower = EverybotIntake.IntakeHoldPower;
-      intakeAmps = EverybotIntake.IntakeHoldCurrentLimit;
-    } else if (lastGamePiece == CONE) {
-      intakePower = -EverybotIntake.IntakeHoldPower;
-      intakeAmps = EverybotIntake.IntakeHoldCurrentLimit;
-    } else {
+    } 
+    else if (lastGamePiece == CUBE) {
+      intakePower = Constants.IntakeConstants.c_intakeHoldPower;
+      intakeAmps = Constants.IntakeConstants.c_intakeHoldCurrentLimit;
+    } 
+    else if (lastGamePiece == CONE) {
+      intakePower = -Constants.IntakeConstants.c_intakeHoldPower;
+      intakeAmps = Constants.IntakeConstants.c_intakeHoldCurrentLimit;
+    } 
+    else {
       intakePower = 0.0;
       intakeAmps = 0;
     }
@@ -66,4 +69,4 @@ public class ControlIntake extends CommandBase {
   public boolean isFinished() {
     return false;
   }
-}*/
+}

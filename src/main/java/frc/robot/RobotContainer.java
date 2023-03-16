@@ -4,15 +4,27 @@
 
 package frc.robot;
 
+import frc.robot.commands.ControllerIntake;
+import frc.robot.commands.MoveArm;
+import frc.robot.subsystems.EverybotArm;
+import frc.robot.subsystems.EverybotIntake;
+import frc.robot.Constants.OperatorConstants;
+
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Auto;
 import frc.robot.commands.DriveRobot;
 import frc.robot.subsystems.Drivetrain;
+
 
 
 
@@ -27,9 +39,8 @@ public class RobotContainer {
   //Subsystems
   public static Drivetrain m_Drivetrain = new Drivetrain();
   public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
-  
-
-
+  private EverybotArm s_everybotArmSubsystem = new EverybotArm();
+  private EverybotIntake s_everybotIntakeSubsystem = new EverybotIntake();
 
   //Commands
   public static DriveRobot m_DriveRobot = new DriveRobot();
@@ -42,23 +53,28 @@ public class RobotContainer {
 
   //OI
   public static XboxController xbox = new XboxController(Constants.c_joystick);
+  public static XboxController xboxSecond = new XboxController(Constants.c_joystickSecond);
+  public static JoystickButton armButton = new JoystickButton(xbox, 4);
   //getPOV can be used to find the ange value of the d-Pad on the xbox controller
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    s_everybotArmSubsystem.setDefaultCommand(new MoveArm(s_everybotArmSubsystem));
+    s_everybotIntakeSubsystem.setDefaultCommand(new ControllerIntake(s_everybotIntakeSubsystem));
     // Configure the button bindings
     configureButtonBindings();
     //Is nessary, might have been the reason for the error "DifferntialDrive...Output not updated often enough"
     m_Drivetrain.setDefaultCommand(m_DriveRobot);
     autoChooser.setDefaultOption("square", 1);
-    autoChooser.addOption("Back up", 2);
-    autoChooser.addOption("probably chaos",3);
-    autoChooser.addOption("chaos square",4);
-    autoChooser.addOption("self align",5);
-    autoChooser.addOption("on and off", 6);
-    autoChooser.addOption("right side balance ", 7);
-    autoChooser.addOption("left side balance ", 8);
+    autoChooser.addOption("Charge station ONLY", 2);
+    autoChooser.addOption("Over the charge station and back on",3);
+    autoChooser.addOption("Right side balcane ",4);
+    autoChooser.addOption("left side balance", 5);
+    autoChooser.addOption( "out of comuntity ONLY", 6);
+    autoChooser.addOption("NO AUTO", 7);
+    autoChooser.addOption("Cube  and backup", 8);
+    autoChooser.addOption("Cube and Chare station", 9);
     Drivescheme.setDefaultOption("Katelyn", true);
     Drivescheme.addOption("Matthew", false);
     SmartDashboard.putData("Autonomous Mode", autoChooser);

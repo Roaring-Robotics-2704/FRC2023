@@ -1,13 +1,13 @@
-
-/*package frc.robot.commands;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.EverybotArm;
 
 public class MoveArm extends CommandBase {
   /** Creates a new MoveArm. */
-  /*private EverybotArm everybotArm;
+  private EverybotArm everybotArm;
   public MoveArm(EverybotArm everybotArm) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.everybotArm = everybotArm;
@@ -22,14 +22,12 @@ public class MoveArm extends CommandBase {
   @Override
   public void execute() {
     double armPower;
-    if (RobotContainer.xbox.getXButton()) {
-    //if (RobotContainer.xboxSecond.getXButton()) {
-      // lower the arm
-      armPower = -EverybotArm.ArmOutputPower;
-    } else if (RobotContainer.xbox.getYButton()) {
-    //} else if (RobotContainer.xboxSecond.getYButton()) {
-      // raise the arm
-      armPower = EverybotArm.ArmOutputPower;
+    if (RobotContainer.xboxSecond.getRightTriggerAxis() > 0) {
+      // makes arm go out
+      armPower = -Constants.ArmConstants.c_armPowerOut;
+    } else if (RobotContainer.xboxSecond.getRightBumper()) {
+      // makes arm go in
+      armPower = Constants.ArmConstants.c_armPowerIn;
     } else {
       // do nothing and let it sit where it is
       armPower = 0.0;
@@ -47,4 +45,4 @@ public class MoveArm extends CommandBase {
   public boolean isFinished() {
     return false;
   }
-}*/
+}
