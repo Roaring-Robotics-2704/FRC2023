@@ -68,13 +68,12 @@ public class RobotContainer {
     m_Drivetrain.setDefaultCommand(m_DriveRobot);
     autoChooser.setDefaultOption("square", 1);
     autoChooser.addOption("Charge station ONLY", 2);
-    autoChooser.addOption("Over the charge station and back on",3);
-    autoChooser.addOption("Right side balcane ",4);
-    autoChooser.addOption("left side balance", 5);
+   /*  autoChooser.addOption("Right side balcane ",4);*/
+    /*autoChooser.addOption("left side balance", 5);*/
     autoChooser.addOption( "out of comuntity ONLY", 6);
     autoChooser.addOption("NO AUTO", 7);
     autoChooser.addOption("Cube  and backup", 8);
-    autoChooser.addOption("Cube and Chare station", 9);
+    autoChooser.addOption("Cube and stop ", 9);
     Drivescheme.setDefaultOption("Katelyn", true);
     Drivescheme.addOption("Matthew", false);
     SmartDashboard.putData("Autonomous Mode", autoChooser);

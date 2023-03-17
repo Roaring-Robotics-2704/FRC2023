@@ -25,7 +25,7 @@ public class Drivetrain extends SubsystemBase {
     Rotation2d heading = Rotation2d.fromDegrees(rotation);
     mecanumdrive.driveCartesian(y,x,z,heading);
     
-    ErrorCode frontRightEncoder = m_frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    /*ErrorCode frontRightEncoder = m_frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     double frontRightEncoderDistance = m_frontrightMotor.getSelectedSensorPosition();//basically a verison of the get.distance()from the wpilib encoder class.
     double frontRightEncoderRate = m_frontrightMotor.getSelectedSensorVelocity();//basically a verison of the get.Rate()from the wpilib encoder class.
    ErrorCode frontLeftEncoder = m_frontleftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
@@ -36,7 +36,7 @@ public class Drivetrain extends SubsystemBase {
      double backRightEncoderRate = m_backleftMotor.getSelectedSensorVelocity();
    ErrorCode backLeftEncoder = m_backleftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
      double backLeftEncoderDistance = m_backleftMotor.getSelectedSensorPosition();
-     double backLeftEncoderRate = m_backleftMotor.getSelectedSensorVelocity();
+     double backLeftEncoderRate = m_backleftMotor.getSelectedSensorVelocity();*/
 
   }
 

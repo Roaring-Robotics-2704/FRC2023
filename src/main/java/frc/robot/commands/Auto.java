@@ -32,86 +32,84 @@ public void execute() {
     SmartDashboard.putNumber("autoTime",autoTime.get());
       autoTime.start();
 
-    if (mode == 1) {//square
-        while (autoTime.get() <= 3){//backwards
+    /*if (mode == 1) {//square
+        if (autoTime.get() <= 3){//backwards
             moveAuto(-0.6,0,0);
         }
         
-        while ( autoTime.get() <= 6){//right
+       else  if  ( autoTime.get() <= 6){//right
           moveAuto(0,0.3,0);
         }
         
-         while  ( autoTime.get() <= 9){//forwards
+        else if ( autoTime.get() <= 9){//forwards
             moveAuto(0.3,0,0);
         }
-        while  ( autoTime.get() <= 12){//left
+       else if ( autoTime.get() <= 12){//left
             moveAuto(0,-0.3,0);
         }
-    }    
-     else if (mode == 2) {//forwards
-        while ( autoTime.get() <= 2.08){
-            moveAuto(0.8,0,0);
+    }   */ 
+     if (mode == 2) {//forwards
+        if ( autoTime.get() <= 2.5025){
+            moveAuto(-0.8,0,0);
         }
         
     }
     else if (mode == 3) {
-        while(autoTime.get()<= 4){// fowards over the chrage station 
-            moveAuto(0.8, 0, 0);// speed needs to be at least 0.8 for the robot to climb the charge station due to the arm 
+        if (autoTime.get()<= 1){// fowards over the chrage station 
+            moveAuto(-0.8, 0, 0);// speed needs to be at least 0.8 for the robot to climb the charge station due to the arm 
         }
-        while (autoTime.get()<= 6){ // backwards onto the charge station until center 
-            moveAuto(-0.8, 0, 0);
+       else if (autoTime.get()<= 5){ // backwards onto the charge station until center 
+            moveAuto(0.8, 0, 0);
         }
     
     }
     
-    else if (mode==4){
-        while(autoTime.get()<=2.4){// forwards 
+    /*else if (mode==4){
+        if(autoTime.get()<=2.4){// forwards 
             moveAuto(0.6,0,0);
         }
-        while (autoTime.get()<=2.75){// left 
+        if (autoTime.get()<=2.75){// left 
             moveAuto(0, -0.6, 0);
         }
-        while (autoTime.get()<=3){// backwards 
+        if  (autoTime.get()<=3){// backwards 
             moveAuto(-0.8, 0,0 );
         }
         
     }
     else if (mode == 5){
-        while(autoTime.get()<=2.4){// forwards 
+        if (autoTime.get()<=2.4){// forwards 
             moveAuto(0.6,0,0);
         }
-    while (autoTime.get()<=2.75){// right  
+    if  (autoTime.get()<=2.75){// right  
             moveAuto(0, 0.6, 0);
         }
-    while (autoTime.get()<=3){// backwards 
+    if  (autoTime.get()<=3){// backwards 
             moveAuto(-0.8, 0,0 );
      }
     }
     else if (mode == 6){
-        while(autoTime.get()<=4){
+    if (autoTime.get()<=4){
             moveAuto(0.6, 0, 0);
         }
-    }
+    }*/
     else if (mode == 7){
-        while(autoTime.get()<= 15){
+        if (autoTime.get()<= 15){
             moveAuto(0, 0, 0);
         }
     }
     else if (mode == 8){
-        while (autoTime.get()<=1){
+        if  (autoTime.get()<=1){
             moveAuto(-0.6, 0, 0);
         }
-        while (autoTime.get()<=3){
+     else   if (autoTime.get()<=3.5){
             moveAuto(0.6, 0, 0);
         }
     }
     else if (mode==9){
-        while (autoTime.get()<=1){
+        if (autoTime.get()<=1){
             moveAuto(-0.6, 0, 0);
         }
-        while (autoTime.get()<=3.08){
-            moveAuto(-0.8, 0, 0);
-        }
+
     }
 
 }
