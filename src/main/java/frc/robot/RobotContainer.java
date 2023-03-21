@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Auto;
 import frc.robot.commands.DriveRobot;
+import frc.robot.commands.autonomousPID;
 import frc.robot.subsystems.Drivetrain;
 
 
@@ -45,6 +46,7 @@ public class RobotContainer {
   //Commands
   public static DriveRobot m_DriveRobot = new DriveRobot();
   public static Auto m_autonomous = new Auto();
+   
 
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
   public static SendableChooser<Boolean> DriveMode = new SendableChooser<>();
@@ -55,6 +57,9 @@ public class RobotContainer {
   public static XboxController xbox = new XboxController(Constants.c_joystick);
   public static XboxController xboxSecond = new XboxController(Constants.c_joystickSecond);
   public static JoystickButton armButton = new JoystickButton(xbox, 4);
+
+  //currently mapped to a button, can change if needed
+  public static JoystickButton testAutoButton = new JoystickButton(xbox, 1);
   //getPOV can be used to find the ange value of the d-Pad on the xbox controller
 
 
@@ -89,7 +94,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-   
+    testAutoButton.onTrue(new autonomousPID(m_Drivetrain));
   }
 
   /**
