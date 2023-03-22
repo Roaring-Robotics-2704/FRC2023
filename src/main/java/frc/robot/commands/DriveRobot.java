@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import org.littletonrobotics.junction.Logger;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;

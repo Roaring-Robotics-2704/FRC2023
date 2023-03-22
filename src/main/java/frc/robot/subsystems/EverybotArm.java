@@ -2,8 +2,6 @@ package frc.robot.subsystems;
 
 import org.littletonrobotics.junction.AutoLog;
 
-import com.ctre.phoenix.ErrorCode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
