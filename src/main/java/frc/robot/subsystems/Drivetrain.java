@@ -29,7 +29,7 @@ public class Drivetrain extends SubsystemBase {
   ErrorCode backrightEncoder = m_backrightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
   ErrorCode backleftEncoder = m_backleftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
 
-  PIDController distancePID = new PIDController(0.001, 0, 0);
+  PIDController distancePID = new PIDController(0.0001, 0, 0);
 
   private MecanumDrive mecanumdrive = new MecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor);
   
