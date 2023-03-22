@@ -58,8 +58,9 @@ public class RobotContainer {
   public static XboxController xboxSecond = new XboxController(Constants.c_joystickSecond);
   public static JoystickButton armButton = new JoystickButton(xbox, 4);
 
-  //currently mapped to a button, can change if needed
+  //currently mapped to a button, can change if needed - will need to map this to the autos eventually
   public static JoystickButton testAutoButton = new JoystickButton(xbox, 1);
+  
   //getPOV can be used to find the ange value of the d-Pad on the xbox controller
 
 

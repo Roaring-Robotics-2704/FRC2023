@@ -27,8 +27,14 @@ public class autonomousPID extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.driveToDistance(-m_drivetrain.m_frontleftMotor.getSelectedSensorPosition(), 4096);
-    SmartDashboard.putNumber("front left encoder", m_drivetrain.readEncoder());
+    //current setpoint is one rotation, aka 16pi (50 ish) inches - can adjust depending on auto needs
+    m_drivetrain.driveToDistance(4096);
+
+    SmartDashboard.putNumber("front left encoder", m_drivetrain.readFrontLeftEncoder());
+    SmartDashboard.putNumber("front right encoder", m_drivetrain.readFrontRightEncoder());
+    SmartDashboard.putNumber("back right encoder", m_drivetrain.readBackRightEncoder());
+    SmartDashboard.putNumber("back left encoder", m_drivetrain.readBackLeftEncoder());
+    
   }
 
   // Called once the command ends or is interrupted.
