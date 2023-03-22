@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import org.littletonrobotics.junction.AutoLog;
+import org.littletonrobotics.junction.Logger;
+import org.littletonrobotics.junction.rlog.RLOGServer;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -36,6 +38,7 @@ public class EverybotArm extends SubsystemBase {
   public void setArmMotor(double percent) {
     armMotor.set(TalonSRXControlMode.PercentOutput, percent);
     SmartDashboard.putNumber("arm power", percent);
+    Logger.getInstance().recordOutput("arm/armMotorPercent", percent);
   }
 /* 
   public void setArmStartingPosition(){
