@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
+import org.littletonrobotics.junction.Logger;
+
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -37,6 +40,8 @@ import frc.robot.subsystems.Drivetrain;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   //Subsystems
+  Logger log = Logger.getInstance();
+
   public static Drivetrain m_Drivetrain = new Drivetrain();
   public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
   private EverybotArm s_everybotArmSubsystem = new EverybotArm();
@@ -68,13 +73,12 @@ public class RobotContainer {
     m_Drivetrain.setDefaultCommand(m_DriveRobot);
     autoChooser.setDefaultOption("square", 1);
     autoChooser.addOption("Charge station ONLY", 2);
-    autoChooser.addOption("Over the charge station and back on",3);
-    autoChooser.addOption("Right side balcane ",4);
-    autoChooser.addOption("left side balance", 5);
+   /*  autoChooser.addOption("Right side balcane ",4);*/
+    /*autoChooser.addOption("left side balance", 5);*/
     autoChooser.addOption( "out of comuntity ONLY", 6);
     autoChooser.addOption("NO AUTO", 7);
     autoChooser.addOption("Cube  and backup", 8);
-    autoChooser.addOption("Cube and Chare station", 9);
+    autoChooser.addOption("Cube and stop ", 9);
     Drivescheme.setDefaultOption("Katelyn", true);
     Drivescheme.addOption("Matthew", false);
     SmartDashboard.putData("Autonomous Mode", autoChooser);

@@ -26,5 +26,6 @@
     },
   ],
   "java.test.defaultConfig": "WPIlibUnitTests",
-  "vscord.enabled": true
+  "vscord.enabled": true,
+  "wpilib.offline": false
 }

@@ -49,22 +49,22 @@ public void execute() {
         }
     }    
      else if (mode == 2) {//forwards
-        while ( autoTime.get() <= 2.08){
-            moveAuto(0.8,0,0);
+        while ( autoTime.get() <= 2.5025){
+            moveAuto(-0.8,0,0);
         }
         
     }
     else if (mode == 3) {
-        while(autoTime.get()<= 4){// fowards over the chrage station 
-            moveAuto(0.8, 0, 0);// speed needs to be at least 0.8 for the robot to climb the charge station due to the arm 
+        while(autoTime.get()<= 1){// fowards over the chrage station 
+            moveAuto(-0.8, 0, 0);// speed needs to be at least 0.8 for the robot to climb the charge station due to the arm 
         }
-        while (autoTime.get()<= 6){ // backwards onto the charge station until center 
-            moveAuto(-0.8, 0, 0);
+        while (autoTime.get()<= 5){ // backwards onto the charge station until center 
+            moveAuto(0.8, 0, 0);
         }
     
     }
     
-    else if (mode==4){
+    /*else if (mode==4){
         while(autoTime.get()<=2.4){// forwards 
             moveAuto(0.6,0,0);
         }
@@ -91,7 +91,7 @@ public void execute() {
         while(autoTime.get()<=4){
             moveAuto(0.6, 0, 0);
         }
-    }
+    }*/
     else if (mode == 7){
         while(autoTime.get()<= 15){
             moveAuto(0, 0, 0);
@@ -101,7 +101,7 @@ public void execute() {
         while (autoTime.get()<=1){
             moveAuto(-0.6, 0, 0);
         }
-        while (autoTime.get()<=3){
+        while (autoTime.get()<=3.5){
             moveAuto(0.6, 0, 0);
         }
     }
@@ -109,9 +109,7 @@ public void execute() {
         while (autoTime.get()<=1){
             moveAuto(-0.6, 0, 0);
         }
-        while (autoTime.get()<=3.08){
-            moveAuto(-0.8, 0, 0);
-        }
+
     }
 
 }

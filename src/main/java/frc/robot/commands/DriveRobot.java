@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import org.littletonrobotics.junction.Logger;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
@@ -20,7 +21,7 @@ public class DriveRobot extends CommandBase {
 
   PIDController align = new PIDController(Constants.zpid.p,Constants.zpid.i,Constants.zpid.d);
   ADIS16470_IMU gyro = RobotContainer.m_imu;
-  //public static double vector(double x, double y) {
+//public static double vector(double x, double y) {
       //double angleRadians = Math.atan2(y, x);
       //double angleDegrees = Math.toDegrees(angleRadians);
      // return angleDegrees;
@@ -49,9 +50,9 @@ public class DriveRobot extends CommandBase {
   public void execute() {
     
     turbo = RobotContainer.xbox.getRightTriggerAxis();
-    precision = RobotContainer.xbox.getLeftTriggerAxis()/2;
+    precision = RobotContainer.xbox.getLeftTriggerAxis();
   
-    adjustemntAmount = turbo - precision + 0.5;
+    adjustemntAmount = (turbo - precision) + Constants.c_speedcap;
 
     
     SmartDashboard.putNumber("adjustemntAmount", adjustemntAmount);
@@ -79,10 +80,10 @@ public class DriveRobot extends CommandBase {
     SmartDashboard.putNumber("output heading", angle);
     SmartDashboard.putNumber("actual heading", -RobotContainer.m_imu.getAngle());;
     if (mode) {
-      RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz,-gyro.getAngle());   
+      RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz*0.5,-gyro.getAngle());   
     }
     else {
-      RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,outputz, 0);
+      RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,outputz*0.5, 0);
     }
     if (RobotContainer.xbox.getLeftBumper()) {
       RobotContainer.m_imu.reset();
