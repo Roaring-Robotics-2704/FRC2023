@@ -1,11 +1,12 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import com.pathplanner.lib.PathConstraints;
+import com.pathplanner.lib.PathPlanner;
+import com.pathplanner.lib.PathPlannerTrajectory;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.math.controller.PIDController;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 
@@ -13,7 +14,8 @@ public class Auto extends CommandBase{
    public Auto() {
     addRequirements(RobotContainer.m_Drivetrain);
    } 
-  
+  // This will load the file "Example Path.path" and generate it with a max velocity of 4 m/s and a max acceleration of 3 m/s^2
+
 private void moveAuto(double y,double x,double z) {
 RobotContainer.m_Drivetrain.driveCartesian(y,x,z,-RobotContainer.m_imu.getAngle()); 
 }
@@ -23,7 +25,6 @@ public int mode;
 @Override
 public void initialize(){
     autoTime.reset();
-    
 }
 double outputz;
 @Override

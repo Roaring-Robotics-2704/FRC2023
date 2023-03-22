@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.pathplanner.lib.PathPlannerTrajectory;
 
 import org.littletonrobotics.junction.AutoLog;
 import org.littletonrobotics.junction.Logger;
@@ -19,9 +20,13 @@ import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
 import edu.wpi.first.math.kinematics.MecanumDriveWheelPositions;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
 @AutoLog
 public class Drivetrain extends SubsystemBase {
   /** Creates a new Drivetrain. */
@@ -90,12 +95,17 @@ double frontRightEncoderDistance = (m_frontrightMotor.getSelectedSensorPosition(
   
     // Update the pose
     Pose2d m_pose = m_odometry.update(gyroAngle, wheelPositions);
-    Logger.getInstance().recordOutput("pose", m_pose);
-    Logger.getInstance().recordOutput("motorSpeeds/frontleft", m_frontleftMotor.getSelectedSensorVelocity());
-    Logger.getInstance().recordOutput("motorSpeeds/frontright", m_frontrightMotor.getSelectedSensorVelocity());
-    Logger.getInstance().recordOutput("motorSpeeds/backleft", m_backleftMotor.getSelectedSensorVelocity());
-    Logger.getInstance().recordOutput("motorSpeeds/backright", m_backrightMotor.getSelectedSensorVelocity());
-
+    Logger log = Logger.getInstance();
+    log.recordOutput("pose", m_pose);
+    log.recordOutput("motorSpeeds/frontleft", m_frontleftMotor.getSelectedSensorVelocity());
+    log.recordOutput("motorSpeeds/frontright", m_frontrightMotor.getSelectedSensorVelocity());
+    log.recordOutput("motorSpeeds/backleft", m_backleftMotor.getSelectedSensorVelocity());
+    log.recordOutput("motorSpeeds/backright", m_backrightMotor.getSelectedSensorVelocity());
+    log.recordOutput("UI/xbox/rotation", RobotContainer.xbox.getLeftX());
+    log.recordOutput("UI/xbox/Y", RobotContainer.xbox.getRightY());
+    log.recordOutput("UI/xbox/X", RobotContainer.xbox.getRightX());
+    log.recordOutput("gyroAngle", -RobotContainer.m_imu.getAngle());
   }
-  }
+ }
+  
 
