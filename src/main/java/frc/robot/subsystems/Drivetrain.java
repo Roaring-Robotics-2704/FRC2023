@@ -30,6 +30,7 @@ public class Drivetrain extends SubsystemBase {
   ErrorCode backrightEncoder = m_backrightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
   ErrorCode backleftEncoder = m_backleftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
 
+  //put these constants in constants.java once this is tuned properly
   PIDController distancePID = new PIDController(0.0001, 0, 0);
 
   private MecanumDrive mecanumdrive = new MecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor);
@@ -49,10 +50,12 @@ public class Drivetrain extends SubsystemBase {
     
     //currently all these input readings are negative - need to make sure this works in both directions
     //also will need to see which ones need to be negative or not based on what direction the wheels spin (either left or right side)
+
+    //need to check that all the encoders are plugged in...then fix the negative thing
     double frontLeftMovementSpeed = distancePID.calculate(-m_frontleftMotor.getSelectedSensorPosition(), setpoint);
     double frontRightMovementSpeed = distancePID.calculate(-m_frontrightMotor.getSelectedSensorPosition(), setpoint);
-    double backRightMovementSpeed = distancePID.calculate(-m_backrightMotor.getSelectedSensorPosition(), setpoint);
-    double backLeftMovementSpeed = distancePID.calculate(-m_backleftMotor.getSelectedSensorPosition(), setpoint);
+    double backRightMovementSpeed = distancePID.calculate(-m_backrightMotor.getSelectedSensorPosition(), -setpoint);
+    double backLeftMovementSpeed = distancePID.calculate(-m_backleftMotor.getSelectedSensorPosition(), -setpoint);
    
     m_frontleftMotor.set(frontLeftMovementSpeed);
     m_frontrightMotor.set(frontRightMovementSpeed);
