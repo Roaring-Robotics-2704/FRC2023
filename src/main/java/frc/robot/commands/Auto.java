@@ -15,7 +15,7 @@ public class Auto extends CommandBase{
    } 
   
 private void moveAuto(double y,double x,double z) {
-RobotContainer.m_Drivetrain.driveCartesian(y,x,z,-RobotContainer.m_imu.getAngle()); 
+RobotContainer.m_Drivetrain.driveCartesian(y,x,z,0); 
 }
 Timer autoTime = new Timer();
 public int mode;
@@ -49,12 +49,14 @@ public void execute() {
         }
     }   */ 
      if (mode == 2) {//forwards
+        System.out.println("charge station only");
         if ( autoTime.get() <= 2.5025){
             moveAuto(-0.8,0,0);
         }
         
     }
     else if (mode == 3) {
+        System.out.println("cube and charge station");
         if (autoTime.get()<= 1){// fowards over the chrage station 
             moveAuto(-0.8, 0, 0);// speed needs to be at least 0.8 for the robot to climb the charge station due to the arm 
         }
@@ -93,11 +95,13 @@ public void execute() {
         }
     }*/
     else if (mode == 7){
+        System.out.println("no auto");
         if (autoTime.get()<= 15){
             moveAuto(0, 0, 0);
         }
     }
     else if (mode == 8){
+        System.out.println("Cube and backup");
         if  (autoTime.get()<=1){
             moveAuto(-0.6, 0, 0);
         }
@@ -106,6 +110,7 @@ public void execute() {
         }
     }
     else if (mode==9){
+        System.out.println("cube only");
         if (autoTime.get()<=1){
             moveAuto(-0.6, 0, 0);
         }
