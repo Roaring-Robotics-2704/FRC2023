@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import frc.robot.commands.ControllerIntake;
+import frc.robot.commands.ControlIntake;
 import frc.robot.commands.MoveArm;
 import frc.robot.subsystems.EverybotArm;
 import frc.robot.subsystems.EverybotIntake;
@@ -61,7 +61,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     s_everybotArmSubsystem.setDefaultCommand(new MoveArm(s_everybotArmSubsystem));
-    s_everybotIntakeSubsystem.setDefaultCommand(new ControllerIntake(s_everybotIntakeSubsystem));
+    s_everybotIntakeSubsystem.setDefaultCommand(new ControlIntake(s_everybotIntakeSubsystem));
     // Configure the button bindings
     configureButtonBindings();
     //Is nessary, might have been the reason for the error "DifferntialDrive...Output not updated often enough"
@@ -91,7 +91,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+   
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
