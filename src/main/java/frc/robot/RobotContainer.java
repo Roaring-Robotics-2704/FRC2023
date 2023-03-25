@@ -67,10 +67,13 @@ public class RobotContainer {
     //Is nessary, might have been the reason for the error "DifferntialDrive...Output not updated often enough"
     m_Drivetrain.setDefaultCommand(m_DriveRobot);
     autoChooser.setDefaultOption("square", 1);
-    autoChooser.addOption("Back up", 2);
-    autoChooser.addOption("probably chaos",3);
-    autoChooser.addOption("chaos square",4);
-    autoChooser.addOption("self align",5);
+    autoChooser.addOption("Charge station ONLY", 2);
+   /*  autoChooser.addOption("Right side balcane ",4);*/
+    /*autoChooser.addOption("left side balance", 5);*/
+    autoChooser.addOption( "out of comuntity ONLY", 6);
+    autoChooser.addOption("NO AUTO", 7);
+    autoChooser.addOption("Cube  and backup", 8);
+    autoChooser.addOption("Cube and stop ", 9);
     Drivescheme.setDefaultOption("Katelyn", true);
     Drivescheme.addOption("Matthew", false);
     SmartDashboard.putData("Autonomous Mode", autoChooser);

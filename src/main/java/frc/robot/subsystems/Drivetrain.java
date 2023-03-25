@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.ErrorCode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -21,6 +23,20 @@ public class Drivetrain extends SubsystemBase {
   public void driveCartesian(double y, double x, double z,double rotation){
     Rotation2d heading = Rotation2d.fromDegrees(rotation);
     mecanumdrive.driveCartesian(y,x,z,heading);
+    
+    /*ErrorCode frontRightEncoder = m_frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    double frontRightEncoderDistance = m_frontrightMotor.getSelectedSensorPosition();//basically a verison of the get.distance()from the wpilib encoder class.
+    double frontRightEncoderRate = m_frontrightMotor.getSelectedSensorVelocity();//basically a verison of the get.Rate()from the wpilib encoder class.
+   ErrorCode frontLeftEncoder = m_frontleftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+     double frontLeftEncoderDistance = m_frontleftMotor.getSelectedSensorPosition();
+     double frontLeftEncoderRate = m_frontleftMotor.getSelectedSensorVelocity();
+   ErrorCode backRightEncoder = m_backrightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+     double backRightEncoderDistance = m_backrightMotor.getSelectedSensorPosition();
+     double backRightEncoderRate = m_backleftMotor.getSelectedSensorVelocity();
+   ErrorCode backLeftEncoder = m_backleftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+     double backLeftEncoderDistance = m_backleftMotor.getSelectedSensorPosition();
+     double backLeftEncoderRate = m_backleftMotor.getSelectedSensorVelocity();*/
+
   }
 
 

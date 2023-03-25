@@ -49,9 +49,10 @@ public class DriveRobot extends CommandBase {
   public void execute() {
     
     turbo = RobotContainer.xbox.getRightTriggerAxis();
-    precision = RobotContainer.xbox.getLeftTriggerAxis()/2;
+    precision = RobotContainer.xbox.getLeftTriggerAxis();
   
-    adjustemntAmount = turbo - precision + 0.5;
+
+    adjustemntAmount = (turbo - precision) + Constants.c_speedcap;
 
     
     SmartDashboard.putNumber("adjustemntAmount", adjustemntAmount);
@@ -79,10 +80,10 @@ public class DriveRobot extends CommandBase {
     SmartDashboard.putNumber("output heading", angle);
     SmartDashboard.putNumber("actual heading", -RobotContainer.m_imu.getAngle());;
     if (mode) {
-      RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz,-gyro.getAngle());   
+      RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz*0.5,-gyro.getAngle());   
     }
     else {
-      RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,outputz, 0);
+      RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,outputz*0.5, 0);
     }
     if (RobotContainer.xbox.getLeftBumper()) {
       RobotContainer.m_imu.reset();
