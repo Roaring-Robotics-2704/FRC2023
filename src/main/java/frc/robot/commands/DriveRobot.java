@@ -51,6 +51,7 @@ public class DriveRobot extends CommandBase {
     turbo = RobotContainer.xbox.getRightTriggerAxis();
     precision = RobotContainer.xbox.getLeftTriggerAxis();
   
+
     adjustemntAmount = (turbo - precision) + Constants.c_speedcap;
 
     
