@@ -41,6 +41,7 @@ public class EverybotArm extends SubsystemBase {
 
   public void setArmMotor(double percent) {
     armMotor.set(TalonSRXControlMode.PercentOutput, percent);
+    //armMotor.set(TalonSRXControlMode.Current, 20);
     SmartDashboard.putNumber("arm power", percent);
   }
 /* 
