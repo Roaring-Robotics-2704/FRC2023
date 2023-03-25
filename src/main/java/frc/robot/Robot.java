@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.MoveArm;
 import frc.robot.subsystems.EverybotArm;
 
 
@@ -32,7 +33,7 @@ public class Robot extends TimedRobot {
     
     //Use the correct one for the position of the gyro on robot
     //gyroStartAngle = Gyroscope.gyro.getXComplementaryAngle();
-
+    RobotContainer.s_everybotArmSubsystem.armMotor.setSelectedSensorPosition(0);
   }
 
   /**

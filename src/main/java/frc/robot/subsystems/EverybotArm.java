@@ -18,22 +18,20 @@ public class EverybotArm extends SubsystemBase {
   /** Creates a new EverybotArm. */
   //Create new TalonSRX
   public static TalonSRX armMotor = new TalonSRX(Constants.ArmConstants.c_armMotor); 
-/* 
+ 
   //Create new Encoder
   public static ErrorCode ArmEncoder = armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-  double ArmEncoderDistance = armMotor.getSelectedSensorPosition();//like get.distance()
+  double ArmEncoderDistance = armMotor.getSelectedSensorPosition();//like get.distance(), is like the tics
   double ArmEncoderRate = armMotor.getSelectedSensorVelocity();//get.rate()
-  */
+  
   //Setpoints for arm
   double topRow = Constants.ArmConstants.c_topRow;
   double middleRow = Constants.ArmConstants.c_middleRow;
+  double bottomRow = Constants.ArmConstants.c_bottomRow;
   double startingPosition =  Constants.ArmConstants.c_startinPosition;
 
   //Create new PID Controller
   PIDController armPID = new PIDController(Constants.ArmConstants.c_armEncoderKp, Constants.ArmConstants.c_armEncoderKi, Constants.ArmConstants.c_armEncoderKd);
-
-  //public static final int ArmCurrentLimit = Constants.ArmConstants.c_armCurrentLimit; //Amps motor can use
-  //public static final double ArmPower = Constants.ArmConstants.c_armPower; //Precent output when go up and down
 
   public EverybotArm() {}
 
@@ -41,9 +39,9 @@ public class EverybotArm extends SubsystemBase {
     armMotor.set(TalonSRXControlMode.PercentOutput, percent);
     SmartDashboard.putNumber("arm power", percent);
   }
-/* 
-  public void setArmStartingPosition(){
-    double speed = armPID.calculate(ArmEncoderDistance, startingPosition);
+ 
+  public void setArmTopRow(){
+    double speed = armPID.calculate(ArmEncoderDistance, topRow);
     armMotor.set(TalonSRXControlMode.PercentOutput, speed);
   }
 
@@ -52,12 +50,16 @@ public class EverybotArm extends SubsystemBase {
     armMotor.set(TalonSRXControlMode.PercentOutput, speed);
   }
 
-  public void setArmTopRow(){
-    double speed = armPID.calculate(ArmEncoderDistance, topRow);
+  public void setArmBottomRow(){
+    double speed = armPID.calculate(ArmEncoderDistance, bottomRow);
     armMotor.set(TalonSRXControlMode.PercentOutput, speed);
   }
-  
-*/
+
+  public void setArmStartingPosition(){
+    double speed = armPID.calculate(ArmEncoderDistance, startingPosition);
+    armMotor.set(TalonSRXControlMode.PercentOutput, speed);
+  }  
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

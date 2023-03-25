@@ -6,9 +6,15 @@ package frc.robot;
 
 import frc.robot.commands.ControlIntake;
 import frc.robot.commands.MoveArm;
+import frc.robot.commands.ArmCommands.MoveArmBottomRow;
+import frc.robot.commands.ArmCommands.MoveArmMiddleRow;
+import frc.robot.commands.ArmCommands.MoveArmStartingPosition;
+import frc.robot.commands.ArmCommands.MoveArmTopRow;
+import frc.robot.commands.ArmCommands.ResetEncoderTics;
 import frc.robot.subsystems.EverybotArm;
 import frc.robot.subsystems.EverybotIntake;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.ButtonConstants;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -18,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.simulation.XboxControllerSim;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -39,32 +46,51 @@ public class RobotContainer {
   //Subsystems
   public static Drivetrain m_Drivetrain = new Drivetrain();
   public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
-  private EverybotArm s_everybotArmSubsystem = new EverybotArm();
-  private EverybotIntake s_everybotIntakeSubsystem = new EverybotIntake();
+  public static EverybotArm s_everybotArmSubsystem = new EverybotArm();
+  public static EverybotIntake s_everybotIntakeSubsystem = new EverybotIntake();
 
   //Commands
   public static DriveRobot m_DriveRobot = new DriveRobot();
+  public static MoveArmTopRow m_MoveArmTopRow = new MoveArmTopRow();
+  public static MoveArmMiddleRow m_MoveArmMiddleRow = new MoveArmMiddleRow();
+  public static MoveArmBottomRow m_MoveArmBottomRow = new MoveArmBottomRow();
+  public static MoveArmStartingPosition m_MoveArmStartingPosition = new MoveArmStartingPosition();
+  public static ResetEncoderTics m_ResetEncoderTics = new ResetEncoderTics();
+
+  //Autonomous
   public static Auto m_autonomous = new Auto();
 
+  //SendableChooser
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
   public static SendableChooser<Boolean> DriveMode = new SendableChooser<>();
   public static SendableChooser<Boolean> Drivescheme = new SendableChooser<>();
 
-
   //OI
+  //Controllers
   public static XboxController xbox = new XboxController(Constants.c_joystick);
   public static XboxController xboxSecond = new XboxController(Constants.c_joystickSecond);
-  public static JoystickButton armButton = new JoystickButton(xbox, 4);
-  //getPOV can be used to find the ange value of the d-Pad on the xbox controller
-
+  //Buttons
+  public static JoystickButton armTopRowButton = new JoystickButton(xboxSecond, Constants.ButtonConstants.c_armTopRowButton);
+  public static JoystickButton armMiddleRowButton = new JoystickButton(xboxSecond, Constants.ButtonConstants.c_armMiddleRowButton);
+  public static JoystickButton armBottomRowButton = new JoystickButton(xboxSecond, Constants.ButtonConstants.c_armBottomRowButton);
+  public static JoystickButton armStartingPositionButton = new JoystickButton(xboxSecond, Constants.ButtonConstants.c_armStartingPositionButton);
+  public static JoystickButton resetArmEncoderTicsButton = new JoystickButton(xboxSecond, Constants.ButtonConstants.c_resetEncoderTicButton);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    //set Default Commands for Subsystems
     s_everybotArmSubsystem.setDefaultCommand(new MoveArm(s_everybotArmSubsystem));
     s_everybotIntakeSubsystem.setDefaultCommand(new ControlIntake(s_everybotIntakeSubsystem));
+    
     // Configure the button bindings
     configureButtonBindings();
-    //Is nessary, might have been the reason for the error "DifferntialDrive...Output not updated often enough"
+    armTopRowButton.onTrue(m_MoveArmTopRow);
+    armMiddleRowButton.onTrue(m_MoveArmMiddleRow);
+    armBottomRowButton.onTrue(m_MoveArmBottomRow);
+    armStartingPositionButton.onTrue(m_MoveArmStartingPosition);
+    resetArmEncoderTicsButton.onTrue(m_ResetEncoderTics);
+   
+    //Chooser for DriverStation
     m_Drivetrain.setDefaultCommand(m_DriveRobot);
     autoChooser.setDefaultOption("square", 1);
     autoChooser.addOption("Back up", 2);
@@ -78,8 +104,6 @@ public class RobotContainer {
     DriveMode.setDefaultOption("Field Oriented", true);
     DriveMode.addOption("Robot Oriented", false);
     SmartDashboard.putData("Drive Mode", DriveMode);
-
-
   }
 
   /**
