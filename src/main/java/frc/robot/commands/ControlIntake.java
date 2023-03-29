@@ -1,3 +1,6 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
 
@@ -6,11 +9,11 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.EverybotIntake;
 
-public class ControllerIntake extends CommandBase {
+public class ControlIntake extends CommandBase {
   /** Creates a new ControlIntake. */
   private EverybotIntake everybotIntake;
 
-  public ControllerIntake(EverybotIntake everybotIntake) {
+  public ControlIntake(EverybotIntake everybotIntake) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.everybotIntake = everybotIntake;
     addRequirements(everybotIntake);

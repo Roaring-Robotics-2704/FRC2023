@@ -4,11 +4,12 @@
 
 package frc.robot;
 
-import frc.robot.commands.ControllerIntake;
+import frc.robot.commands.ControlIntake;
 import frc.robot.commands.MoveArm;
 import frc.robot.subsystems.EverybotArm;
 import frc.robot.subsystems.EverybotIntake;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.subsystems.Gyroscope;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -41,6 +42,7 @@ public class RobotContainer {
   public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
   private EverybotArm s_everybotArmSubsystem = new EverybotArm();
   private EverybotIntake s_everybotIntakeSubsystem = new EverybotIntake();
+  public static Gyroscope m_gyroscope = new Gyroscope();
 
   //Commands
   public static DriveRobot m_DriveRobot = new DriveRobot();
@@ -61,19 +63,19 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     s_everybotArmSubsystem.setDefaultCommand(new MoveArm(s_everybotArmSubsystem));
-    s_everybotIntakeSubsystem.setDefaultCommand(new ControllerIntake(s_everybotIntakeSubsystem));
+    s_everybotIntakeSubsystem.setDefaultCommand(new ControlIntake(s_everybotIntakeSubsystem));
     // Configure the button bindings
     configureButtonBindings();
     //Is nessary, might have been the reason for the error "DifferntialDrive...Output not updated often enough"
     m_Drivetrain.setDefaultCommand(m_DriveRobot);
     autoChooser.setDefaultOption("square", 1);
     autoChooser.addOption("Charge station ONLY", 2);
-   /*  autoChooser.addOption("Right side balcane ",4);*/
-    /*autoChooser.addOption("left side balance", 5);*/
     autoChooser.addOption( "out of comuntity ONLY", 6);
     autoChooser.addOption("NO AUTO", 7);
-    autoChooser.addOption("Cube  and backup", 8);
+    autoChooser.addOption("Cube  and forwards NON cable sides", 8);
     autoChooser.addOption("Cube and stop ", 9);
+    autoChooser.addOption("Cube, leave and charge station ONLY", 10);//DO NOT USE UNLESS YOU WILL BE GOING ON THE CHARGESTATION
+    autoChooser.addOption("cube and forwards cable side  ", 11);
     Drivescheme.setDefaultOption("Katelyn", true);
     Drivescheme.addOption("Matthew", false);
     SmartDashboard.putData("Autonomous Mode", autoChooser);
@@ -91,7 +93,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+   
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

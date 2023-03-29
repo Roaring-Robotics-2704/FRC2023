@@ -1,3 +1,9 @@
+
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.ErrorCode;
@@ -42,10 +48,12 @@ public class EverybotArm extends SubsystemBase {
     double speed = armPID.calculate(ArmEncoderDistance, startingPosition);
     armMotor.set(TalonSRXControlMode.PercentOutput, speed);
   }
+
   public void setArmMiddleRow(){
     double speed = armPID.calculate(ArmEncoderDistance, middleRow);
     armMotor.set(TalonSRXControlMode.PercentOutput, speed);
   }
+
   public void setArmTopRow(){
     double speed = armPID.calculate(ArmEncoderDistance, topRow);
     armMotor.set(TalonSRXControlMode.PercentOutput, speed);
