@@ -17,7 +17,7 @@ public final class Constants {
     public static final int c_armMotor = 5;//Motor port
     //public static final int c_armCurrentLimit = 20;//Amps motor can use
     public static final double c_armPowerIn = 0.35;//Precent output when go up and down
-    public static final double c_armPowerOut = 0.42;
+    public static final double c_armPowerOut = 0.45;
     public static final double c_armEncoderKp = 0;
     public static final double c_armEncoderKi = 0;
     public static final double c_armEncoderKd = 0;
