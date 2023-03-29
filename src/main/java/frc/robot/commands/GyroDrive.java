@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
@@ -40,20 +41,18 @@ public class GyroDrive extends CommandBase {
     
     //balancing variables
     //If gyro moved on robot
-    //boolean autoBalancePitchMode = false; //same as X
-    boolean autoBalanceRollMode = false; //same as Y
+    //boolean autoBalanceXMode = false; //same as X
+    boolean autoBalanceYMode = false; //same as Y
 
     final double MaximumAllowedAngle = 2.5; //is the maximum allowed in order to be consider engaged and docked(level)
     final double TargetAngle  = 2; //this number might need to be changed, it is when we stop adjusting
 
     //If gyro moved on robot
-    //double pitchAngleDegrees = Gyroscope.zeroGyroX(Robot.gyroStartAngle);
-    //SmartDashboard.putNumber("newStartAngle inital X", pitchAngleDegrees);
-    double rollAngleDegrees = Gyroscope.zeroGyroY(Robot.gyroStartAngle);
-    SmartDashboard.putNumber("newStartAngle inital Y", rollAngleDegrees);
+    //double gyroscopeXAngleDegrees = Gyroscope.zeroGyroX(Robot.gyroStartAngle);
+    //SmartDashboard.putNumber("newStartAngle inital X", gyroscopeXAngleDegrees);
+    double gyroscopeYAngleDegrees = Gyroscope.zeroGyroY(Robot.gyroStartAngle); //is after zeroing
+    SmartDashboard.putNumber("newStartAngle inital Y", gyroscopeYAngleDegrees);
  
-    //If gyro moved on robot
-    //double xAxisRate = 0;
     double yAxisRate = 0;
     double zAxisRate = 0;
 
@@ -61,24 +60,24 @@ public class GyroDrive extends CommandBase {
     final double allowedTurnAngle = 2;
     double stabilizingSpeed = 0.1;
 
-    PIDController stablizePID = new PIDController(0.005, 0, 0);
+    PIDController stablizePID = new PIDController(Constants.GyroConstants.c_balanceKp, Constants.GyroConstants.c_balanceKi, Constants.GyroConstants.c_balanceKd);
     double correction = stablizePID.calculate(Gyroscope.gyro.getAngle());
     SmartDashboard.putNumber("PID correction", correction);
     
       //autobalance code
       //If gyro moved on robot 
-      /*if ( !autoBalancePitchMode && (Math.abs(pitchAngleDegrees) >= Math.abs(MaximumAllowedAngle))) {
+      /*if ( !autoBalancePitchMode && (Math.abs(gyroscopeXAngleDegrees) >= Math.abs(MaximumAllowedAngle))) {
         autoBalancePitchMode = true;
       }
-      else if ( autoBalancePitchMode && (Math.abs(pitchAngleDegrees) <= Math.abs(TargetAngle))) {
+      else if ( autoBalancePitchMode && (Math.abs(gyroscopeXAngleDegrees) <= Math.abs(TargetAngle))) {
         autoBalancePitchMode = false;
       }*/
 
-      if ( !autoBalanceRollMode && (Math.abs(rollAngleDegrees) >= Math.abs(MaximumAllowedAngle))) {
-        autoBalanceRollMode = true;
+      if ( !autoBalanceYMode && (Math.abs(gyroscopeYAngleDegrees) >= Math.abs(MaximumAllowedAngle))) {
+        autoBalanceYMode = true;
       }
-      else if ( autoBalanceRollMode && (Math.abs(rollAngleDegrees) <= Math.abs(TargetAngle))) {
-        autoBalanceRollMode = false;
+      else if ( autoBalanceYMode && (Math.abs(gyroscopeYAngleDegrees) <= Math.abs(TargetAngle))) {
+        autoBalanceYMode = false;
       }
 
       /*if ( autoBalancePitchMode ) {
@@ -92,34 +91,34 @@ public class GyroDrive extends CommandBase {
         double angleRange = maxAngle - minAngle;
 
         double multiplier = angleRange/100;
-        double absAngle = Math.abs(pitchAngleDegrees);
+        double absAngle = Math.abs(gyroscopeXAngleDegrees);
         SmartDashboard.putNumber("absAngle", absAngle);
         double scaledPower = (absAngle - minPower)*(multiplier)*(powerRange);
         SmartDashboard.putNumber("scaledPower", scaledPower);
         double finalPower = minPower + scaledPower;
         SmartDashboard.putNumber("finalPower", finalPower);
 
-        if(pitchAngleDegrees > 0){
-          if(pitchAngleDegrees > maxAngle){
-            xAxisRate = maxPower;
+        if(gyroscopeXAngleDegrees > 0){
+          if(gyroscopeXAngleDegrees > maxAngle){
+            yAxisRate = maxPower;
           }
-          else if(pitchAngleDegrees < minAngle){
-            xAxisRate = minPower;
+          else if(gyroscopeXAngleDegrees < minAngle){
+            yAxisRate = minPower;
           }
           else{
-            xAxisRate = finalPower;
+            yAxisRate = finalPower;
             SmartDashboard.putNumber("+xAxisRate", finalPower);
           }
         }
-        else if(pitchAngleDegrees < 0){
-          if(pitchAngleDegrees < -maxAngle){
-            xAxisRate = -maxPower;
+        else if(gyroscopeXAngleDegrees < 0){
+          if(gyroscopeXAngleDegrees < -maxAngle){
+            yAxisRate = -maxPower;
           }
-          else if(pitchAngleDegrees > -minAngle){
-            xAxisRate = -minPower;
+          else if(gyroscopeXAngleDegrees > -minAngle){
+            yAxisRate = -minPower;
           }
           else{
-            xAxisRate = -finalPower;
+            yAxisRate = -finalPower;
             SmartDashboard.putNumber("-xAxisRate", finalPower);
           }
         }
@@ -128,9 +127,9 @@ public class GyroDrive extends CommandBase {
         }
       }*/
        
-      if ( autoBalanceRollMode ) {
+      if ( autoBalanceYMode ) {
         double minPower = 0.18;
-        double maxPower = 0.30;
+        double maxPower = 0.38;
         double powerRange = maxPower - minPower;
 
         double minAngle = 2.5;
@@ -138,34 +137,34 @@ public class GyroDrive extends CommandBase {
         double angleRange = maxAngle - minAngle;
 
         double multiplier = angleRange/100;
-        double absAngle = Math.abs(rollAngleDegrees);
+        double absAngle = Math.abs(gyroscopeYAngleDegrees);
         SmartDashboard.putNumber("absAngle", absAngle);
         double scaledPower = (absAngle - minPower)*(multiplier)*(powerRange);
         SmartDashboard.putNumber("scaledPower", scaledPower);
         double finalPower = minPower + scaledPower;
         SmartDashboard.putNumber("finalPower", finalPower);
 
-        if(rollAngleDegrees > 0){
-          if(rollAngleDegrees > maxAngle){
-            yAxisRate = -maxPower;
-          }
-          else if(rollAngleDegrees < minAngle){
-            yAxisRate = -minPower;
-          }
-          else{
-            yAxisRate = -finalPower;
-            SmartDashboard.putNumber("+xAxisRate", finalPower);
-          }
-        }
-        else if(rollAngleDegrees < 0){
-          if(rollAngleDegrees < -maxAngle){
+        if(gyroscopeYAngleDegrees > 0){
+          if(gyroscopeYAngleDegrees > maxAngle){
             yAxisRate = maxPower;
           }
-          else if(rollAngleDegrees > -minAngle){
+          else if(gyroscopeYAngleDegrees < minAngle){
             yAxisRate = minPower;
           }
           else{
             yAxisRate = finalPower;
+            SmartDashboard.putNumber("+xAxisRate", finalPower);
+          }
+        }
+        else if(gyroscopeYAngleDegrees < 0){
+          if(gyroscopeYAngleDegrees < -maxAngle){
+            yAxisRate = -maxPower;
+          }
+          else if(gyroscopeYAngleDegrees > -minAngle){
+            yAxisRate = -minPower;
+          }
+          else{
+            yAxisRate = -finalPower;
             SmartDashboard.putNumber("-xAxisRate", finalPower);
           }
         }

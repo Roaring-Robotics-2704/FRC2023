@@ -37,7 +37,7 @@ public class RobotContainer {
   public static Gyroscope m_gyroscope = new Gyroscope();
   //Subsystems
   public static Drivetrain m_Drivetrain = new Drivetrain();
-  public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
+ // public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
 
 
   //Commands

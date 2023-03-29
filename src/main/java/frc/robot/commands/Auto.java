@@ -7,12 +7,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Gyroscope;
 
 public class Auto extends CommandBase{
    public Auto() {
     addRequirements(RobotContainer.m_Drivetrain);
    } 
-   ADIS16470_IMU gyro = RobotContainer.m_imu;
+   ADIS16470_IMU gyro = Gyroscope.gyro;
    private void moveAuto(double y,double x,double z) {
     RobotContainer.m_Drivetrain.driveCartesian(y,x,z,-gyro.getAngle());   
     }

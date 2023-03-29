@@ -17,6 +17,11 @@ public final class Constants {
   public static class GyroConstants{
     public static final double c_MaximumAllowedAngle = 2.5; //is the maximum allowed in order to be consider engaged and docked(level)
     public static final double c_TargetAngle  = 2; //this number might need to be changed, it is when we stop adjusting
+    //PID
+    public static final double c_balanceKp = 0.0005;
+    public static final double c_balanceKi = 0;
+    public static final double c_balanceKd = 0;
+
   }
 
     public static int c_joystick = 0;

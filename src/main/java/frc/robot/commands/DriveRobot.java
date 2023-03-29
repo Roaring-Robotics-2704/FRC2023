@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Gyroscope;
 public class DriveRobot extends CommandBase {
   /** Creates a new DriveRobot. */
   public DriveRobot() {
@@ -19,7 +20,7 @@ public class DriveRobot extends CommandBase {
   }
 
   PIDController align = new PIDController(Constants.zpid.p,Constants.zpid.i,Constants.zpid.d);
-  ADIS16470_IMU gyro = RobotContainer.m_imu;
+  ADIS16470_IMU gyro = Gyroscope.gyro;
   public static double vector(double x, double y) {
       double angleRadians = Math.atan2(y, x);
       double angleDegrees = Math.toDegrees(angleRadians);
@@ -30,9 +31,9 @@ public class DriveRobot extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_imu.reset();
-    RobotContainer.m_imu.calibrate();
-    RobotContainer.m_imu.reset();
+    Gyroscope.gyro.reset();
+    Gyroscope.gyro.calibrate();
+    Gyroscope.gyro.reset();
   }
 
   public Boolean mode;
@@ -78,7 +79,7 @@ public class DriveRobot extends CommandBase {
     SmartDashboard.putNumber("z", outputz);
     SmartDashboard.putNumber("vector angle",vector(joystickxz,joystickyz));
     SmartDashboard.putNumber("output heading", angle);
-    SmartDashboard.putNumber("actual heading", -RobotContainer.m_imu.getAngle());;
+    SmartDashboard.putNumber("actual heading", -Gyroscope.gyro.getAngle());;
     if (mode) {
       RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz,-gyro.getAngle());   
     }
@@ -86,7 +87,7 @@ public class DriveRobot extends CommandBase {
       RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,outputz, 0);
     }
     if (RobotContainer.xbox.getLeftBumper()) {
-      RobotContainer.m_imu.reset();
+      Gyroscope.gyro.reset();
       RobotContainer.xbox.setRumble(RumbleType.kBothRumble, 0.5);
     }
     else {
