@@ -22,52 +22,44 @@ Timer autoTime = new Timer();
 public int mode;
 public static ADIS16470_IMU gyro = RobotContainer.m_imu;
 double yAxisRate = 0;
-    double zAxisRate = 0;
+ double zAxisRate = 0;
+double outputz;
+    final double allowedTurnAngle = 2;
+      double stabilizingSpeed = 0.1;
+  
+      PIDController stablizePID = new PIDController(0.005, 0, 0.001);
+      double correction = stablizePID.calculate(Gyroscope.gyro.getAngle());
 
 
 @Override
 public void initialize(){
     autoTime.reset();
-    
 }
-double outputz;
+
 @Override
 public void execute() {
     
     SmartDashboard.putNumber("autoTime",autoTime.get());
       autoTime.start();
 
-      final double allowedTurnAngle = 2;
-      double stabilizingSpeed = 0.1;
-  
-      PIDController stablizePID = new PIDController(0.01, 0, 0.001);
-      double correction = stablizePID.calculate(Gyroscope.gyro.getAngle());
-      SmartDashboard.putNumber("PID correction", correction);
-      
-
      if (mode == 2) {//forwards
         System.out.println("charge station only");
         if ( autoTime.get() <= 2.5){
             moveAuto(0.7,0,0);
         }
-        else if(autoTime.get()<=2.5){
+        else if(autoTime.get()<=2.6){
             if(Gyroscope.gyro.getAngle() > allowedTurnAngle){
                 zAxisRate = -correction;
                 SmartDashboard.putNumber("stabilizingSpeed", zAxisRate);
               }
-              else{
-                zAxisRate = 0;
-              }
-            
-              if(Gyroscope.gyro.getAngle() < -allowedTurnAngle){
+           else if(Gyroscope.gyro.getAngle() < -allowedTurnAngle){
                 zAxisRate = correction;
                 SmartDashboard.putNumber("-stabilizingSpeed", zAxisRate);
               }
               else{
                 zAxisRate = 0;
               }
-        
-        }
+         }
         else if(autoTime.get()<=15){
             moveAuto(0, 0, 0);
         }
@@ -109,7 +101,7 @@ public void execute() {
      }
     }*/
     else if (mode == 6){
-    if (autoTime.get()<=2.1){
+    if (autoTime.get()<=3.5){
             moveAuto(0.6, 0, 0);
         }
     else if (autoTime.get()<=15){
@@ -140,10 +132,6 @@ public void execute() {
         else if (autoTime.get()<=15){
             moveAuto(0, 0, 0);
         }
-        else if (autoTime.get()<=15){
-            moveAuto(0, 0, 0);
-        }
-
     }
     else if (mode==10){// cube and charge station 
         if (autoTime.get()<=1){
@@ -155,10 +143,7 @@ public void execute() {
             zAxisRate = -correction;
             SmartDashboard.putNumber("stabilizingSpeed", zAxisRate);
           }
-          else{
-            zAxisRate = 0;
-          }
-        
+
           if(Gyroscope.gyro.getAngle() < -allowedTurnAngle){
             zAxisRate = correction;
             SmartDashboard.putNumber("-stabilizingSpeed", zAxisRate);
@@ -176,10 +161,7 @@ public void execute() {
             zAxisRate = -correction;
             SmartDashboard.putNumber("stabilizingSpeed", zAxisRate);
           }
-          else{
-            zAxisRate = 0;
-          }
-        
+
           if(Gyroscope.gyro.getAngle() < -allowedTurnAngle){
             zAxisRate = correction;
             SmartDashboard.putNumber("-stabilizingSpeed", zAxisRate);

@@ -68,12 +68,11 @@ public class RobotContainer {
     configureButtonBindings();
     //Is nessary, might have been the reason for the error "DifferntialDrive...Output not updated often enough"
     m_Drivetrain.setDefaultCommand(m_DriveRobot);
-    autoChooser.setDefaultOption("square", 1);
+    autoChooser.setDefaultOption("Cube and stop ", 9);
     autoChooser.addOption("Charge station ONLY", 2);
     autoChooser.addOption( "out of comuntity ONLY", 6);
     autoChooser.addOption("NO AUTO", 7);
     autoChooser.addOption("Cube  and forwards NON cable sides", 8);
-    autoChooser.addOption("Cube and stop ", 9);
     autoChooser.addOption("Cube, leave and charge station ONLY", 10);//DO NOT USE UNLESS YOU WILL BE GOING ON THE CHARGESTATION
     autoChooser.addOption("cube and forwards cable side  ", 11);
     Drivescheme.setDefaultOption("Katelyn", true);

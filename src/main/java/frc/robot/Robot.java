@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
     CameraServer.startAutomaticCapture();
     
     //Use the correct one for the position of the gyro on robot
-    gyroStartAngle = RobotContainer.m_imu.getXComplementaryAngle()
+    gyroStartAngle = RobotContainer.m_imu.getXComplementaryAngle();
 
   }
 
