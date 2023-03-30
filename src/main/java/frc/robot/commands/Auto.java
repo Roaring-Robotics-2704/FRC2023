@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -22,13 +23,13 @@ Timer autoTime = new Timer();
 public int mode;
 public static ADIS16470_IMU gyro = RobotContainer.m_imu;
 double yAxisRate = 0;
- double zAxisRate = 0;
+double zAxisRate = 0;
 double outputz;
     final double allowedTurnAngle = 2;
       double stabilizingSpeed = 0.1;
   
       PIDController stablizePID = new PIDController(0.005, 0, 0.001);
-      double correction = stablizePID.calculate(Gyroscope.gyro.getAngle());
+      double correction = stablizePID.calculate(gyro.getAngle());
 
 
 @Override
@@ -40,14 +41,13 @@ public void initialize(){
 public void execute() {
     
     SmartDashboard.putNumber("autoTime",autoTime.get());
+    SmartDashboard.putNumber("Current Auto Mode: ",mode);
       autoTime.start();
-
+      DriverStation.reportError("Mode: " + mode, false);
      if (mode == 2) {//forwards
         System.out.println("charge station only");
         if ( autoTime.get() <= 2.5){
             moveAuto(0.7,0,0);
-        }
-        else if(autoTime.get()<=2.6){
             if(Gyroscope.gyro.getAngle() > allowedTurnAngle){
                 zAxisRate = -correction;
                 SmartDashboard.putNumber("stabilizingSpeed", zAxisRate);
@@ -108,11 +108,13 @@ public void execute() {
             moveAuto(0, 0, 0);
         }
     }
+
     else if (mode == 7){ 
         if (autoTime.get()<= 15){
             moveAuto(0, 0, 0);
         }
     }
+
     else if (mode == 8){
         if  (autoTime.get()<=1){
             moveAuto(-0.6, 0, 0);
@@ -126,6 +128,7 @@ public void execute() {
 
     }
     else if (mode==9){
+        DriverStation.reportError("************* Running Mode 9 ************", false);
         if (autoTime.get()<=1){
             moveAuto(-0.6, 0, 0);
         }
