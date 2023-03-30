@@ -18,6 +18,6 @@ public class auto_CubeAndForward extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new automove(-0.6, 0, 0, m_Drivetrain).withTimeout(1),
                 new WaitCommand(0.1),
-                new automove(0.6, 0, 0, m_Drivetrain).withTimeout(3.5));
+                new automove(0.6, 0, 0, m_Drivetrain).withTimeout(2.5));
   }
 }
