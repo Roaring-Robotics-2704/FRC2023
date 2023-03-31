@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.commands.ControlIntake;
 import frc.robot.commands.MoveArm;
+import frc.robot.commands.Autonomus.auto_CubeAndChargeStation;
 import frc.robot.commands.Autonomus.auto_CubeAndForward;
 import frc.robot.commands.Autonomus.auto_NoAuto;
 import frc.robot.commands.Autonomus.auto_cubeAndStop;
@@ -82,6 +83,7 @@ public class RobotContainer {
     autoChooser.addOption("cube and forwards cable side", new auto_CubeAndForward(m_Drivetrain));
     autoChooser.setDefaultOption("cube and stop", new auto_cubeAndStop(m_Drivetrain));
     autoChooser.addOption(" NO AUTO", new auto_NoAuto(m_Drivetrain));
+    autoChooser.addOption("cube and Charge Station",  new auto_CubeAndChargeStation(m_Drivetrain));
     /* autoChooser.setDefaultOption("Cube and stop ", 9);
     autoChooser.addOption("Charge station ONLY", 2);
     autoChooser.addOption( "out of comuntity ONLY", 6);
