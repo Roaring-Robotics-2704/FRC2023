@@ -15,9 +15,8 @@ public final class Constants {
 
   public static class ArmConstants{
     public static final int c_armMotor = 5;//Motor port
-    //public static final int c_armCurrentLimit = 20;//Amps motor can use
     public static final double c_armPowerIn = 0.35;//Precent output when go up and down
-    public static final double c_armPowerOut = 0.45;
+    public static final double c_armPowerOut = 0.4;
     public static final double c_armEncoderKp = 0;
     public static final double c_armEncoderKi = 0;
     public static final double c_armEncoderKd = 0;
@@ -33,6 +32,10 @@ public final class Constants {
     public static final double c_intakeOutputPower = 1.0;//Precent output for intaking
     public static final double c_intakeOutputPowerSlower = 0.20;
     public static final double c_intakeHoldPower = 0.07;//Precent output for holding
+  }
+  public static class GyroConstants{
+    public static final double c_MaximumAllowedAngle = 2.5; //is the maximum allowed in order to be consider engaged and docked(level)
+    public static final double c_TargetAngle  = 2; //this number might need to be changed, it is when we stop adjusting
   }
 
 

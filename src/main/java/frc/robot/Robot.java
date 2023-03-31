@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+
+
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -29,9 +32,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
+    CameraServer.startAutomaticCapture();
     
     //Use the correct one for the position of the gyro on robot
-    //gyroStartAngle = Gyroscope.gyro.getXComplementaryAngle();
+    gyroStartAngle = RobotContainer.m_imu.getXComplementaryAngle();
 
   }
 
@@ -63,7 +67,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-
+m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
