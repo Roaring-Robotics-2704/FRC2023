@@ -39,7 +39,6 @@ public void initialize(){
 
 @Override
 public void execute() {
-    
     SmartDashboard.putNumber("autoTime",autoTime.get());
     SmartDashboard.putNumber("Current Auto Mode: ",mode);
       autoTime.start();
@@ -64,8 +63,7 @@ public void execute() {
             moveAuto(0, 0, 0);
         }
     }
-    
-    
+
    /*  else if (mode == 3) {
         System.out.println("cube and charge station");
         if (autoTime.get()<= 1){// fowards over the chrage station 
